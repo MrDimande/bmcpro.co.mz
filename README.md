@@ -68,19 +68,78 @@ Envia mensagem de contacto.
 ### GET `/api/health`
 Verifica o status da API.
 
-## 📝 Dados
+## ⚙️ Operação
 
-Os contactos são salvos em `data/contacts.json` (desenvolvimento).
-Em produção, recomenda-se usar uma base de dados (PostgreSQL, MongoDB, etc.).
+### Variáveis de ambiente (.env)
 
-## 🌐 Deploy
+Crie um ficheiro `.env` na raiz do projeto com (exemplo):
 
-O projeto pode ser deployado em:
-- Vercel
-- Netlify
-- Cloudflare Pages
-- Astro Hosting
+```env
+# Supabase
+SUPABASE_URL="https://SEU-PROJECT-ID.supabase.co"
+SUPABASE_ANON_KEY="SUA_CHAVE_ANON_PUBLICA"
 
-## 📄 Licença
+# Autenticação (JWT) para área de admin
+JWT_SECRET="uma-string-secreta-muito-forte"
+JWT_EXPIRES_IN="7d"
 
-© 2024 BMC Pro Services. Todos os direitos reservados.
+# Utilizador administrador inicial
+ADMIN_EMAIL="admin@bmcpro.co.mz"
+ADMIN_PASSWORD="mude-esta-password"
+ADMIN_NAME="Administrador"
+
+# SMTP (envio de emails)
+SMTP_HOST="smtp.seuprovedor.com"
+SMTP_PORT="587"
+SMTP_SECURE="false" # true se usar SSL (porta 465)
+SMTP_USER="utilizador@smtp"
+SMTP_PASS="password-smtp"
+SMTP_FROM="BMC Pro Services <noreply@bmcpro.co.mz>"
+SMTP_TO="contacto@bmcpro.co.mz"
+```
+
+### Configurar Supabase
+
+1. Criar projeto em [supabase.com](https://supabase.com)
+2. No SQL Editor, executar o script de criação das tabelas (ver `BACKEND.md`)
+3. Copiar `SUPABASE_URL` e `SUPABASE_ANON_KEY` para o `.env`
+
+## Deploy na Hostinger
+
+Este projeto está preparado para deploy na Hostinger usando Supabase como base de dados externa.
+
+### Passos para Deploy
+
+1. **Configurar Supabase**
+   - Criar projeto em [supabase.com](https://supabase.com)
+   - Executar o SQL de criação das tabelas (ver `BACKEND.md`)
+   - Guardar `SUPABASE_URL` e `SUPABASE_ANON_KEY`
+
+2. **Preparar ambiente na Hostinger**
+   - Apontar o domínio `bmcpro.co.mz` para o servidor
+   - Garantir que Node.js está disponível
+
+3. **Configurar variáveis de ambiente**
+   - Criar `.env` com `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `JWT_SECRET`, `SMTP_*`
+
+4. **Instalar e build**
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+5. **Iniciar a aplicação**
+
+   ```bash
+   npm run start
+   # Ou com PM2:
+   pm2 start "npm run start" --name bmcpro
+   ```
+
+6. **Configurar HTTPS**
+   - Activar SSL/HTTPS via painel Hostinger ou Let's Encrypt 
+
+## Licença
+
+ 2024 BMC Pro Services. Todos os direitos reservados.

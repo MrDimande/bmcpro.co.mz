@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import OurProcess from '../components/OurProcess.astro';
+import OurServices from '../components/OurServices.astro';
+import StatsSection from '../components/StatsSection.astro';
+import EcosystemSection from '../components/EcosystemSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import BlogSection from '../components/BlogSection.astro';
+import BackToTop from '../components/BackToTop.astro';
+import Footer from '../components/Footer.astro';
+import StarfieldBackground from '../components/StarfieldBackground.tsx';
+import { ArrowRight, Rocket } from 'lucide-astro';
+import '../styles/global.css';
+---
+
+<Layout title="BMC Pro Services – Business Management Consultant">
+	<Header />
+	<main class="homepage-unified-bg relative">
+		<!-- Deep Black Base Background -->
+		<div class="fixed inset-0 bg-black -z-20"></div>
+		
+		<!-- 3D Starfield Background - covers entire page -->
+		<StarfieldBackground client:load />
+		
+		<!-- Subtle Orbs overlay with scroll parallax -->
+		<div class="fixed inset-0 pointer-events-none z-[1]">
+			<div class="parallax-orb absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl" data-depth="0.15"></div>
+			<div class="parallax-orb absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-gold-500/4 rounded-full blur-3xl" data-depth="0.25"></div>
+			<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gold-500/3 rounded-full blur-3xl animate-pulse"></div>
+		</div>
+		
+		<Hero />
+		<WhyChooseUs />
+		<OurProcess />
+		<OurServices />
+		<StatsSection />
+		<EcosystemSection />
+		<ProjectsSection />
+		<BlogSection />
+		
+		<!-- Intermediate CTA -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto text-center">
+					<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/30 mb-6">
+						<Rocket class="w-4 h-4 text-gold-500" />
+						<span class="text-sm font-semibold text-gold-500">Pronto para Começar?</span>
+					</div>
+					<h2 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-6">
+						<span class="text-white">Transforme a Sua</span>
+						<br />
+						<span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400">Organização Hoje</span>
+					</h2>
+					<p class="text-base sm:text-lg md:text-xl text-gray-300 mb-6 max-w-2xl mx-auto leading-relaxed">
+						Descubra como a BMC Pro Services pode ajudar a impulsionar o crescimento da sua empresa com soluções multidisciplinares e inovadoras.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
+						<a href="/contact" class="group px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold text-lg hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
+							Fale Connosco
+							<ArrowRight class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+						</a>
+						<a href="/services" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold text-lg hover:bg-gold-500/10 hover:border-gold-500 transition-all transform hover:scale-105">
+							Explorar Serviços
+						</a>
+					</div>
+					<ul class="flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-gray-400 justify-center">
+						<li class="flex items-center gap-2">
+							<span class="text-gold-500">✓</span>
+							<span>Resposta média em 1–2 dias úteis</span>
+						</li>
+						<li class="flex items-center gap-2">
+							<span class="text-gold-500">✓</span>
+							<span>Proposta personalizada para o seu contexto</span>
+						</li>
+						<li class="flex items-center gap-2">
+							<span class="text-gold-500">✓</span>
+							<span>Equipa multidisciplinar dedicada</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+	<BackToTop />
+</Layout>
+
+<script>
+	// Intersection Observer for scroll reveal animations
+	if (typeof window !== 'undefined') {
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const delay = getComputedStyle(entry.target).getPropertyValue('--animation-delay') || '0s';
+					entry.target.style.animationDelay = delay;
+					entry.target.classList.add('animate-on-scroll-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		// Wait for DOM to be ready
+		setTimeout(() => {
+			// Scroll reveal
+			document.querySelectorAll('.animate-on-scroll').forEach(el => {
+				observer.observe(el);
+			});
+
+			// Background parallax for golden orbs
+			const orbs = Array.from(document.querySelectorAll('.parallax-orb'));
+			const updateParallax = () => {
+				const scrollY = window.scrollY || window.pageYOffset;
+				orbs.forEach((el) => {
+					const depth = parseFloat(el.getAttribute('data-depth') || '0.2');
+					const translateY = scrollY * depth * -0.25;
+					(el as HTMLElement).style.transform = `translate3d(0, ${translateY}px, 0)`;
+				});
+			};
+			updateParallax();
+			window.addEventListener('scroll', updateParallax, { passive: true });
+
+			// Pointer parallax for metallic cards
+			const cardWrappers = Array.from(document.querySelectorAll('.parallax-card-wrapper')) as HTMLElement[];
+			cardWrappers.forEach((card) => {
+				const handleMove = (event: MouseEvent) => {
+					const rect = card.getBoundingClientRect();
+					const x = (event.clientX - rect.left) / rect.width - 0.5; // -0.5 .. 0.5
+					const y = (event.clientY - rect.top) / rect.height - 0.5;
+					const rotateX = y * -10;
+					const rotateY = x * 10;
+					const translateY = -4;
+					card.style.transform = `translate3d(0, ${translateY}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+				};
+				const handleLeave = () => {
+					card.style.transform = 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)';
+				};
+				card.addEventListener('mousemove', handleMove);
+				card.addEventListener('mouseleave', handleLeave);
+			});
+		}, 100);
+	}
+</script>
+
+<style is:global>
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+	
+	.animate-on-scroll-visible {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+
+	.parallax-card-wrapper {
+		transition: transform 0.45s ease-out, box-shadow 0.45s ease-out;
+		transform-style: preserve-3d;
+	}
+
+	/* Unified Background for Homepage */
+	.homepage-unified-bg {
+		position: relative;
+		background: transparent;
+	}
+
+	/* Make all sections transparent so starfield shows through */
+	.homepage-unified-bg section {
+		background: transparent !important;
+		position: relative;
+		z-index: 2;
+	}
+
+	/* Ensure content is above starfield */
+	.homepage-unified-bg .container {
+		position: relative;
+		z-index: 3;
+	}
+
+	@keyframes float {
+		0%, 100% {
+			transform: translate(0, 0) scale(1);
+		}
+		33% {
+			transform: translate(30px, -30px) scale(1.1);
+		}
+		66% {
+			transform: translate(-20px, 20px) scale(0.9);
+		}
+	}
+
+	.animate-float {
+		animation: float 8s ease-in-out infinite;
+	}
+</style>
+

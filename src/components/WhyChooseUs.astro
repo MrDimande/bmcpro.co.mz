@@ -1,0 +1,66 @@
+---
+import { Users, SlidersHorizontal, Cpu, Shield, TrendingUp, ArrowRight } from 'lucide-astro';
+
+const items = [
+	{
+		icon: Users,
+		title: 'Equipa Multidisciplinar',
+		description: 'Profissionais especializados em diversas áreas, trabalhando em conjunto para oferecer soluções integradas e abrangentes.'
+	},
+	{
+		icon: SlidersHorizontal,
+		title: 'Soluções Personalizadas',
+		description: 'Cada projeto é único. Desenvolvemos estratégias personalizadas que se adaptam às necessidades específicas do seu negócio.'
+	},
+	{
+		icon: Cpu,
+		title: 'Tecnologia de Ponta',
+		description: 'Utilizamos as mais recentes ferramentas tecnológicas e práticas inovadoras para maximizar eficiência e resultados.'
+	},
+	{
+		icon: Shield,
+		title: 'Ética e Compromisso',
+		description: 'Mantemos os mais altos padrões de ética profissional e compromisso com a transparência em todos os nossos projetos.'
+	},
+	{
+		icon: TrendingUp,
+		title: 'Resultados Comprovados',
+		description: 'Temos um histórico sólido de projetos bem-sucedidos que geram valor real e impacto positivo para os nossos clientes.'
+	}
+];
+---
+
+<section id="why-us" class="py-20 relative overflow-hidden">
+	<div class="container mx-auto px-6 relative z-10">
+		<h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+			<span class="text-white">Why Choose</span>
+			<span class="text-gold-500"> Us</span>
+		</h2>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 max-w-7xl mx-auto">
+			{items.map((item, index) => {
+				const IconComponent = item.icon;
+				return (
+					<div class="parallax-card-wrapper" style={`--animation-delay: ${index * 0.15}s`}>
+						<div class="card-metallic rounded-3xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
+							<div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold">
+								<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+							</div>
+							<h3 class="text-2xl font-bold text-gold-500 mb-4 text-center">{item.title}</h3>
+							<p class="text-gray-300 leading-relaxed text-center text-sm">{item.description}</p>
+						</div>
+					</div>
+				);
+			})}
+		</div>
+
+		<div class="text-center mt-12">
+			<a href="/why-us" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105">
+				Descobrir Mais Sobre Nós
+				<ArrowRight class="w-5 h-5" />
+			</a>
+		</div>
+	</div>
+</section>
+
+

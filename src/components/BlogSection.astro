@@ -1,0 +1,119 @@
+---
+import { Calendar, ArrowRight, TrendingUp, Lightbulb, Target, Users } from 'lucide-astro';
+
+const articles = [
+	{
+		slug: 'estrategias-crescimento-empresarial-2024',
+		icon: TrendingUp,
+		title: 'Estratégias de Crescimento Empresarial em 2024',
+		excerpt: 'Descubra as principais tendências e estratégias que estão impulsionando o crescimento das empresas em Moçambique e além.',
+		category: 'Consultoria Estratégica',
+		date: '15 Jan 2024',
+		readTime: '5 min'
+	},
+	{
+		slug: 'inovacao-digital-transformando-processos',
+		icon: Lightbulb,
+		title: 'Inovação Digital: Transformando Processos Empresariais',
+		excerpt: 'Como a digitalização de processos pode aumentar a eficiência operacional e reduzir custos nas organizações.',
+		category: 'Inovação Digital',
+		date: '10 Jan 2024',
+		readTime: '7 min'
+	},
+	{
+		slug: 'planeamento-territorial-desenvolvimento-sustentavel',
+		icon: Target,
+		title: 'Planeamento Territorial e Desenvolvimento Sustentável',
+		excerpt: 'A importância do ordenamento territorial para o desenvolvimento urbano sustentável e melhoria da qualidade de vida.',
+		category: 'Planeamento Territorial',
+		date: '5 Jan 2024',
+		readTime: '6 min'
+	},
+	{
+		slug: 'gestao-equipas-multidisciplinares',
+		icon: Users,
+		title: 'Gestão de Equipas Multidisciplinares: Desafios e Oportunidades',
+		excerpt: 'Estratégias eficazes para liderar e coordenar equipas diversas em projetos complexos de consultoria.',
+		category: 'Gestão',
+		date: '28 Dez 2023',
+		readTime: '8 min'
+	}
+];
+---
+
+<section id="blog" class="py-20 relative overflow-hidden">
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="text-center mb-12 md:mb-16">
+			<h2 class="text-4xl md:text-5xl font-bold mb-4">
+				<span class="text-white">Blog &</span>
+				<span class="text-gold-500"> Notícias</span>
+			</h2>
+			<p class="text-lg text-gray-400 max-w-2xl mx-auto">
+				Artigos, insights e tendências sobre gestão, consultoria e inovação empresarial.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+			{articles.map((article, index) => {
+				const IconComponent = article.icon;
+				const isFeatured = index === 0;
+				return (
+					<div class="parallax-card-wrapper animate-on-scroll" style={`--animation-delay: ${index * 0.1}s`}>
+						<article class="card-metallic rounded-3xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group relative">
+							{isFeatured && (
+								<span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gold-500 text-dark-200 text-[10px] font-semibold tracking-wide uppercase shadow-md">
+									Recomendado para si
+								</span>
+							)}
+							<!-- Icon -->
+							<div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold">
+								<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+							</div>
+							
+							<!-- Category -->
+							<p class="text-xs text-gold-500 font-medium uppercase tracking-wider text-center mb-2">{article.category}</p>
+							
+							<!-- Title -->
+							<h3 class="text-2xl font-bold text-gold-500 mb-4 text-center group-hover:text-gold-400 transition-colors">
+								{article.title}
+							</h3>
+							
+							<!-- Excerpt -->
+							<p class="text-gray-300 leading-relaxed text-sm text-center mb-4">
+								{article.excerpt}
+							</p>
+							
+							<!-- Meta info -->
+							<div class="flex items-center justify-center gap-4 text-xs text-gray-500 mb-6">
+								<div class="flex items-center gap-1">
+									<Calendar class="w-3 h-3" />
+									{article.date}
+								</div>
+								<span>{article.readTime} de leitura</span>
+							</div>
+							
+							<a href={`/blog/${article.slug}`} class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 text-center block">
+								Ler mais
+							</a>
+						</article>
+					</div>
+				);
+			})}
+		</div>
+		
+		<!-- View All + Email Insights -->
+		<div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6">
+			<a href="/blog" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 text-sm">
+				Ver Todos os Artigos
+				<ArrowRight class="w-4 h-4" stroke-width="2.5" />
+			</a>
+			<a
+				href="mailto:geral@bmcpro.co.mz?subject=Quero%20receber%20insights%20da%20BMC%20Pro%20por%20email&body=Olá%20BMC%20Pro%2C%0D%0A%0D%0AQuero%20receber%20artigos%20e%20insights%20sobre%20gestão%2C%20consultoria%20e%20inovação%20no%20meu%20email.%0D%0A%0D%0ANome%3A%0D%0AOrganização%3A%0D%0AEmail%3A%0D%0A%0D%0AObrigado%21"
+				class="text-xs sm:text-sm text-gold-400 hover:text-gold-300 underline underline-offset-4 decoration-gold-500/60"
+			>
+				Receber insights por email
+			</a>
+		</div>
+	</div>
+</section>
+

@@ -1,0 +1,146 @@
+---
+import BMCLogo from './BMCLogo.astro';
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-astro';
+---
+
+<footer class="relative py-16 border-t border-gold-500/30 bg-transparent">
+	<!-- Subtle glow effect at top border -->
+	<div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent"></div>
+	
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="pointer-events-none absolute -top-24 right-0 w-52 h-52 bg-gold-500/8 blur-3xl rounded-full"></div>
+		<div class="pointer-events-none absolute -bottom-32 left-0 w-64 h-64 bg-gold-500/5 blur-3xl rounded-full"></div>
+		<div class="grid md:grid-cols-4 gap-12 mb-12 relative">
+			<div class="md:col-span-2">
+				<div class="flex items-center gap-3 mb-6">
+					<BMCLogo class="text-gold-500" size={48} />
+					<div class="flex flex-col">
+						<span class="text-2xl font-bold text-gold-500 leading-tight tracking-tight">BMC Pro</span>
+						<span class="text-[10px] text-gray-500 font-medium uppercase tracking-wider">Business Management Consultant</span>
+					</div>
+				</div>
+				<p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-md">
+					Soluções Multidisciplinares para Impulsionar o Crescimento da Sua Empresa
+				</p>
+				<!-- Social Icons -->
+				<div class="mt-6 flex items-center gap-4">
+					<span class="text-[10px] uppercase tracking-[0.25em] text-gray-500">Siga-nos</span>
+					<div class="flex items-center gap-2">
+						<a
+							href="https://www.instagram.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-9 h-9 rounded-full border border-gold-500/30 bg-black/40 flex items-center justify-center text-gray-300 hover:text-gold-500 hover:border-gold-500 hover:bg-gold-500/10 transition-all"
+						>
+							<Instagram class="w-4 h-4" />
+						</a>
+						<a
+							href="https://www.facebook.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-9 h-9 rounded-full border border-gold-500/30 bg-black/40 flex items-center justify-center text-gray-300 hover:text-gold-500 hover:border-gold-500 hover:bg-gold-500/10 transition-all"
+						>
+							<Facebook class="w-4 h-4" />
+						</a>
+						<a
+							href="https://www.linkedin.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="w-9 h-9 rounded-full border border-gold-500/30 bg-black/40 flex items-center justify-center text-gray-300 hover:text-gold-500 hover:border-gold-500 hover:bg-gold-500/10 transition-all"
+						>
+							<Linkedin class="w-4 h-4" />
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<h3 class="text-gold-500 font-bold mb-6 text-lg">Links Rápidos</h3>
+				<div class="grid grid-cols-2 gap-x-8 gap-y-2">
+					<ul class="space-y-3 text-sm">
+						<li><a href="/" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Home
+						</a></li>
+						<li><a href="/why-us" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Why Us
+						</a></li>
+						<li><a href="/services" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Services
+						</a></li>
+						<li><a href="/#ecosystem" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Ecossistema
+						</a></li>
+					</ul>
+					<ul class="space-y-3 text-sm">
+						<li><a href="/#process" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Process
+						</a></li>
+						<li><a href="/#projects" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Projectos
+						</a></li>
+						<li><a href="/#blog" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Blog
+						</a></li>
+						<li><a href="/contact" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Contactos
+						</a></li>
+						<li><a href="/politica-privacidade" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Política de Privacidade
+						</a></li>
+						<li><a href="/termos-condicoes" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
+							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
+							Termos &amp; Condições
+						</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<div>
+				<h3 class="text-gold-500 font-bold mb-6 text-lg">Contactos</h3>
+				<ul class="space-y-4 text-sm">
+					<li class="flex items-start gap-3">
+						<div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-500/20">
+							<Mail class="w-4 h-4 text-gold-500" stroke-width="2" />
+						</div>
+						<a href="mailto:geral@bmcpro.co.mz" class="text-gray-400 hover:text-gold-500 transition-colors break-all">
+							geral@bmcpro.co.mz
+						</a>
+					</li>
+					<li class="flex items-start gap-3">
+						<div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-500/20">
+							<Phone class="w-4 h-4 text-gold-500" stroke-width="2" />
+						</div>
+						<div class="flex flex-col gap-1">
+							<a href="tel:+258820883478" class="text-gray-400 hover:text-gold-500 transition-colors">82 088 3478</a>
+							<a href="tel:+258848509143" class="text-gray-400 hover:text-gold-500 transition-colors">84 850 9143</a>
+						</div>
+					</li>
+					<li class="flex items-start gap-3">
+						<div class="w-8 h-8 rounded-lg bg-gold-500/10 flex items-center justify-center flex-shrink-0 border border-gold-500/20">
+							<MapPin class="w-4 h-4 text-gold-500" stroke-width="2" />
+						</div>
+						<span class="text-gray-400 leading-relaxed">
+							Avenida Julius Nyerere<br />
+							Maputo
+						</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="pt-8 border-t border-gold-500/20 text-center space-y-2">
+			<p class="text-[11px] tracking-[0.25em] uppercase text-gray-500">Inovação • Estratégia • Tecnologia</p>
+			<p class="text-gray-500 text-sm">&copy; 2024 BMC Pro Services. Todos os direitos reservados.</p>
+		</div>
+	</div>
+</footer>
+

@@ -1,0 +1,60 @@
+---
+import { Users, Target, Award, Zap, TrendingUp } from 'lucide-astro';
+
+const benefits = [
+	{
+		icon: Users,
+		title: 'Equipa Multidisciplinar Experiente',
+		description: 'Profissionais especializados em diversas áreas, trabalhando em conjunto para oferecer soluções integradas.'
+	},
+	{
+		icon: Target,
+		title: 'Soluções à Medida',
+		description: 'Cada projeto é único. Desenvolvemos estratégias personalizadas que se adaptam às necessidades específicas do seu negócio.'
+	},
+	{
+		icon: Award,
+		title: 'Rigor Técnico e Metodológico',
+		description: 'Aplicamos metodologias comprovadas e mantemos os mais altos padrões de qualidade em todos os nossos projetos.'
+	},
+	{
+		icon: Zap,
+		title: 'Inovação e Tecnologia',
+		description: 'Utilizamos as mais recentes ferramentas tecnológicas e práticas inovadoras para maximizar eficiência e resultados.'
+	},
+	{
+		icon: TrendingUp,
+		title: 'Resultados Comprovados',
+		description: 'Temos um histórico sólido de projetos bem-sucedidos que geram valor real e impacto positivo para os nossos clientes.'
+	}
+];
+---
+
+<section class="py-20 relative overflow-hidden">
+	<!-- Background -->
+	<div class="absolute inset-0 gradient-diagonal"></div>
+	<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-500/5 rounded-full blur-3xl"></div>
+	
+	<div class="container mx-auto px-6 relative z-10">
+		<h2 class="text-4xl md:text-5xl font-bold text-center mb-16">
+			<span class="text-white">Porquê Trabalhar</span>
+			<span class="text-gold-500"> Connosco</span>
+		</h2>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+			{benefits.map((benefit, index) => {
+				const IconComponent = benefit.icon;
+				return (
+					<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
+						<div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center mb-6 glow-gold">
+							<IconComponent class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+						</div>
+						<h3 class="text-xl font-bold text-gold-500 mb-3">{benefit.title}</h3>
+						<p class="text-gray-300 leading-relaxed text-sm">{benefit.description}</p>
+					</div>
+				);
+			})}
+		</div>
+	</div>
+</section>
+

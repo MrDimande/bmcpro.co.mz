@@ -1,0 +1,37 @@
+---
+import { Heart, Eye, Zap } from 'lucide-astro';
+---
+<div class="my-12 grid md:grid-cols-3 gap-6">
+  <!-- Card 1: Servant Leadership -->
+  <div class="bg-dark-300/50 p-6 rounded-2xl border border-white/5 hover:border-gold-500/30 transition-all duration-300 group">
+    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <Heart class="w-6 h-6 text-gold-500" />
+    </div>
+    <h4 class="text-white font-bold mb-2">Liderança Servidora</h4>
+    <p class="text-gray-400 text-sm leading-relaxed">
+      Remover obstáculos e facilitar o sucesso da equipa, colocando as necessidades dos membros em primeiro lugar.
+    </p>
+  </div>
+
+  <!-- Card 2: Shared Vision -->
+  <div class="bg-dark-300/50 p-6 rounded-2xl border border-white/5 hover:border-gold-500/30 transition-all duration-300 group">
+    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600/20 to-blue-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <Eye class="w-6 h-6 text-blue-400" />
+    </div>
+    <h4 class="text-white font-bold mb-2">Visão Compartilhada</h4>
+    <p class="text-gray-400 text-sm leading-relaxed">
+      Alinhar todos os membros com um propósito comum, garantindo que diferentes disciplinas caminhem na mesma direcção.
+    </p>
+  </div>
+
+  <!-- Card 3: Empowerment -->
+  <div class="bg-dark-300/50 p-6 rounded-2xl border border-white/5 hover:border-gold-500/30 transition-all duration-300 group">
+    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-600/20 to-purple-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+      <Zap class="w-6 h-6 text-purple-400" />
+    </div>
+    <h4 class="text-white font-bold mb-2">Empoderamento</h4>
+    <p class="text-gray-400 text-sm leading-relaxed">
+      Dar autonomia e confiança aos especialistas, descentralizando a tomada de decisão técnica.
+    </p>
+  </div>
+</div>

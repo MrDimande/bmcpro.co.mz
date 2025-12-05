@@ -1,0 +1,166 @@
+---
+interface Props {
+	class?: string;
+	size?: number;
+}
+
+const { class: className = '', size = 24 } = Astro.props;
+---
+
+<svg 
+	class={className}
+	width={size} 
+	height={size} 
+	viewBox="0 0 40 40" 
+	fill="none" 
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<defs>
+		<!-- Premium gold metallic gradient for circle -->
+		<linearGradient id="goldCircle" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+			<stop offset="25%" style="stop-color:#ffed4e;stop-opacity:1" />
+			<stop offset="50%" style="stop-color:#ffb800;stop-opacity:1" />
+			<stop offset="75%" style="stop-color:#e6a500;stop-opacity:1" />
+			<stop offset="100%" style="stop-color:#cc9300;stop-opacity:1" />
+		</linearGradient>
+		
+		<!-- Premium gold gradient for bars - vertical with shine -->
+		<linearGradient id="goldBarGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+			<stop offset="0%" style="stop-color:#996e00;stop-opacity:1" />
+			<stop offset="30%" style="stop-color:#cc9300;stop-opacity:1" />
+			<stop offset="50%" style="stop-color:#ffb800;stop-opacity:1" />
+			<stop offset="70%" style="stop-color:#ffd54d;stop-opacity:1" />
+			<stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" />
+		</linearGradient>
+		
+		<!-- Inner highlight for bars -->
+		<linearGradient id="barHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+			<stop offset="0%" style="stop-color:#fff9e6;stop-opacity:0.6" />
+			<stop offset="50%" style="stop-color:#ffed4e;stop-opacity:0.3" />
+			<stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+		</linearGradient>
+		
+		<!-- Shadow for depth -->
+		<filter id="deepShadow" x="-100%" y="-100%" width="300%" height="300%">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+			<feOffset dx="1" dy="2" result="offsetblur"/>
+			<feComponentTransfer>
+				<feFuncA type="linear" slope="0.5"/>
+			</feComponentTransfer>
+			<feMerge>
+				<feMergeNode/>
+				<feMergeNode in="SourceGraphic"/>
+			</feMerge>
+		</filter>
+		
+		<!-- Inner shadow for circle depth -->
+		<filter id="innerShadow">
+			<feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+			<feOffset dx="0" dy="1"/>
+			<feComponentTransfer>
+				<feFuncA type="linear" slope="0.3"/>
+			</feComponentTransfer>
+		</filter>
+		
+		<!-- Radial gradient for circle inner glow -->
+		<radialGradient id="circleGlow" cx="50%" cy="50%">
+			<stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.2" />
+			<stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+		</radialGradient>
+	</defs>
+	
+	<!-- Inner glow for circle -->
+	<circle 
+		cx="20" 
+		cy="20" 
+		r="15" 
+		fill="url(#circleGlow)"
+	/>
+	
+	<!-- Outer circle - premium thick border with realistic 3D effect -->
+	<circle 
+		cx="20" 
+		cy="20" 
+		r="16" 
+		fill="none" 
+		stroke="url(#goldCircle)" 
+		stroke-width="3.5"
+		filter="url(#deepShadow)"
+	/>
+	
+	<!-- Inner circle ring for depth -->
+	<circle 
+		cx="20" 
+		cy="20" 
+		r="13.5" 
+		fill="none" 
+		stroke="url(#goldCircle)" 
+		stroke-width="0.8"
+		opacity="0.4"
+	/>
+	
+	<!-- Three premium ascending bars - CENTERED -->
+	<g transform="translate(2, 0)">
+		<!-- Bar 1 - Shortest (left) -->
+		<g filter="url(#deepShadow)">
+			<rect 
+				x="10" 
+				y="19" 
+				width="4" 
+				height="7" 
+				rx="2"
+				fill="url(#goldBarGradient)"
+			/>
+			<ellipse 
+				cx="12" 
+				cy="19" 
+				rx="1.5" 
+				ry="0.8" 
+				fill="white" 
+				opacity="0.5"
+			/>
+		</g>
+		
+		<!-- Bar 2 - Medium (center) -->
+		<g filter="url(#deepShadow)">
+			<rect 
+				x="15.5" 
+				y="14" 
+				width="4" 
+				height="12" 
+				rx="2"
+				fill="url(#goldBarGradient)"
+			/>
+			<ellipse 
+				cx="17.5" 
+				cy="14" 
+				rx="1.5" 
+				ry="0.8" 
+				fill="white" 
+				opacity="0.5"
+			/>
+		</g>
+		
+		<!-- Bar 3 - Tallest (right) -->
+		<g filter="url(#deepShadow)">
+			<rect 
+				x="21" 
+				y="9" 
+				width="4" 
+				height="17" 
+				rx="2"
+				fill="url(#goldBarGradient)"
+			/>
+			<ellipse 
+				cx="23" 
+				cy="9" 
+				rx="1.5" 
+				ry="0.8" 
+				fill="white" 
+				opacity="0.5"
+			/>
+		</g>
+	</g>
+</svg>
+

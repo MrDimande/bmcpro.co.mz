@@ -1,0 +1,153 @@
+---
+import { BookOpen, Calendar, Megaphone, Building2 } from 'lucide-astro';
+
+const companies = [
+	{
+		icon: BookOpen,
+		name: 'BrainyWrite',
+		logo: '/BrainyWrite%20Logo.png',
+		segment: 'Educação & Conteúdo',
+		role: 'Hub de conhecimento, escrita académica e soluções criativas dentro do ecossistema.',
+		link: '/contact?empresa=BrainyWrite',
+		description: 'Assessoria Académica e Criativa',
+		details: 'Especializada em serviços de redação acadêmica, consultoria educacional e soluções criativas para estudantes e instituições de ensino.'
+	},
+	{
+		icon: Calendar,
+		name: 'The Peculiar Atelier',
+		logo: '/Peculiarlogo.svg',
+		segment: 'Eventos & Experiências',
+		role: 'Concepção e execução de eventos corporativos, institucionais e experiências de marca.',
+		link: '/contact?empresa=The%20Peculiar%20Atelier',
+		description: 'Assessoria e Organização de Eventos',
+		details: 'Planeamento, organização e execução de eventos corporativos, sociais e institucionais com foco em excelência e inovação.'
+	},
+	{
+		icon: Megaphone,
+		name: 'Agência Criativa 360°',
+		logo: '/Logo%20-%20Agencia%20Criativa%20360.png',
+		segment: 'Marketing & Branding',
+		role: 'Amplificação de marca, campanhas integradas e presença digital para empresas e instituições.',
+		link: '/contact?empresa=Agencia%20Criativa%20360',
+		description: 'Marketing, Comunicação e Branding',
+		details: 'Soluções completas em marketing digital, comunicação estratégica e desenvolvimento de identidade visual para marcas e empresas.'
+	},
+	{
+		icon: Building2,
+		name: 'Artes Luanica e Filhos',
+		logo: '',
+		segment: 'Engenharia & Infraestrutura',
+		role: 'Execução física de projectos, obras e soluções de engenharia com foco em qualidade.',
+		link: '/contact?empresa=Artes%20Luanica%20e%20Filhos',
+		description: 'Engenharia e Construção Civil',
+		details: 'Projetos de engenharia, construção civil e serviços técnicos especializados com qualidade e compromisso com a excelência.'
+	}
+];
+---
+
+<section id="ecosystem" class="py-20 relative overflow-hidden">
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="text-center mb-16">
+			<h2 class="text-4xl md:text-5xl font-bold mb-4">
+				<span class="text-white">Nosso</span>
+				<span class="text-gold-500"> Ecossistema</span>
+			</h2>
+			<p class="text-lg text-gray-400 max-w-3xl mx-auto">
+				Um ecossistema integrado de empresas especializadas, trabalhando em conjunto para oferecer soluções completas e multidisciplinares aos nossos clientes.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 ecosystem-grid">
+			{companies.map((company, index) => {
+				const IconComponent = company.icon;
+				return (
+					<div class="parallax-card-wrapper animate-on-scroll" style={`--animation-delay: ${index * 0.1}s`}>
+						<div class="card-metallic rounded-3xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105">
+							<div class="w-24 h-24 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold overflow-hidden">
+								{company.logo ? (
+									<img
+										src={company.logo}
+										alt={company.name}
+										loading="lazy"
+										class="w-20 h-20 object-contain drop-shadow-[0_0_14px_rgba(255,184,0,0.6)]"
+									/>
+								) : (
+									<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+								)}
+							</div>
+							<div class="text-center mb-2">
+								<p class="text-gold-500/60 text-[11px] font-semibold uppercase tracking-[0.25em] mb-1">
+									{company.segment}
+								</p>
+								<h3 class="text-2xl font-bold text-gold-500 mb-2">{company.name}</h3>
+							</div>
+							<p class="text-gold-400/80 text-sm font-medium mb-1 text-center">{company.description}</p>
+							<p class="text-gray-400/80 text-[11px] italic mb-2 text-center">
+								{company.role}
+							</p>
+							<p class="text-gray-300 leading-relaxed text-sm text-center mb-4">
+								{company.details}
+							</p>
+							<a
+								href={company.link}
+								class="inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold text-sm hover:glow-gold-lg transition-all transform hover:scale-105"
+							>
+								Conhecer a Marca
+							</a>
+						</div>
+					</div>
+				);
+			})}
+		</div>
+		
+		<div class="mt-16 text-center space-y-4">
+			<p class="text-gray-400 text-sm max-w-2xl mx-auto">
+				Juntas, estas empresas formam um ecossistema robusto que acompanha o cliente desde a estratégia e conteúdo, passando por experiências de marca, até à execução física de projectos complexos.
+			</p>
+			<div class="flex flex-wrap items-center justify-center gap-3 text-[11px] font-medium text-gold-400/80">
+				<span class="px-3 py-1 rounded-full border border-gold-500/40 bg-gold-500/5">Ideia &amp; Estratégia</span>
+				<span class="text-gold-500/60">→</span>
+				<span class="px-3 py-1 rounded-full border border-gold-500/40 bg-gold-500/5">Conteúdo &amp; Comunicação</span>
+				<span class="text-gold-500/60">→</span>
+				<span class="px-3 py-1 rounded-full border border-gold-500/40 bg-gold-500/5">Experiências &amp; Eventos</span>
+				<span class="text-gold-500/60">→</span>
+				<span class="px-3 py-1 rounded-full border border-gold-500/40 bg-gold-500/5">Execução &amp; Infraestrutura</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.ecosystem-grid {
+		position: relative;
+	}
+
+	@media (min-width: 1024px) {
+		.ecosystem-grid::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 8%;
+			right: 8%;
+			height: 1px;
+			background: linear-gradient(90deg, rgba(255, 184, 0, 0), rgba(255, 184, 0, 0.5), rgba(255, 184, 0, 0));
+			opacity: 0.5;
+			pointer-events: none;
+			filter: blur(0.5px);
+		}
+
+		.ecosystem-grid::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 14px;
+			height: 14px;
+			transform: translate(-50%, -50%);
+			border-radius: 9999px;
+			background: radial-gradient(circle, rgba(255, 184, 0, 0.9), rgba(255, 184, 0, 0));
+			box-shadow: 0 0 24px rgba(255, 184, 0, 0.6);
+			pointer-events: none;
+		}
+	}
+</style>

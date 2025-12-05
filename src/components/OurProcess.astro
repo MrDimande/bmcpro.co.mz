@@ -1,0 +1,177 @@
+---
+import { Search, FileText, Settings, Rocket, ArrowRight } from 'lucide-astro';
+
+const steps = [
+	{
+		number: '01',
+		icon: Search,
+		title: 'Diagnóstico',
+		subtitle: 'Análise Profunda',
+		description: 'Analisamos a sua organização, identificamos desafios e oportunidades, e compreendemos os seus objectivos estratégicos.'
+	},
+	{
+		number: '02',
+		icon: FileText,
+		title: 'Planeamento',
+		subtitle: 'Estratégia Personalizada',
+		description: 'Desenvolvemos um plano de acção personalizado com metas claras, cronogramas e indicadores de sucesso mensuráveis.'
+	},
+	{
+		number: '03',
+		icon: Settings,
+		title: 'Implementação',
+		subtitle: 'Execução Precisa',
+		description: 'Executamos as soluções propostas com acompanhamento contínuo, garantindo qualidade e alinhamento com os objectivos.'
+	},
+	{
+		number: '04',
+		icon: Rocket,
+		title: 'Resultados',
+		subtitle: 'Impacto Mensurável',
+		description: 'Monitorizamos os resultados, optimizamos processos e asseguramos a sustentabilidade das melhorias alcançadas.'
+	}
+];
+---
+
+<section id="process" class="py-24 relative overflow-hidden">
+	<div class="container mx-auto px-6 relative z-10">
+		<!-- Header -->
+		<div class="text-center mb-20">
+			<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gold-500/10 border border-gold-500/30 mb-6">
+				<div class="w-2 h-2 rounded-full bg-gold-500 animate-pulse"></div>
+				<span class="text-sm font-semibold text-gold-500">Metodologia Comprovada</span>
+			</div>
+			<h2 class="text-4xl md:text-6xl font-bold mb-6">
+				<span class="text-white">O Nosso</span>
+				<span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400"> Processo</span>
+			</h2>
+			<p class="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+				Uma jornada estratégica de transformação, desenhada para maximizar o potencial da sua organização.
+			</p>
+		</div>
+
+		<!-- Futuristic Timeline -->
+		<div class="relative">
+			<!-- Central Vertical Line (mobile) / Horizontal Line (desktop) -->
+			<div class="hidden lg:block absolute top-1/2 left-0 right-0 h-px -translate-y-1/2">
+				<div class="h-full w-full bg-gradient-to-r from-transparent via-gold-500/40 to-transparent"></div>
+				<div class="absolute inset-0 bg-gradient-to-r from-transparent via-gold-500/60 to-transparent animate-pulse-slow"></div>
+			</div>
+			
+			<!-- Steps Grid -->
+			<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative">
+				{steps.map((step, index) => {
+					const IconComponent = step.icon;
+					const isEven = index % 2 === 0;
+					return (
+						<div 
+							class="process-step group animate-on-scroll" 
+							style={`--animation-delay: ${index * 0.2}s`}
+						>
+							{/* Connector Node on Timeline */}
+							<div class="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+								<div class="relative">
+									<div class="w-4 h-4 rounded-full bg-gold-500 shadow-lg shadow-gold-500/50"></div>
+									<div class="absolute inset-0 w-4 h-4 rounded-full bg-gold-500/50 animate-ping"></div>
+								</div>
+							</div>
+							
+							{/* Card */}
+							<div class={`relative ${isEven ? 'lg:mb-16' : 'lg:mt-16'}`}>
+								{/* Floating Number */}
+								<div class="absolute -top-6 left-1/2 -translate-x-1/2 z-10">
+									<div class="relative">
+										<div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-500 via-gold-600 to-gold-500 flex items-center justify-center shadow-xl shadow-gold-500/30 transform rotate-45 group-hover:rotate-0 transition-transform duration-500">
+											<span class="text-dark-200 font-black text-xl -rotate-45 group-hover:rotate-0 transition-transform duration-500">{step.number}</span>
+										</div>
+										<div class="absolute inset-0 w-14 h-14 rounded-2xl bg-gold-500/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+									</div>
+								</div>
+								
+								{/* Main Card */}
+								<div class="card-metallic rounded-3xl p-8 pt-12 transition-all duration-500 transform group-hover:-translate-y-3 group-hover:scale-[1.02] relative overflow-hidden">
+									{/* Animated Border Glow */}
+									<div class="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+										<div class="absolute inset-0 rounded-3xl border border-gold-500/50"></div>
+										<div class="absolute -inset-px rounded-3xl bg-gradient-to-br from-gold-500/10 via-transparent to-gold-500/10"></div>
+									</div>
+									
+									{/* Glowing Orb Background */}
+									<div class="absolute top-0 right-0 w-32 h-32 bg-gold-500/5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 group-hover:bg-gold-500/10 transition-colors duration-500"></div>
+									
+									{/* Icon */}
+									<div class="relative mb-6 flex justify-center">
+										<div class="relative">
+											<div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/5 flex items-center justify-center border border-gold-500/20 group-hover:border-gold-500/40 transition-colors duration-500">
+												<IconComponent class="w-10 h-10 text-gold-500 group-hover:scale-110 transition-transform duration-500" stroke-width="1.5" />
+											</div>
+											{/* Icon Glow Ring */}
+											<div class="absolute inset-0 rounded-full border-2 border-gold-500/0 group-hover:border-gold-500/30 scale-100 group-hover:scale-125 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+										</div>
+									</div>
+									
+									{/* Content */}
+									<div class="relative text-center">
+										<p class="text-gold-500/60 text-xs font-semibold uppercase tracking-widest mb-2">{step.subtitle}</p>
+										<h3 class="text-2xl font-bold text-white mb-4 group-hover:text-gold-500 transition-colors duration-300">{step.title}</h3>
+										<p class="text-gray-400 leading-relaxed text-sm">{step.description}</p>
+									</div>
+									
+									{/* Bottom Accent Line */}
+									<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent group-hover:w-3/4 transition-all duration-500"></div>
+								</div>
+								
+								{/* Connecting Line to Timeline (desktop) */}
+								<div
+									class={`hidden lg:block absolute left-1/2 w-px h-16 bg-gold-500/40 ${
+										isEven ? 'top-full' : 'bottom-full'
+									}`}
+								></div>
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+		
+		<!-- CTA -->
+		<div class="text-center mt-20">
+			<a href="/contact" class="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-dark-200 font-bold text-lg hover:shadow-2xl hover:shadow-gold-500/30 transition-all duration-500 transform hover:scale-105 relative overflow-hidden">
+				<span class="relative z-10">Iniciar a Sua Transformação</span>
+				<ArrowRight class="w-6 h-6 relative z-10 group-hover:translate-x-1 transition-transform" />
+				<div class="absolute inset-0 bg-gradient-to-r from-gold-500 via-gold-400 to-gold-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.process-step {
+		position: relative;
+	}
+
+	@keyframes pulse-slow {
+		0%, 100% {
+			opacity: 0.3;
+		}
+		50% {
+			opacity: 0.8;
+		}
+	}
+
+	.animate-pulse-slow {
+		animation: pulse-slow 3s ease-in-out infinite;
+	}
+
+	/* Staggered animation for alternating cards */
+	@media (min-width: 1024px) {
+		.process-step:nth-child(odd) .card-metallic {
+			transform-origin: bottom center;
+		}
+		.process-step:nth-child(even) .card-metallic {
+			transform-origin: top center;
+		}
+	}
+</style>
+
+

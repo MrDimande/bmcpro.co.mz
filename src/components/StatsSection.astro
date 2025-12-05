@@ -1,0 +1,353 @@
+---
+import { TrendingUp, Users, Briefcase, Award, Target, CheckCircle } from 'lucide-astro';
+
+const stats = [
+	{
+		icon: Briefcase,
+		value: '50+',
+		label: 'Projetos Concluídos',
+		description: 'Com sucesso comprovado',
+		gradient: 'from-gold-500 via-gold-400 to-gold-600'
+	},
+	{
+		icon: Users,
+		value: '100+',
+		label: 'Clientes Atendidos',
+		description: 'Empresas e instituições',
+		gradient: 'from-gold-500 via-gold-400 to-gold-600'
+	},
+	{
+		icon: Award,
+		value: '2023',
+		label: 'Ano de Fundação',
+		description: 'Empresa moçambicana',
+		gradient: 'from-gold-500 via-gold-400 to-gold-600'
+	},
+	{
+		icon: Target,
+		value: '95%',
+		label: 'Taxa de Satisfação',
+		description: 'Clientes satisfeitos',
+		gradient: 'from-gold-500 via-gold-400 to-gold-600'
+	}
+];
+---
+
+<section class="py-32 relative overflow-hidden stats-section-3d bg-transparent">
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="text-center mb-20">
+			<h2 class="text-5xl md:text-7xl font-bold mb-6 stats-title">
+				<span class="text-white inline-block">Resultados que</span>
+				<br />
+				<span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 via-gold-500 to-gold-400 inline-block animate-gradient">Falam por Si</span>
+			</h2>
+			<p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+				Números que comprovam a nossa excelência e o impacto positivo que geramos para os nossos clientes.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto stats-grid-3d">
+			{stats.map((stat, index) => {
+				const IconComponent = stat.icon;
+				return (
+					<div class="parallax-card-wrapper animate-on-scroll" style={`--animation-delay: ${index * 0.15}s`}>
+						<div class="card-metallic rounded-3xl p-8 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group">
+							<!-- Icon Container -->
+							<div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold">
+								<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+							</div>
+							
+							<!-- Number -->
+							<div class="text-5xl md:text-6xl font-black bg-gradient-to-br from-gold-400 via-gold-500 to-gold-600 bg-clip-text text-transparent text-center mb-4 counter" data-target={stat.value}>
+								{stat.value}
+							</div>
+							
+							<!-- Label -->
+							<h3 class="text-2xl font-bold text-gold-500 mb-4 text-center">{stat.label}</h3>
+							
+							<!-- Description -->
+							<p class="text-gray-300 leading-relaxed text-center text-sm">{stat.description}</p>
+						</div>
+					</div>
+				);
+			})}
+		</div>
+	</div>
+</section>
+
+<script>
+	// Enhanced 3D Mouse Tracking and Counter Animation
+	if (typeof window !== 'undefined') {
+		// Counter animation
+		const animateCounter = (element: HTMLElement) => {
+			const target = element.getAttribute('data-target');
+			if (!target) return;
+			
+			// Handle year (2023) differently
+			if (target.includes('2023')) {
+				element.textContent = '2023';
+				return;
+			}
+			
+			// Extract number and symbol
+			const match = target.match(/(\d+)(.*)/);
+			if (!match) return;
+			
+			const number = parseInt(match[1]);
+			const symbol = match[2] || '';
+			const duration = 2500;
+			const steps = 80;
+			const increment = number / steps;
+			let current = 0;
+			let step = 0;
+			
+			const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+			
+			const timer = setInterval(() => {
+				step++;
+				const progress = step / steps;
+				const eased = easeOutCubic(progress);
+				current = Math.min(Math.floor(number * eased), number);
+				element.textContent = current + symbol;
+				
+				if (step >= steps) {
+					clearInterval(timer);
+					element.textContent = target;
+				}
+			}, duration / steps);
+		};
+		
+		// 3D Tilt Effect
+		const init3DTilt = () => {
+			const cards = document.querySelectorAll('.stat-card-3d');
+			
+			cards.forEach(card => {
+				card.addEventListener('mousemove', (e: MouseEvent) => {
+					const rect = card.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
+					
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					
+					const rotateX = (y - centerY) / 15;
+					const rotateY = (centerX - x) / 15;
+					
+					(card as HTMLElement).style.setProperty('--rotate-x', `${rotateX}deg`);
+					(card as HTMLElement).style.setProperty('--rotate-y', `${rotateY}deg`);
+				});
+				
+				card.addEventListener('mouseleave', () => {
+					(card as HTMLElement).style.setProperty('--rotate-x', '0deg');
+					(card as HTMLElement).style.setProperty('--rotate-y', '0deg');
+				});
+			});
+		};
+		
+		// Intersection Observer for counters
+		const observerOptions = {
+			threshold: 0.3,
+			rootMargin: '0px'
+		};
+		
+		const counterObserver = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+					entry.target.classList.add('counted');
+					animateCounter(entry.target as HTMLElement);
+					counterObserver.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+		
+		// Initialize on load
+		setTimeout(() => {
+			document.querySelectorAll('.counter').forEach(counter => {
+				counterObserver.observe(counter);
+			});
+			init3DTilt();
+		}, 100);
+	}
+</script>
+
+<style>
+	/* 3D Stats Section */
+	.stats-section-3d {
+		perspective: 2000px;
+		transform-style: preserve-3d;
+	}
+
+	.stats-grid-3d {
+		transform-style: preserve-3d;
+	}
+
+	.stat-card-3d {
+		--rotate-x: 0deg;
+		--rotate-y: 0deg;
+		transform-style: preserve-3d;
+		transition: transform 0.1s ease-out;
+		opacity: 0;
+		transform: translateY(50px) scale(0.9);
+		animation: floatIn 0.8s ease-out forwards;
+	}
+
+	.stat-card-3d:hover {
+		transform: translateY(-20px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) scale(1.05);
+		z-index: 10;
+	}
+
+	.stat-card-inner {
+		transform-style: preserve-3d;
+		backface-visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.stat-card-3d:hover .stat-card-inner {
+		box-shadow: 
+			0 30px 60px rgba(0, 0, 0, 0.5),
+			0 0 50px rgba(255, 184, 0, 0.4),
+			0 0 100px rgba(255, 184, 0, 0.3),
+			inset 0 0 40px rgba(255, 184, 0, 0.1);
+	}
+
+	/* Holographic Effect */
+	.holographic-overlay {
+		background: linear-gradient(
+			135deg,
+			rgba(255, 184, 0, 0.1) 0%,
+			rgba(255, 184, 0, 0.05) 25%,
+			transparent 50%,
+			rgba(255, 184, 0, 0.05) 75%,
+			rgba(255, 184, 0, 0.1) 100%
+		);
+		border-radius: 1.5rem;
+		pointer-events: none;
+		animation: holographic 3s ease-in-out infinite;
+	}
+
+	@keyframes holographic {
+		0%, 100% { opacity: 0; }
+		50% { opacity: 0.3; }
+	}
+
+	/* Icon 3D Effect */
+	.icon-container-3d {
+		perspective: 500px;
+	}
+
+	.icon-3d-wrapper {
+		transform-style: preserve-3d;
+		transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.stat-card-3d:hover .icon-3d-wrapper {
+		transform: translateZ(30px) rotateY(360deg) scale(1.2);
+	}
+
+	.icon-3d {
+		transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+		filter: drop-shadow(0 0 10px rgba(255, 184, 0, 0.5));
+	}
+
+	.stat-card-3d:hover .icon-3d {
+		filter: drop-shadow(0 0 20px rgba(255, 184, 0, 0.8));
+		transform: scale(1.1);
+	}
+
+	/* Number 3D Effect */
+	.number-container {
+		perspective: 1000px;
+		transform-style: preserve-3d;
+	}
+
+	.number-shadow {
+		transform: translateZ(-20px);
+		opacity: 0.3;
+	}
+
+	.number-3d {
+		transform-style: preserve-3d;
+		transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+		line-height: 1;
+		background-size: 200% 200%;
+		animation: gradient-shift 3s ease infinite;
+	}
+
+	.stat-card-3d:hover .number-3d {
+		transform: translateZ(20px) scale(1.1);
+		text-shadow: 
+			0 0 30px rgba(255, 184, 0, 0.6),
+			0 0 60px rgba(255, 184, 0, 0.4);
+	}
+
+	@keyframes gradient-shift {
+		0%, 100% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
+	}
+
+	/* Label and Description 3D */
+	.label-3d,
+	.description-3d {
+		transform-style: preserve-3d;
+		transition: all 0.4s ease;
+	}
+
+	.stat-card-3d:hover .label-3d {
+		transform: translateZ(10px);
+		color: #ffb800;
+	}
+
+	.stat-card-3d:hover .description-3d {
+		transform: translateZ(5px);
+	}
+
+	/* Glow Border */
+	.glow-border {
+		box-shadow: 
+			0 0 20px rgba(255, 184, 0, 0.3),
+			inset 0 0 20px rgba(255, 184, 0, 0.1);
+		animation: border-pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes border-pulse {
+		0%, 100% { opacity: 0.5; }
+		50% { opacity: 1; }
+	}
+
+	/* Title Animation */
+	.stats-title {
+		transform-style: preserve-3d;
+	}
+
+	.animate-gradient {
+		background-size: 200% 200%;
+		animation: gradient-shift 3s ease infinite;
+	}
+
+	/* Float In Animation */
+	@keyframes floatIn {
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	/* Counter */
+	.counter {
+		line-height: 1;
+		font-weight: 900;
+		letter-spacing: -0.02em;
+	}
+
+	/* Responsive */
+	@media (max-width: 768px) {
+		.stat-card-3d:hover {
+			transform: translateY(-10px) scale(1.02);
+		}
+		
+		.number-3d {
+			font-size: 3rem;
+		}
+	}
+</style>
+

@@ -1,0 +1,54 @@
+---
+---
+<div class="my-12 p-8 rounded-2xl bg-dark-200/50 border border-white/5 relative overflow-hidden">
+  <div class="absolute top-0 right-0 p-4 opacity-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-gold-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  </div>
+
+  <h3 class="text-gold-500 font-bold text-lg uppercase tracking-widest mb-2">Impacto da Transformação Digital</h3>
+  <p class="text-gray-400 text-xs mb-8">Fonte: Dell Technologies Digital Transformation Index (2023)</p>
+
+  <div class="space-y-8">
+    <!-- Productivity Bar -->
+    <div class="relative">
+      <div class="flex justify-between items-end mb-2">
+        <span class="text-white font-medium">Aumento de Produtividade</span>
+        <span class="text-green-400 font-bold text-xl">+23%</span>
+      </div>
+      <div class="w-full h-4 bg-dark-300 rounded-full overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-green-600 to-green-400 w-0 animate-grow-bar" style="width: 23%"></div>
+      </div>
+    </div>
+
+    <!-- Cost Reduction Bar -->
+    <div class="relative">
+      <div class="flex justify-between items-end mb-2">
+        <span class="text-white font-medium">Redução de Custos Operacionais</span>
+        <span class="text-blue-400 font-bold text-xl">-18%</span>
+      </div>
+      <div class="w-full h-4 bg-dark-300 rounded-full overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-blue-600 to-blue-400 w-0 animate-grow-bar" style="width: 18%"></div>
+      </div>
+    </div>
+
+    <!-- Revenue Growth Bar (Hypothetical/General Context) -->
+    <div class="relative">
+      <div class="flex justify-between items-end mb-2">
+        <span class="text-white font-medium">Crescimento de Receita</span>
+        <span class="text-gold-500 font-bold text-xl">+16%</span>
+      </div>
+      <div class="w-full h-4 bg-dark-300 rounded-full overflow-hidden">
+        <div class="h-full bg-gradient-to-r from-gold-600 to-gold-400 w-0 animate-grow-bar" style="width: 16%"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes grow-width {
+    from { width: 0; }
+  }
+  .animate-grow-bar {
+    animation: grow-width 1.5s ease-out forwards;
+  }
+</style>

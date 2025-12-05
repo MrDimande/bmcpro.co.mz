@@ -1,0 +1,77 @@
+---
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "BMC Pro Services – Consultoria multidisciplinar para o crescimento sustentável de empresas e instituições em Moçambique." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-PT">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://bmcpro.co.mz" />
+		<meta property="og:image" content="https://bmcpro.co.mz/Peculiarlogo.svg" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content="https://bmcpro.co.mz/Peculiarlogo.svg" />
+
+		<!-- JSON-LD Organization Schema -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "BMC Pro Services",
+				"alternateName": "Business Management Consultant Pro Services",
+				"url": "https://bmcpro.co.mz",
+				"logo": "https://bmcpro.co.mz/Peculiarlogo.svg",
+				"email": "geral@bmcpro.co.mz",
+				"telephone": "+258 82 088 3478",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Avenida Julius Nyerere",
+					"addressLocality": "Maputo",
+					"addressCountry": "MZ"
+				}
+			}
+		</script>
+		<title>{title}</title>
+	</head>
+	<body class="bg-black text-gray-100 antialiased">
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	html {
+		font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		scroll-behavior: smooth;
+	}
+	
+	body {
+		overflow-x: hidden;
+	}
+	
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+</style>
+

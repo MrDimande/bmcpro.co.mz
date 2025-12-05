@@ -1,0 +1,257 @@
+---
+const projects = [
+	{
+		name: 'Transdata Consult',
+		description: 'Soluções de consultoria em gestão de dados e transformação digital para empresas do setor de transportes e logística.',
+		image: '/images/projects/transdata-consult.png',
+		sector: 'Transportes & Logística',
+		caseStudySlug: null
+	},
+	{
+		name: 'GreenBuild',
+		description: 'Projeto de consultoria ambiental e planeamento sustentável para construção e desenvolvimento urbano com foco em práticas ecológicas.',
+		image: '/images/projects/greenbuild.png',
+		sector: 'Construção & Ambiente',
+		caseStudySlug: null
+	},
+	{
+		name: 'Criativa',
+		description: 'Estratégia de comunicação e branding para agência criativa, incluindo identidade visual e campanhas de marketing digital.',
+		image: '/images/projects/criativa.png',
+		sector: 'Comunicação & Branding',
+		caseStudySlug: null
+	},
+	{
+		name: 'TecnoAgro',
+		description: 'Inovação digital e soluções tecnológicas para o setor agrícola, incluindo sistemas de gestão e análise de dados agrícolas.',
+		image: '/images/projects/tecnoagro.png',
+		sector: 'Agro & Tecnologia',
+		caseStudySlug: null
+	},
+	{
+		name: 'Conselho Municipal de Marracuene',
+		description: 'Consultoria estratégica e planeamento territorial para desenvolvimento municipal, incluindo gestão urbana e projetos de infraestrutura.',
+		image: '/images/projects/conselho-municipal.png',
+		sector: 'Setor Público',
+		caseStudySlug: 'planeamento-territorial-desenvolvimento-sustentavel'
+	},
+	{
+		name: 'UrbanPlan',
+		description: 'Planeamento urbano e ordenamento territorial com foco em desenvolvimento sustentável e melhoria da qualidade de vida urbana.',
+		image: '/images/projects/urbanplan.png',
+		sector: 'Planeamento Urbano',
+		caseStudySlug: null
+	}
+];
+---
+
+<section id="projects" class="py-20 relative overflow-hidden">
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="text-center mb-16">
+			<h2 class="text-4xl md:text-5xl font-bold mb-4">
+				<span class="text-white">Projectos</span>
+				<span class="text-gold-500"> / </span>
+				<span class="text-white">Case Studies</span>
+			</h2>
+			<p class="text-lg text-gray-400 max-w-2xl mx-auto">
+				Conheça alguns dos nossos projetos de sucesso e soluções implementadas para clientes em diversos setores.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 projects-grid-3d">
+			{projects.map((project, index) => (
+				<div class="parallax-card-wrapper animate-on-scroll" style={`--animation-delay: ${index * 0.1}s`}>
+					<div class="card-metallic rounded-3xl overflow-hidden transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 group">
+						<!-- Image Container -->
+						<div class="relative h-48 overflow-hidden bg-gradient-to-br from-gold-600/20 to-gold-500/10">
+							<img 
+								src={project.image} 
+								alt={project.name}
+								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+								loading="lazy"
+							/>
+							<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+							<div class="absolute inset-0 bg-gold-500/0 group-hover:bg-gold-500/10 transition-colors duration-500"></div>
+						</div>
+						
+						<!-- Content -->
+						<div class="p-8 flex flex-col gap-4">
+							<div class="flex flex-col gap-2">
+								<h3 class="text-2xl font-bold text-gold-500 text-center">{project.name}</h3>
+								<p class="text-gray-300 leading-relaxed text-sm text-center">
+									{project.description}
+								</p>
+							</div>
+
+							<div class="flex flex-wrap justify-center gap-2 text-[11px] uppercase tracking-wide">
+								<span class="px-3 py-1 rounded-full border border-gold-500/40 text-gold-400 bg-black/40">
+									{project.sector}
+								</span>
+								{project.caseStudySlug && (
+									<span class="px-3 py-1 rounded-full border border-emerald-500/40 text-emerald-300 bg-black/40">
+										Case Study
+									</span>
+								)}
+							</div>
+
+							{project.caseStudySlug ? (
+								<a
+									href={`/blog/${project.caseStudySlug}`}
+									class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 text-center text-sm"
+								>
+									Ver estudo de caso
+								</a>
+							) : (
+								<button class="w-full px-6 py-3 rounded-xl border border-gold-500/40 text-gold-400 font-semibold hover:bg-gold-500/10 hover:border-gold-500 transition-all transform hover:scale-105 text-center text-sm">
+									Ver detalhes do projeto
+								</button>
+							)}
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.projects-grid-3d {
+		perspective: 2000px;
+		transform-style: preserve-3d;
+	}
+
+	.project-card-3d {
+		--rotate-x: 0deg;
+		--rotate-y: 0deg;
+		transform-style: preserve-3d;
+		opacity: 0;
+		transform: translateY(50px) scale(0.95);
+		animation: project-fade-in 0.8s ease-out forwards;
+		transition: transform 0.1s ease-out;
+	}
+
+	@keyframes project-fade-in {
+		to {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+	}
+
+	.project-card-3d:hover {
+		transform: translateY(-15px) rotateX(var(--rotate-x)) rotateY(var(--rotate-y)) scale(1.02);
+		z-index: 10;
+	}
+
+	.project-card-inner {
+		transform-style: preserve-3d;
+		backface-visibility: hidden;
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.project-card-3d:hover .project-card-inner {
+		box-shadow: 
+			0 30px 60px rgba(0, 0, 0, 0.5),
+			0 0 50px rgba(255, 184, 0, 0.4),
+			0 0 100px rgba(255, 184, 0, 0.3);
+	}
+
+	.project-image-wrapper {
+		transform-style: preserve-3d;
+		perspective: 1000px;
+		overflow: hidden;
+	}
+
+	.project-image {
+		transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+		transform: translateZ(0);
+	}
+
+	.project-card-3d:hover .project-image {
+		transform: translateZ(20px) scale(1.15) rotateY(2deg);
+	}
+
+	.project-overlay {
+		transition: opacity 0.4s ease;
+	}
+
+	.project-card-3d:hover .project-overlay {
+		opacity: 0.3;
+	}
+
+	.project-title {
+		transform: translateZ(10px);
+		transition: all 0.4s ease;
+	}
+
+	.project-card-3d:hover .project-title {
+		transform: translateZ(20px) scale(1.05);
+		text-shadow: 0 0 20px rgba(255, 184, 0, 0.5);
+	}
+
+	.project-content {
+		transform-style: preserve-3d;
+	}
+
+	.project-description {
+		transition: all 0.4s ease;
+	}
+
+	.project-card-3d:hover .project-description {
+		transform: translateZ(5px);
+		color: #e5e7eb;
+	}
+
+	.project-button {
+		transform-style: preserve-3d;
+		transition: all 0.4s ease;
+	}
+
+	.project-card-3d:hover .project-button {
+		transform: translateZ(10px);
+	}
+
+	/* Mouse tracking for 3D effect */
+	@media (hover: hover) {
+		.project-card-3d {
+			cursor: pointer;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.project-card-3d:hover {
+			transform: translateY(-5px) scale(1.01);
+		}
+	}
+</style>
+
+<script>
+	// 3D Mouse Tracking for Project Cards
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			const cards = document.querySelectorAll('.project-card-3d');
+			
+			cards.forEach(card => {
+				card.addEventListener('mousemove', (e: MouseEvent) => {
+					const rect = card.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
+					
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					
+					const rotateX = (y - centerY) / 20;
+					const rotateY = (centerX - x) / 20;
+					
+					(card as HTMLElement).style.setProperty('--rotate-x', `${rotateX}deg`);
+					(card as HTMLElement).style.setProperty('--rotate-y', `${rotateY}deg`);
+				});
+				
+				card.addEventListener('mouseleave', () => {
+					(card as HTMLElement).style.setProperty('--rotate-x', '0deg');
+					(card as HTMLElement).style.setProperty('--rotate-y', '0deg');
+				});
+			});
+		});
+	}
+</script>
+

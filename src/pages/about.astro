@@ -1,0 +1,509 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { Target, Eye, Heart, Shield, Lightbulb, TrendingUp, Leaf, Users, Sparkles, Clock, CheckCircle, Handshake, Briefcase, UserCog, Palette, ShoppingBag, Map, Code, Megaphone, Search, Award, Cpu } from 'lucide-astro';
+import '../styles/global.css';
+
+const values = [
+	{
+		icon: Shield,
+		title: 'Ética em Todas as Relações',
+		description: 'Mantemos os mais altos padrões de integridade, transparência e responsabilidade em todas as nossas interacções com clientes, parceiros e colaboradores.'
+	},
+	{
+		icon: Lightbulb,
+		title: 'Inovação e Criatividade',
+		description: 'Buscamos constantemente soluções criativas e inovadoras que desafiem o status quo e gerem valor diferenciado para os nossos clientes.'
+	},
+	{
+		icon: TrendingUp,
+		title: 'Compromisso com Resultados',
+		description: 'Focamos em entregas concretas e mensuráveis, garantindo que cada projeto gere impacto real e contribua para o crescimento sustentável dos nossos clientes.'
+	},
+	{
+		icon: Leaf,
+		title: 'Sustentabilidade',
+		description: 'Desenvolvemos soluções que promovem o crescimento económico, social e ambiental, pensando no longo prazo e no impacto positivo para as comunidades.'
+	},
+	{
+		icon: Users,
+		title: 'Valorização das Pessoas',
+		description: 'Reconhecemos que as pessoas são o activo mais valioso. Investimos no desenvolvimento das nossas equipas e respeitamos a diversidade e o talento de cada indivíduo.'
+	}
+];
+---
+
+<Layout title="Sobre Nós - BMC Pro Services">
+	<Header />
+	<main>
+		<!-- Hero Section -->
+		<section class="py-20 relative overflow-hidden pt-32">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute inset-0 gradient-gold opacity-20"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto text-center">
+					<h1 class="text-4xl md:text-6xl font-bold mb-6">
+						<span class="text-white">Sobre a</span>
+						<span class="text-gold-500"> BMC Pro Services</span>
+					</h1>
+					<p class="text-xl text-gray-300 leading-relaxed mb-8">
+						A BMC Pro Services é uma empresa moçambicana de consultoria multidisciplinar fundada em 2023, dedicada a oferecer soluções estratégicas, inovadoras e sustentáveis para empresas, instituições públicas e organizações de diversos sectores.
+					</p>
+					<p class="text-lg text-gray-400 leading-relaxed">
+						Com uma abordagem orientada a resultados e forte compromisso ético, a BMC Pro atua como parceira no desenvolvimento organizacional, na tomada de decisão estratégica e no aperfeiçoamento de processos. Desde a sua criação, a empresa destaca-se pela capacidade de integrar consultoria, tecnologia e capacitação, garantindo serviços de elevada qualidade, adaptados às necessidades específicas de cada cliente.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Mission Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto">
+					<div class="glass-dark rounded-3xl p-8 md:p-12 border border-gold-500/20 animate-on-scroll">
+						<div class="flex items-center gap-4 mb-6">
+							<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center glow-gold">
+								<Target class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+							</div>
+							<h2 class="text-3xl md:text-4xl font-bold text-gold-500">Missão</h2>
+						</div>
+						<p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+							Oferecer soluções inovadoras e sustentáveis em gestão e consultoria, apoiando empresas, instituições e governos na tomada de decisão estratégica, no desenvolvimento organizacional e no planeamento territorial, sempre com ética, qualidade e compromisso com resultados.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Vision Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto">
+					<div class="glass-dark rounded-3xl p-8 md:p-12 border border-gold-500/20 animate-on-scroll">
+						<div class="flex items-center gap-4 mb-6">
+							<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center glow-gold">
+								<Eye class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+							</div>
+							<h2 class="text-3xl md:text-4xl font-bold text-gold-500">Visão</h2>
+						</div>
+						<p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+							Ser reconhecida como referência em consultoria multidisciplinar em Moçambique e na região, destacando-se pela inovação, impacto positivo e capacidade de transformar desafios em oportunidades de crescimento sustentável.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Values Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+					<span class="text-white">Os Nossos</span>
+					<span class="text-gold-500"> Valores</span>
+				</h2>
+				<p class="text-lg text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+					Princípios fundamentais que guiam todas as nossas acções e decisões
+				</p>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+					{values.map((value, index) => {
+						const IconComponent = value.icon;
+						return (
+							<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
+								<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold">
+									<IconComponent class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+								</div>
+								<h3 class="text-xl font-bold text-gold-500 mb-4 text-center">{value.title}</h3>
+								<p class="text-gray-300 leading-relaxed text-center text-sm">{value.description}</p>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+
+		<!-- What Defines Us Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute inset-0 gradient-gold opacity-20"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto">
+					<div class="glass-dark rounded-3xl p-8 md:p-12 border border-gold-500/20 animate-on-scroll">
+						<div class="flex items-center gap-4 mb-6">
+							<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center glow-gold">
+								<Sparkles class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+							</div>
+							<h2 class="text-3xl md:text-4xl font-bold text-gold-500">O Que Nos Define</h2>
+						</div>
+						<div class="space-y-4 text-gray-300 leading-relaxed mb-8">
+							<p class="text-lg">
+								A BMC Pro Services combina <span class="text-gold-500 font-semibold">experiência</span>, <span class="text-gold-500 font-semibold">inovação</span> e <span class="text-gold-500 font-semibold">multidisciplinaridade</span>.
+							</p>
+							<p>
+								A nossa atuação é guiada por princípios fundamentais que garantem a excelência em cada projeto:
+							</p>
+						</div>
+						<div class="grid md:grid-cols-2 gap-6">
+							<div class="flex items-start gap-4">
+								<div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center flex-shrink-0">
+									<Clock class="w-6 h-6 text-gold-500" stroke-width="1.5" />
+								</div>
+								<div>
+									<h3 class="text-gold-500 font-semibold mb-2">Pontualidade</h3>
+									<p class="text-gray-400 text-sm">Cumprimos prazos com rigor e comprometimento, garantindo entregas no tempo acordado.</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-4">
+								<div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center flex-shrink-0">
+									<CheckCircle class="w-6 h-6 text-gold-500" stroke-width="1.5" />
+								</div>
+								<div>
+									<h3 class="text-gold-500 font-semibold mb-2">Transparência</h3>
+									<p class="text-gray-400 text-sm">Mantemos comunicação clara e honesta em todas as etapas do projeto.</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-4">
+								<div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center flex-shrink-0">
+									<Award class="w-6 h-6 text-gold-500" stroke-width="1.5" />
+								</div>
+								<div>
+									<h3 class="text-gold-500 font-semibold mb-2">Qualidade</h3>
+									<p class="text-gray-400 text-sm">Excelência em cada entrega, com rigor técnico e metodológico.</p>
+								</div>
+							</div>
+							<div class="flex items-start gap-4">
+								<div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center flex-shrink-0">
+									<Handshake class="w-6 h-6 text-gold-500" stroke-width="1.5" />
+								</div>
+								<div>
+									<h3 class="text-gold-500 font-semibold mb-2">Forte Relação</h3>
+									<p class="text-gray-400 text-sm">Construímos parcerias duradouras baseadas em confiança e resultados.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Team Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+					<span class="text-white">A Nossa</span>
+					<span class="text-gold-500"> Equipa</span>
+				</h2>
+				<p class="text-lg text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+					Uma equipa multidisciplinar formada por profissionais especializados em diversas áreas
+				</p>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto team-3d-container">
+					{[
+						{ icon: Briefcase, title: 'Gestores', description: 'Liderança estratégica e gestão de projetos' },
+						{ icon: UserCog, title: 'Consultores', description: 'Expertise em diversas áreas de consultoria' },
+						{ icon: Palette, title: 'Designers', description: 'Criação visual e identidade de marca' },
+						{ icon: ShoppingBag, title: 'Especialistas em Procurement', description: 'Gestão de aquisições e compras' },
+						{ icon: Map, title: 'Planificadores Territoriais', description: 'Ordenamento e planeamento territorial' },
+						{ icon: Code, title: 'Desenvolvedores', description: 'Desenvolvimento web e sistemas' },
+						{ icon: Megaphone, title: 'Profissionais de Comunicação', description: 'Marketing e comunicação estratégica' },
+						{ icon: Search, title: 'Pesquisadores', description: 'Estudos técnicos e análises' }
+					].map((member, index) => {
+						const IconComponent = member.icon;
+						return (
+							<div class="glass-dark rounded-2xl p-6 border border-gold-500/20 animate-on-scroll text-center team-card-3d" style={`animation-delay: ${index * 0.1}s;`}>
+								<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-4 mx-auto glow-gold icon-3d">
+									<IconComponent class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+								</div>
+								<h3 class="text-lg font-bold text-gold-500 mb-2">{member.title}</h3>
+								<p class="text-gray-400 text-sm">{member.description}</p>
+							</div>
+						);
+					})}
+				</div>
+				<p class="text-center text-gray-400 mt-8 max-w-2xl mx-auto">
+					Esta diversidade garante uma visão ampla e integrada para cada projeto, permitindo abordagens holísticas e soluções completas.
+				</p>
+			</div>
+		</section>
+
+		<!-- Differentiators Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+					<span class="text-white">Os Nossos</span>
+					<span class="text-gold-500"> Diferenciais</span>
+				</h2>
+				<p class="text-lg text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+					O que nos torna únicos e nos permite entregar resultados excepcionais
+				</p>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto diff-3d-container">
+					{[
+						{
+							icon: Users,
+							title: 'Equipa Experiente e Multidisciplinar',
+							description: 'Profissionais com vasta experiência em diversas áreas, trabalhando em conjunto para oferecer soluções integradas e abrangentes.'
+						},
+						{
+							icon: Sparkles,
+							title: 'Soluções Personalizadas',
+							description: 'Cada cliente recebe uma abordagem única e customizada, desenvolvida especificamente para as suas necessidades e objectivos.'
+						},
+						{
+							icon: Cpu,
+							title: 'Tecnologias Modernas',
+							description: 'Utilizamos ferramentas de ponta como KoboCollect, Better Rides e sistemas de georreferenciação para maximizar eficiência e precisão.'
+						},
+						{
+							icon: TrendingUp,
+							title: 'Forte Compromisso com Resultados',
+							description: 'Focamos em entregas concretas e mensuráveis, garantindo que cada projeto gere impacto real e valor duradouro.'
+						},
+						{
+							icon: Award,
+							title: 'Infraestrutura Digital e Metodológica',
+							description: 'Possuímos infraestrutura tecnológica e metodologias comprovadas que garantem qualidade e eficiência em todos os projetos.'
+						}
+					].map((item, index) => {
+						const IconComponent = item.icon;
+						return (
+							<div class="glass-dark rounded-3xl p-8 border border-gold-500/20 animate-on-scroll diff-card-3d" style={`animation-delay: ${index * 0.1}s;`}>
+								<div class="w-16 h-16 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold icon-3d">
+									<IconComponent class="w-8 h-8 text-gold-500" stroke-width="1.5" />
+								</div>
+								<h3 class="text-xl font-bold text-gold-500 mb-4 text-center">{item.title}</h3>
+								<p class="text-gray-300 leading-relaxed text-center text-sm">{item.description}</p>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute inset-0 gradient-gold opacity-20"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-4xl md:text-5xl font-bold mb-6">
+						<span class="text-white">Pronto para</span>
+						<span class="text-gold-500"> Trabalhar Connosco?</span>
+					</h2>
+					<p class="text-lg text-gray-300 mb-8 leading-relaxed">
+						Descubra como a BMC Pro Services pode ajudar a transformar a sua organização.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105">
+							Contactar-nos
+						</a>
+						<a href="/services" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold hover:bg-gold-500/10 hover:border-gold-500 transition-all transform hover:scale-105">
+							Ver Serviços
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+	<BackToTop />
+</Layout>
+
+<script>
+	if (typeof window !== 'undefined') {
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const delay = entry.target.style.getPropertyValue('--animation-delay') || '0s';
+					entry.target.style.animationDelay = delay;
+					entry.target.classList.add('animate-on-scroll-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		setTimeout(() => {
+			document.querySelectorAll('.animate-on-scroll').forEach(el => {
+				observer.observe(el);
+			});
+		}, 100);
+	}
+</script>
+
+<style is:global>
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+	
+	.animate-on-scroll-visible {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+
+	/* 3D Effects Container */
+	.team-3d-container,
+	.diff-3d-container {
+		perspective: 1000px;
+	}
+
+	/* Team Cards 3D */
+	.team-card-3d {
+		transform-style: preserve-3d;
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+		position: relative;
+		backface-visibility: hidden;
+	}
+
+	.team-card-3d::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: 1rem;
+		background: linear-gradient(135deg, rgba(255, 184, 0, 0.1) 0%, transparent 50%);
+		opacity: 0;
+		transition: opacity 0.4s ease;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	.team-card-3d {
+		--rotate-x: 0deg;
+		--rotate-y: 0deg;
+	}
+
+	.team-card-3d:hover {
+		transform: translateY(-10px) rotateX(calc(5deg + var(--rotate-x))) rotateY(var(--rotate-y)) scale(1.05);
+		box-shadow: 
+			0 20px 40px rgba(0, 0, 0, 0.3),
+			0 0 30px rgba(255, 184, 0, 0.3),
+			0 0 60px rgba(255, 184, 0, 0.2);
+	}
+
+	.team-card-3d:hover::before {
+		opacity: 1;
+	}
+
+	/* Differentiators Cards 3D */
+	.diff-card-3d {
+		transform-style: preserve-3d;
+		transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+		position: relative;
+		backface-visibility: hidden;
+	}
+
+	.diff-card-3d::before {
+		content: '';
+		position: absolute;
+		inset: -2px;
+		border-radius: 1.5rem;
+		background: linear-gradient(135deg, rgba(255, 184, 0, 0.2) 0%, rgba(255, 184, 0, 0.05) 50%, transparent 100%);
+		opacity: 0;
+		transition: opacity 0.5s ease;
+		pointer-events: none;
+		z-index: -1;
+		filter: blur(10px);
+	}
+
+	.diff-card-3d {
+		--rotate-x: 0deg;
+		--rotate-y: 0deg;
+	}
+
+	.diff-card-3d:hover {
+		transform: translateY(-15px) rotateX(calc(8deg + var(--rotate-x))) rotateY(var(--rotate-y)) scale(1.08);
+		box-shadow: 
+			0 25px 50px rgba(0, 0, 0, 0.4),
+			0 0 40px rgba(255, 184, 0, 0.4),
+			0 0 80px rgba(255, 184, 0, 0.3),
+			inset 0 0 30px rgba(255, 184, 0, 0.1);
+	}
+
+	.diff-card-3d:hover::before {
+		opacity: 1;
+	}
+
+	/* Icon 3D Effect */
+	.icon-3d {
+		transform-style: preserve-3d;
+		transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.team-card-3d:hover .icon-3d,
+	.diff-card-3d:hover .icon-3d {
+		transform: translateZ(20px) rotateY(360deg) scale(1.15);
+		filter: drop-shadow(0 0 15px rgba(255, 184, 0, 0.6));
+	}
+
+	/* Mobile adjustments */
+	@media (max-width: 768px) {
+		.team-card-3d:hover,
+		.diff-card-3d:hover {
+			transform: translateY(-5px) scale(1.02);
+		}
+	}
+
+	/* Smooth parallax effect on scroll */
+	@supports (transform-style: preserve-3d) {
+		.team-card-3d,
+		.diff-card-3d {
+			will-change: transform;
+		}
+	}
+</style>
+
+<script>
+	// Enhanced 3D mouse tracking effect
+	if (typeof window !== 'undefined') {
+		document.addEventListener('DOMContentLoaded', () => {
+			const cards = document.querySelectorAll('.team-card-3d, .diff-card-3d');
+			
+			cards.forEach(card => {
+				card.addEventListener('mousemove', (e) => {
+					const rect = card.getBoundingClientRect();
+					const x = e.clientX - rect.left;
+					const y = e.clientY - rect.top;
+					
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					
+					const rotateX = (y - centerY) / 10;
+					const rotateY = (centerX - x) / 10;
+					
+					card.style.setProperty('--rotate-x', `${rotateX}deg`);
+					card.style.setProperty('--rotate-y', `${rotateY}deg`);
+				});
+				
+				card.addEventListener('mouseleave', () => {
+					card.style.setProperty('--rotate-x', '0deg');
+					card.style.setProperty('--rotate-y', '0deg');
+				});
+			});
+		});
+	}
+</script>
+

@@ -1,0 +1,28 @@
+---
+interface Props {
+	children: any;
+	class?: string;
+}
+
+const { children, class: className = '' } = Astro.props;
+---
+
+<div class={`animate-on-scroll ${className}`} set:html={children} />
+
+<style>
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	.animate-on-scroll {
+		animation: fadeInUp 0.8s ease-out;
+	}
+</style>
+

@@ -1,0 +1,265 @@
+---
+export const prerender = false;
+---
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard - BMC Pro Services</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						sans: ['Inter', 'sans-serif'],
+					},
+					colors: {
+						gold: {
+							50: '#fff9e6',
+							100: '#ffedb3',
+							200: '#ffe180',
+							300: '#ffd54d',
+							400: '#ffc91a',
+							500: '#ffb800',
+							600: '#cc9300',
+							700: '#996e00',
+							800: '#664900',
+							900: '#332400',
+						},
+						dark: {
+							50: '#1a1a1a',
+							100: '#0f0f0f',
+							200: '#000000',
+						},
+					},
+					boxShadow: {
+						'glow-gold': '0 0 20px rgba(255, 184, 0, 0.3), 0 0 40px rgba(255, 184, 0, 0.2)',
+						'glow-gold-lg': '0 0 30px rgba(255, 184, 0, 0.4), 0 0 60px rgba(255, 184, 0, 0.3)',
+					},
+					backgroundImage: {
+						'grid-dark': 'linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px)',
+					},
+					backgroundSize: {
+						'grid-dark': '24px 24px',
+					},
+				}
+			}
+		}
+	</script>
+</head>
+<body class="bg-black font-sans">
+	<div id="admin-app"></div>
+	
+	<script type="module">
+		import React from 'https://esm.sh/react@18';
+		import ReactDOM from 'https://esm.sh/react-dom@18/client';
+		import { createElement as h, useState, useEffect } from 'https://esm.sh/react@18';
+
+		// Auth Context
+		const useAuth = () => {
+			const [user, setUser] = useState(null);
+			const [token, setToken] = useState(localStorage.getItem('admin_token'));
+			const [loading, setLoading] = useState(true);
+
+			useEffect(() => {
+				if (token) {
+					fetch('/api/auth/me', {
+						headers: { 'Authorization': `Bearer ${token}` }
+					})
+					.then(res => res.json())
+					.then(data => {
+						if (data.success) {
+							setUser(data.user);
+						} else {
+							logout();
+						}
+					})
+					.catch(() => logout())
+					.finally(() => setLoading(false));
+				} else {
+					setLoading(false);
+				}
+			}, [token]);
+
+			const login = async (email, password) => {
+				const res = await fetch('/api/auth/login', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ email, password })
+				});
+				const data = await res.json();
+				if (data.success) {
+					localStorage.setItem('admin_token', data.token);
+					setToken(data.token);
+					setUser(data.user);
+				}
+				return data;
+			};
+
+			const logout = () => {
+				localStorage.removeItem('admin_token');
+				setToken(null);
+				setUser(null);
+			};
+
+			return { user, token, loading, login, logout };
+		};
+
+		// Login Form
+		const LoginForm = ({ onLogin }) => {
+			const [email, setEmail] = useState('');
+			const [password, setPassword] = useState('');
+			const [error, setError] = useState('');
+			const [loading, setLoading] = useState(false);
+
+			const handleSubmit = async (e) => {
+				e.preventDefault();
+				setLoading(true);
+				setError('');
+				const result = await onLogin(email, password);
+				if (!result.success) {
+					setError(result.error);
+				}
+				setLoading(false);
+			};
+
+			return h('div', { className: 'min-h-screen flex items-center justify-center bg-gradient-to-br from-dark-200 via-slate-900 to-black relative overflow-hidden' },
+				h('div', { className: 'pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,184,0,0.18),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(59,130,246,0.2),_transparent_55%)] opacity-80' }),
+				h('div', { className: 'relative z-10 w-full max-w-md px-4' },
+					h('div', { className: 'bg-dark-50/80 border border-gold-500/25 shadow-glow-gold-lg rounded-3xl p-8 backdrop-blur-xl' },
+						h('div', { className: 'text-center mb-8' },
+							h('h1', { className: 'text-3xl font-bold text-gold-500 tracking-tight' }, 'BMC Pro Admin'),
+							h('p', { className: 'text-sm text-slate-300 mt-2' }, 'Painel de gestão BMC Pro Services')
+						),
+					h('form', { onSubmit: handleSubmit },
+						error && h('div', { className: 'bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm' }, error),
+						h('div', { className: 'mb-4' },
+							h('label', { className: 'block text-sm font-medium text-slate-200 mb-1' }, 'Email'),
+							h('input', {
+								type: 'email',
+								value: email,
+								onChange: (e) => setEmail(e.target.value),
+								className: 'w-full px-4 py-3 rounded-xl bg-dark-100/60 border border-white/10 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500',
+								placeholder: 'admin@bmcpro.co.mz',
+								required: true
+							})
+						),
+						h('div', { className: 'mb-6' },
+							h('label', { className: 'block text-sm font-medium text-slate-200 mb-1' }, 'Password'),
+							h('input', {
+								type: 'password',
+								value: password,
+								onChange: (e) => setPassword(e.target.value),
+								className: 'w-full px-4 py-3 rounded-xl bg-dark-100/60 border border-white/10 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-gold-500',
+								placeholder: '••••••••',
+								required: true
+							})
+						),
+						h('button', {
+							type: 'submit',
+							disabled: loading,
+							className: 'w-full bg-gradient-to-r from-gold-500 to-gold-400 text-dark-200 py-3 rounded-xl font-semibold shadow-glow-gold hover:shadow-glow-gold-lg hover:brightness-110 transition disabled:opacity-50'
+						}, loading ? 'A entrar...' : 'Entrar')
+					)
+				)
+			);
+		};
+
+		// Dashboard Component
+		const Dashboard = ({ token, user, onLogout }) => {
+			const [stats, setStats] = useState(null);
+			const [contacts, setContacts] = useState([]);
+			const [loading, setLoading] = useState(true);
+			const [activeTab, setActiveTab] = useState('dashboard');
+
+			useEffect(() => {
+				fetchData();
+			}, []);
+
+			const fetchData = async () => {
+				setLoading(true);
+				try {
+					const [dashRes, contactsRes] = await Promise.all([
+						fetch('/api/admin/dashboard', { headers: { 'Authorization': `Bearer ${token}` } }),
+						fetch('/api/admin/contacts?limit=10', { headers: { 'Authorization': `Bearer ${token}` } })
+					]);
+					const dashData = await dashRes.json();
+					const contactsData = await contactsRes.json();
+					
+					if (dashData.success) setStats(dashData.data);
+					if (contactsData.success) setContacts(contactsData.data);
+				} catch (err) {
+					console.error('Error fetching data:', err);
+				}
+				setLoading(false);
+			};
+
+			const updateContactStatus = async (id, status) => {
+				await fetch('/api/admin/contacts', {
+					method: 'PATCH',
+					headers: { 
+						'Authorization': `Bearer ${token}`,
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({ id, status })
+				});
+				fetchData();
+			};
+
+			const statusColors = {
+				NEW: 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/40',
+				READ: 'bg-sky-500/15 text-sky-300 border border-sky-500/40',
+				REPLIED: 'bg-violet-500/15 text-violet-300 border border-violet-500/40',
+				ARCHIVED: 'bg-slate-500/15 text-slate-300 border border-slate-500/40'
+			};
+
+			const statusLabels = {
+				NEW: 'Novo',
+				READ: 'Lido',
+				REPLIED: 'Respondido',
+				ARCHIVED: 'Arquivado'
+			};
+
+			return h('div', { className: 'min-h-screen bg-gradient-to-br from-dark-200 via-slate-900 to-black text-slate-100' },
+				// Header
+				h('header', { className: 'bg-dark-50/80 backdrop-blur-xl border-b border-white/5' },
+					h('div', { className: 'max-w-7xl mx-auto px-4 py-4 flex justify-between items-center' },
+						h('div', { className: 'flex items-center gap-4' },
+							h('div', { className: 'flex items-center gap-2' },
+								h('div', { className: 'w-9 h-9 rounded-2xl bg-gradient-to-br from-gold-500 to-gold-300 flex items-center justify-center shadow-glow-gold' }, '🏢'),
+								h('div', null,
+									h('h1', { className: 'text-lg font-semibold text-slate-50 tracking-tight' }, 'BMC Pro Admin'),
+									h('p', { className: 'text-xs text-slate-400' }, 'Command Center')
+								)
+							),
+							h('nav', { className: 'flex gap-2 ml-8 bg-white/5 rounded-full p-1 border border-white/10' },
+								h('button', {
+									onClick: () => setActiveTab('dashboard'),
+									className: `px-4 py-1.5 rounded-full text-sm font-medium transition-all ${activeTab === 'dashboard' ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-dark-200 shadow-glow-gold' : 'text-slate-300 hover:text-white hover:bg-white/10'}`
+								}, '📊 Dashboard'),
+								h('button', {
+									onClick: () => setActiveTab('contacts'),
+									className: `px-4 py-1.5 rounded-full text-sm font-medium transition-all ${activeTab === 'contacts' ? 'bg-gradient-to-r from-gold-500 to-gold-400 text-dark-200 shadow-glow-gold' : 'text-slate-300 hover:text-white hover:bg-white/10'}`
+								}, '📬 Contactos')
+							)
+						),
+						h('div', { className: 'flex items-center gap-4' },
+							h('span', { className: 'text-sm text-slate-300' }, `👤 ${user.name}`),
+							h('button', {
+								onClick: onLogout,
+								className: 'text-sm font-medium text-rose-400 hover:text-rose-300'
+						)
+
+			return h(Dashboard, { token, user, onLogout: logout });
+		};
+
+		// Render
+		const root = ReactDOM.createRoot(document.getElementById('admin-app'));
+		root.render(h(App));
+	</script>
+</body>
+</html>

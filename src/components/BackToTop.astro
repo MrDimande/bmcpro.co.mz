@@ -1,0 +1,52 @@
+---
+import { ArrowUp } from 'lucide-astro';
+---
+
+<button 
+	id="back-to-top" 
+	class="fixed bottom-8 right-8 z-50 w-14 h-14 rounded-full bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 shadow-lg hover:glow-gold-lg transition-all transform hover:scale-110 opacity-0 pointer-events-none flex items-center justify-center group"
+	aria-label="Voltar ao topo"
+>
+	<ArrowUp class="w-6 h-6 group-hover:-translate-y-1 transition-transform" stroke-width="2.5" />
+</button>
+
+<script>
+	if (typeof window !== 'undefined') {
+		const backToTopButton = document.getElementById('back-to-top');
+		
+		if (backToTopButton) {
+			// Show/hide button based on scroll position
+			const toggleButton = () => {
+				if (window.scrollY > 300) {
+					backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+					backToTopButton.classList.add('opacity-100', 'pointer-events-auto');
+				} else {
+					backToTopButton.classList.add('opacity-0', 'pointer-events-none');
+					backToTopButton.classList.remove('opacity-100', 'pointer-events-auto');
+				}
+			};
+			
+			// Scroll to top function
+			const scrollToTop = () => {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			};
+			
+			// Event listeners
+			window.addEventListener('scroll', toggleButton);
+			backToTopButton.addEventListener('click', scrollToTop);
+			
+			// Initial check
+			toggleButton();
+		}
+	}
+</script>
+
+<style>
+	#back-to-top {
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+</style>
+

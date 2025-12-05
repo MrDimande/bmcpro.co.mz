@@ -1,0 +1,69 @@
+---
+import { Network, PenTool, Building2, Megaphone } from 'lucide-astro';
+---
+<div class="my-12 p-8 rounded-2xl bg-dark-200/50 border border-white/5 relative overflow-hidden">
+  <h3 class="text-gold-500 font-bold text-lg uppercase tracking-widest mb-8 text-center">Ecossistema BMC Pro Services</h3>
+  
+  <div class="relative h-[400px] w-full flex items-center justify-center">
+    <!-- Center Node -->
+    <div class="absolute z-20 w-32 h-32 rounded-full bg-gradient-to-br from-gold-600 to-gold-400 flex flex-col items-center justify-center shadow-[0_0_30px_rgba(255,184,0,0.3)] animate-pulse-slow">
+      <span class="font-bold text-dark-100 text-xl tracking-tighter">BMC</span>
+      <span class="text-dark-200 text-xs font-medium">Pro Services</span>
+    </div>
+
+    <!-- Orbiting Nodes -->
+    <div class="absolute inset-0 animate-spin-slow">
+      <!-- Node 1: BrainyWrite -->
+      <div class="absolute top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group">
+        <div class="w-16 h-16 rounded-2xl bg-dark-300 border border-gold-500/30 flex items-center justify-center mb-2 group-hover:bg-gold-500/10 transition-colors transform -rotate-0"> <!-- Counter rotate if needed, but CSS animation handles parent -->
+          <PenTool class="w-6 h-6 text-gold-500" />
+        </div>
+        <span class="text-xs text-gray-300 font-medium bg-dark-100/80 px-2 py-1 rounded">BrainyWrite</span>
+      </div>
+
+      <!-- Node 2: Peculiar -->
+      <div class="absolute bottom-1/2 right-4 translate-x-1/2 translate-y-1/2 flex flex-col items-center group">
+        <div class="w-16 h-16 rounded-2xl bg-dark-300 border border-gold-500/30 flex items-center justify-center mb-2 group-hover:bg-gold-500/10 transition-colors">
+          <Network class="w-6 h-6 text-gold-500" />
+        </div>
+        <span class="text-xs text-gray-300 font-medium bg-dark-100/80 px-2 py-1 rounded">Peculiar</span>
+      </div>
+
+      <!-- Node 3: Artes Luanica -->
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-1/2 flex flex-col items-center group">
+        <div class="w-16 h-16 rounded-2xl bg-dark-300 border border-gold-500/30 flex items-center justify-center mb-2 group-hover:bg-gold-500/10 transition-colors">
+          <Building2 class="w-6 h-6 text-gold-500" />
+        </div>
+        <span class="text-xs text-gray-300 font-medium bg-dark-100/80 px-2 py-1 rounded">Artes Luanica</span>
+      </div>
+
+      <!-- Node 4: Agencia 360 -->
+      <div class="absolute top-1/2 left-4 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center group">
+        <div class="w-16 h-16 rounded-2xl bg-dark-300 border border-gold-500/30 flex items-center justify-center mb-2 group-hover:bg-gold-500/10 transition-colors">
+          <Megaphone class="w-6 h-6 text-gold-500" />
+        </div>
+        <span class="text-xs text-gray-300 font-medium bg-dark-100/80 px-2 py-1 rounded">Agência 360</span>
+      </div>
+    </div>
+
+    <!-- Connecting Lines -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 400 400">
+      <circle cx="200" cy="200" r="140" fill="none" stroke="currentColor" stroke-width="1" class="text-gold-500/20" stroke-dasharray="8 8" />
+      <line x1="200" y1="200" x2="200" y2="60" stroke="currentColor" stroke-width="1" class="text-gold-500/10" />
+      <line x1="200" y1="200" x2="340" y2="200" stroke="currentColor" stroke-width="1" class="text-gold-500/10" />
+      <line x1="200" y1="200" x2="200" y2="340" stroke="currentColor" stroke-width="1" class="text-gold-500/10" />
+      <line x1="200" y1="200" x2="60" y2="200" stroke="currentColor" stroke-width="1" class="text-gold-500/10" />
+    </svg>
+  </div>
+</div>
+
+<style>
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .animate-spin-slow {
+    animation: spin-slow 60s linear infinite;
+  }
+  /* Counter-rotate children to keep them upright if desired, or let them spin */
+</style>

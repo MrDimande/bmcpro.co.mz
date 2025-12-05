@@ -1,0 +1,166 @@
+---
+import { 
+	Target, 
+	Map, 
+	Megaphone, 
+	Cpu, 
+	ShoppingBag, 
+	Leaf, 
+	FileSearch, 
+	GraduationCap, 
+	Briefcase,
+	Check,
+	ArrowRight
+} from 'lucide-astro';
+
+const services = [
+	{
+		icon: Target,
+		title: 'Consultoria Estratégica',
+		description: 'Apoiamos organizações na definição de metas, estratégias e planos de ação alinhados à realidade do mercado e ao futuro desejado pela instituição.',
+		subServices: [
+			'Diagnóstico organizacional',
+			'Planeamento estratégico',
+			'Gestão de performance',
+			'Análise de riscos e oportunidades',
+			'Estruturação de planos operacionais'
+		]
+	},
+	{
+		icon: Map,
+		title: 'Planeamento Territorial',
+		description: 'Desenvolvemos soluções técnicas para gestão e ordenamento do território, com foco na sustentabilidade, urbanização e melhoria da qualidade de vida.',
+		subServices: [
+			'Planos de estrutura urbana',
+			'Ordenamento territorial',
+			'Regularização e licenciamento',
+			'Mapas temáticos e relatórios técnicos',
+			'Projetos de infraestruturas e espaços públicos'
+		]
+	},
+	{
+		icon: Megaphone,
+		title: 'Comunicação & Branding',
+		description: 'Criamos identidade visual, campanhas e materiais que reforçam a presença das marcas e facilitam a comunicação com o público-alvo.',
+		subServices: [
+			'Identidade visual e branding',
+			'Criação de conteúdo corporativo',
+			'Gestão de redes sociais',
+			'Desenvolvimento de materiais gráficos',
+			'Estratégias de comunicação institucional'
+		]
+	},
+	{
+		icon: Cpu,
+		title: 'Inovação Digital & Smart Solutions',
+		description: 'Integramos ferramentas tecnológicas que aceleram processos, melhoram decisões e trazem eficiência às operações.',
+		subServices: [
+			'Digitalização de processos',
+			'Implementação de Better Rides, KoboCollect, entre outras',
+			'Soluções de georreferenciação',
+			'Desenvolvimento de dashboards e relatórios digitais',
+			'Web development e sistemas de apoio à gestão'
+		]
+	},
+	{
+		icon: ShoppingBag,
+		title: 'Procurement e Gestão de Aquisições',
+		description: 'Ajudamos empresas a estruturar processos éticos, transparentes e eficientes de aquisição de bens e serviços.',
+		subServices: [
+			'Gestão do ciclo de procurement',
+			'Preparação e avaliação de concursos',
+			'Pesquisa e análise de fornecedores',
+			'Auditoria de processos de aquisição',
+			'Implementação de boas práticas e compliance'
+		]
+	},
+	{
+		icon: Leaf,
+		title: 'Consultoria Ambiental',
+		description: 'Prestamos suporte técnico especializado em análises ambientais, mitigação de impactos e sustentabilidade.',
+		subServices: [
+			'Estudos de impacto ambiental (EIA/RIMA)',
+			'Relatórios ambientais',
+			'Definição de medidas de mitigação',
+			'Monitoria ambiental',
+			'Licenciamento'
+		]
+	},
+	{
+		icon: FileSearch,
+		title: 'Pesquisa & Estudos Técnicos',
+		description: 'Realizamos surveys, recolha de dados e análises técnicas para tomada de decisões baseadas em evidências.',
+		subServices: [
+			'Levantamentos de campo',
+			'Estudos socioeconómicos',
+			'Pesquisas de mercado',
+			'Recolha e tratamento de dados',
+			'Estudos específicos para setores públicos e privados'
+		]
+	},
+	{
+		icon: GraduationCap,
+		title: 'Formação e Desenvolvimento Profissional',
+		description: 'Capacitamos equipas em diversas áreas de gestão, tecnologia e liderança, promovendo ambientes de trabalho mais produtivos e eficazes.',
+		subServices: [
+			'Treinamentos corporativos',
+			'Team building',
+			'Workshops técnicos',
+			'Programas de liderança',
+			'Formação modular conforme necessidade do cliente'
+		]
+	},
+	{
+		icon: Briefcase,
+		title: 'Gestão Administrativa & Apoio Operacional',
+		description: 'Oferecemos suporte administrativo profissional para garantir o funcionamento eficiente e organizado das operações internas.',
+		subServices: [
+			'Gestão documental',
+			'Apoio administrativo',
+			'Organização de processos internos',
+			'Assessoria operacional',
+			'Suporte contínuo às equipas'
+		]
+	}
+];
+---
+
+<section class="py-20 relative overflow-hidden">
+	<!-- Background -->
+	<div class="absolute inset-0 gradient-diagonal"></div>
+	<div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+	
+	<div class="container mx-auto px-6 relative z-10">
+		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{services.map((service, index) => {
+				const IconComponent = service.icon;
+				return (
+					<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 flex flex-col animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
+						<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center mb-6 glow-gold">
+							<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+						</div>
+						
+						<h3 class="text-2xl font-bold text-gold-500 mb-4">{service.title}</h3>
+						<p class="text-gray-300 leading-relaxed mb-6 flex-grow text-sm">{service.description}</p>
+						
+						<ul class="space-y-3 mb-6">
+							{service.subServices.map((subService) => (
+								<li class="text-gray-400 text-sm flex items-start gap-2">
+									<Check class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" stroke-width="2.5" />
+									<span>{subService}</span>
+								</li>
+							))}
+						</ul>
+						
+						<button class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+							Saiba mais
+							<ArrowRight class="w-4 h-4" stroke-width="2.5" />
+						</button>
+					</div>
+				);
+			})}
+		</div>
+	</div>
+</section>
+
+

@@ -1,0 +1,85 @@
+---
+import { Briefcase, Users, TrendingUp, Lightbulb } from 'lucide-astro';
+---
+
+<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
+	<!-- Background Gradient Dourado Tech -->
+	<div class="absolute inset-0 gradient-diagonal"></div>
+	<div class="absolute inset-0 gradient-gold opacity-30"></div>
+	
+	<!-- Animated Background Elements -->
+	<div class="absolute top-20 left-10 w-72 h-72 bg-gold-500/10 rounded-full blur-3xl animate-pulse"></div>
+	<div class="absolute bottom-20 right-10 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s;"></div>
+	<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gold-500/5 rounded-full blur-3xl"></div>
+
+	<!-- Floating Icons -->
+	<div class="absolute top-32 left-20 opacity-20 animate-float">
+		<Briefcase class="w-16 h-16 text-gold-500" />
+	</div>
+	<div class="absolute top-40 right-32 opacity-20 animate-float" style="animation-delay: 0.5s;">
+		<Users class="w-12 h-12 text-gold-500" />
+	</div>
+	<div class="absolute bottom-32 left-1/4 opacity-20 animate-float" style="animation-delay: 1s;">
+		<TrendingUp class="w-14 h-14 text-gold-500" />
+	</div>
+	<div class="absolute bottom-40 right-20 opacity-20 animate-float" style="animation-delay: 1.5s;">
+		<Lightbulb class="w-10 h-10 text-gold-500" />
+	</div>
+
+	<div class="container mx-auto px-6 py-20 relative z-10">
+		<div class="max-w-4xl mx-auto text-center space-y-8">
+			<h1 class="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in">
+				<span class="text-white">Soluções Multidisciplinares</span>
+				<br />
+				<span class="text-gold-500">para Impulsionar o Crescimento</span>
+				<br />
+				<span class="text-white">da Sua Empresa</span>
+			</h1>
+			
+			<p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed animate-fade-in" style="animation-delay: 0.2s;">
+				Consultoria estratégica, inovação digital, desenvolvimento organizacional e apoio técnico para empresas, governos e instituições que procuram resultados concretos e sustentáveis.
+			</p>
+			
+			<div class="flex flex-col sm:flex-row gap-4 justify-center pt-4 animate-fade-in" style="animation-delay: 0.4s;">
+				<a href="/proposta" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold text-lg hover:glow-gold-lg transition-all transform hover:scale-105">
+					Solicitar Proposta
+				</a>
+				<a href="/contact" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold text-lg hover:bg-gold-500/10 hover:border-gold-500 transition-all transform hover:scale-105">
+					Fale com um Consultor
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	
+	@keyframes float {
+		0%, 100% {
+			transform: translateY(0px);
+		}
+		50% {
+			transform: translateY(-20px);
+		}
+	}
+	
+	.animate-fade-in {
+		animation: fade-in 1s ease-out forwards;
+		opacity: 0;
+	}
+	
+	.animate-float {
+		animation: float 6s ease-in-out infinite;
+	}
+</style>
+
