@@ -140,6 +140,83 @@ Este projeto está preparado para deploy na Hostinger usando Supabase como base 
 6. **Configurar HTTPS**
    - Activar SSL/HTTPS via painel Hostinger ou Let's Encrypt 
 
+## 🔧 Requisitos para Deploy
+
+### Hostinger VPS/Cloud
+- **Node.js 18+** instalado
+- **PM2** para gestão de processos
+- **Nginx** como reverse proxy (recomendado)
+- **SSL/HTTPS** via Let's Encrypt
+
+### Variáveis de Ambiente Obrigatórias
+| Variável | Descrição | Obrigatório |
+|----------|-----------|-------------|
+| `SUPABASE_URL` | URL do projecto Supabase | ✅ Sim |
+| `SUPABASE_ANON_KEY` | Chave pública Supabase | ✅ Sim |
+| `JWT_SECRET` | Chave secreta para tokens | ✅ Sim |
+| `JWT_EXPIRES_IN` | Expiração do token (ex: 7d) | ✅ Sim |
+| `SMTP_HOST` | Servidor SMTP | ⚠️ Para emails |
+| `SMTP_PORT` | Porta SMTP (587/465) | ⚠️ Para emails |
+| `SMTP_USER` | Utilizador SMTP | ⚠️ Para emails |
+| `SMTP_PASS` | Password SMTP | ⚠️ Para emails |
+| `SMTP_FROM` | Email remetente | ⚠️ Para emails |
+| `SMTP_TO` | Email destino | ⚠️ Para emails |
+
+### Comandos de Deploy
+
+```bash
+# 1. Clonar repositório
+git clone <repo-url>
+cd bmcpro.co.mz
+
+# 2. Instalar dependências
+npm install
+
+# 3. Criar ficheiro .env
+cp .env.example .env
+nano .env  # Editar com valores reais
+
+# 4. Build
+npm run build
+
+# 5. Iniciar com PM2
+pm2 start dist/server/entry.mjs --name bmcpro
+
+# 6. Configurar para iniciar no boot
+pm2 save
+pm2 startup
+```
+
+### Configuração Nginx (Exemplo)
+
+```nginx
+server {
+    listen 80;
+    server_name bmcpro.co.mz www.bmcpro.co.mz;
+    return 301 https://$server_name$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name bmcpro.co.mz www.bmcpro.co.mz;
+
+    ssl_certificate /etc/letsencrypt/live/bmcpro.co.mz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/bmcpro.co.mz/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:4321;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
 ## Licença
 
- 2024 BMC Pro Services. Todos os direitos reservados.
+© 2025 BMC Pro Services. Todos os direitos reservados.

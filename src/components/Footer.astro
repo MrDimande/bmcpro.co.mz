@@ -1,6 +1,6 @@
 ---
 import BMCLogo from './BMCLogo.astro';
-import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-astro';
+import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Shield, FileText, Cookie, Scale, Settings } from 'lucide-astro';
 ---
 
 <footer class="relative py-16 border-t border-gold-500/30 bg-transparent">
@@ -92,14 +92,6 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-astro
 							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
 							Contactos
 						</a></li>
-						<li><a href="/politica-privacidade" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
-							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
-							Política de Privacidade
-						</a></li>
-						<li><a href="/termos-condicoes" class="text-gray-400 hover:text-gold-500 transition-colors flex items-center gap-2 group">
-							<span class="w-1.5 h-1.5 rounded-full bg-gold-500/0 group-hover:bg-gold-500 transition-all"></span>
-							Termos &amp; Condições
-						</a></li>
 					</ul>
 				</div>
 			</div>
@@ -137,10 +129,66 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin } from 'lucide-astro
 			</div>
 		</div>
 		
-		<div class="pt-8 border-t border-gold-500/20 text-center space-y-2">
-			<p class="text-[11px] tracking-[0.25em] uppercase text-gray-500">Inovação • Estratégia • Tecnologia</p>
-			<p class="text-gray-500 text-sm">&copy; 2024 BMC Pro Services. Todos os direitos reservados.</p>
+		<!-- Policy Links Bar -->
+		<div class="pt-8 border-t border-gold-500/20">
+			<div class="flex flex-col lg:flex-row items-center justify-between gap-4 mb-6">
+				<!-- Policy Links -->
+				<nav class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs">
+					<a href="/politica-privacidade" class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors">
+						<Shield class="w-3 h-3" />
+						Política de Privacidade
+					</a>
+					<span class="hidden md:inline text-gray-600">|</span>
+					<a href="/termos-condicoes" class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors">
+						<FileText class="w-3 h-3" />
+						Termos & Condições
+					</a>
+					<span class="hidden md:inline text-gray-600">|</span>
+					<a href="/politica-cookies" class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors">
+						<Cookie class="w-3 h-3" />
+						Política de Cookies
+					</a>
+					<span class="hidden md:inline text-gray-600">|</span>
+					<a href="/aviso-legal" class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors">
+						<Scale class="w-3 h-3" />
+						Aviso Legal
+					</a>
+				</nav>
+				
+				<!-- Cookie Settings & DPO Contact -->
+				<div class="flex items-center gap-4 text-xs">
+					<button 
+						id="footer-cookie-settings"
+						class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors cursor-pointer"
+					>
+						<Settings class="w-3 h-3" />
+						Gerir Cookies
+					</button>
+					<a href="mailto:geral@bmcpro.co.mz" class="flex items-center gap-1.5 text-gray-400 hover:text-gold-500 transition-colors">
+						<Mail class="w-3 h-3" />
+						Contacto DPO
+					</a>
+				</div>
+			</div>
+			
+			<!-- Copyright -->
+			<div class="text-center space-y-2">
+				<p class="text-[11px] tracking-[0.25em] uppercase text-gray-500">Inovação • Estratégia • Tecnologia</p>
+				<p class="text-gray-500 text-sm">&copy; 2025 BMC Pro Services. Todos os direitos reservados.</p>
+			</div>
 		</div>
 	</div>
 </footer>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		document.getElementById('footer-cookie-settings')?.addEventListener('click', () => {
+			const modal = document.getElementById('cookie-modal');
+			if (modal) {
+				modal.classList.remove('hidden');
+				document.body.style.overflow = 'hidden';
+			}
+		});
+	});
+</script>
 

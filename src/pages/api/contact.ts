@@ -4,6 +4,8 @@ import { sendContactConfirmation, sendContactNotification } from '../../lib/emai
 import supabase from '../../lib/supabase';
 import { checkRateLimit, isValidEmail, sanitizeInput } from '../../lib/utils';
 
+export const prerender = false;
+
 export const POST: APIRoute = async ({ request }) => {
 	const ip = request.headers.get('x-forwarded-for') || 
 	           request.headers.get('x-real-ip') || 
