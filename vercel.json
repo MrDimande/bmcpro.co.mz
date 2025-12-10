@@ -1,8 +1,4 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "version": 2,
-  "framework": "astro",
-  "buildCommand": "npm run build",
   "headers": [
     {
       "source": "/api/(.*)",
