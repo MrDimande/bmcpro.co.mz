@@ -9,6 +9,7 @@
     "dev": "astro dev",
     "start": "node ./dist/server/entry.mjs",
     "build": "astro build",
+    "build:vercel": "astro build --config astro.config.vercel.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
