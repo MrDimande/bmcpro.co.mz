@@ -320,6 +320,13 @@ import { Send, Mail, Phone, MapPin, User, MessageSquare, Clock, Building2, Shiel
 <script>
 	const form = document.getElementById('contact-form-element');
 	const messageDiv = document.getElementById('form-message');
+
+	// Base da API: se PUBLIC_API_URL estiver definido (build estático em Hostinger),
+	// usamos esse domínio; caso contrário, usamos o backend no mesmo host (/api/contact).
+	const API_BASE = import.meta.env.PUBLIC_API_URL || '';
+	const CONTACT_ENDPOINT = API_BASE
+		? `${API_BASE.replace(/\/$/, '')}/api/contact`
+		: '/api/contact';
 	
 	if (form) {
 		form.addEventListener('submit', async (e) => {
@@ -338,7 +345,7 @@ import { Send, Mail, Phone, MapPin, User, MessageSquare, Clock, Building2, Shiel
 			
 			// API call to backend
 			try {
-				const response = await fetch('/api/contact', {
+				const response = await fetch(CONTACT_ENDPOINT, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(data)
