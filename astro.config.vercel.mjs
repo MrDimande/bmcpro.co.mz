@@ -1,6 +1,6 @@
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
 
@@ -10,9 +10,7 @@ export default defineConfig({
   site: 'https://api.bmcpro.co.mz',
   integrations: [tailwind(), react()],
   output: 'server',
-  adapter: vercel({
-    functionPerRoute: false
-  }),
+  adapter: vercel(),
   vite: {
     define: {
       'process.env.SUPABASE_URL': JSON.stringify(env.SUPABASE_URL),

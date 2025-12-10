@@ -1,0 +1,190 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CookieConsent from '../../components/CookieConsent.astro';
+import BackToTop from '../../components/BackToTop.astro';
+import SustainabilityVenn from '../../components/blog/SustainabilityVenn.astro';
+import UrbanGrowthChart from '../../components/blog/UrbanGrowthChart.astro';
+import { Calendar, Clock, Target, ArrowLeft } from 'lucide-astro';
+import '../../styles/global.css';
+---
+
+<Layout title="Planeamento Territorial e Desenvolvimento Sustentável - BMC Pro Services">
+	<Header />
+	<main>
+		<article class="py-20 relative overflow-hidden pt-32">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="container mx-auto px-6 relative z-10 max-w-4xl">
+				<a href="/blog" class="inline-flex items-center gap-2 text-gold-500 hover:text-gold-400 mb-8 transition-colors">
+					<ArrowLeft class="w-4 h-4" />
+					Voltar ao Blog
+				</a>
+
+				<header class="mb-12">
+					<div class="flex items-center gap-4 mb-6">
+						<div class="w-16 h-16 rounded-xl bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center glow-gold">
+							<Target class="w-8 h-8 text-gold-500" />
+						</div>
+						<span class="text-sm text-gold-500 font-medium uppercase tracking-wider">Planeamento Territorial</span>
+					</div>
+					
+					<h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+						Planeamento Territorial e Desenvolvimento Sustentável
+					</h1>
+					
+					<div class="flex items-center gap-6 text-sm text-gray-400 mb-6">
+						<div class="flex items-center gap-2">
+							<Calendar class="w-4 h-4" />
+							<span>5 Janeiro 2024</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<Clock class="w-4 h-4" />
+							<span>6 min de leitura</span>
+						</div>
+					</div>
+					
+					<div class="flex items-center gap-3 pt-6 border-t border-gold-500/20">
+						<div class="w-12 h-12 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center">
+							<span class="text-gold-500 font-bold text-lg">AD</span>
+						</div>
+						<div>
+							<p class="text-white font-semibold">Alberto Dimande</p>
+							<p class="text-gray-400 text-sm">Licenciado em Planeamento e Ordenamento Territorial, Gestor de Capital Humano, Web Developer</p>
+						</div>
+					</div>
+				</header>
+
+				<div class="prose prose-invert prose-lg max-w-none">
+					<div class="text-gray-300 leading-relaxed space-y-6" style="text-align: justify;">
+						<p class="text-xl text-gray-200 font-medium">
+							O planeamento territorial é fundamental para o desenvolvimento sustentável de Moçambique. Num país com vastos recursos naturais e desafios de urbanização, o ordenamento adequado do território é essencial para garantir qualidade de vida, preservação ambiental e crescimento económico equilibrado.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">1. A Importância do Planeamento Territorial</h2>
+						
+						<p>
+							Segundo a Organização das Nações Unidas (ONU), até 2050, 68% da população mundial viverá em áreas urbanas. Em Moçambique, este processo de urbanização está a acelerar, especialmente em cidades como Maputo, Beira e Nampula. O planeamento territorial adequado é crucial para gerir este crescimento de forma sustentável.
+						</p>
+
+						<UrbanGrowthChart />
+
+						<p>
+							Ian McHarg, pioneiro do planeamento ambiental e autor de "Design with Nature", defendia que o planeamento deve ser baseado na compreensão profunda dos sistemas naturais e sociais. Esta abordagem é particularmente relevante em Moçambique, onde a interacção entre desenvolvimento urbano, recursos naturais e comunidades locais requer planeamento cuidadoso e integrado.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">2. Princípios do Desenvolvimento Sustentável</h2>
+
+						<h3 class="text-2xl font-semibold text-white mt-8 mb-4">2.1. Integração de Dimensões Ambientais, Sociais e Económicas</h3>
+						
+						<p>
+							O conceito de desenvolvimento sustentável, popularizado pelo Relatório Brundtland (1987), define desenvolvimento sustentável como aquele que "satisfaz as necessidades do presente sem comprometer a capacidade das gerações futuras de satisfazerem as suas próprias necessidades".
+						</p>
+
+						<SustainabilityVenn />
+
+						<p>
+							No contexto do planeamento territorial, isto significa criar planos que equilibrem crescimento económico, equidade social e preservação ambiental. Planos de estrutura urbana devem considerar não apenas a expansão física, mas também o impacto ambiental, acesso a serviços básicos e qualidade de vida das comunidades.
+						</p>
+
+						<h3 class="text-2xl font-semibold text-white mt-8 mb-4">2.2. Participação Comunitária</h3>
+						
+						<p>
+							Jane Jacobs, em "The Death and Life of Great American Cities", argumentou que as cidades são criadas por e para as pessoas. O planeamento participativo, que envolve as comunidades locais na tomada de decisões, é essencial para criar espaços urbanos inclusivos e funcionais.
+						</p>
+
+						<p>
+							Em Moçambique, a Lei de Ordenamento do Território (Lei n.º 19/2007) estabelece a participação pública como um princípio fundamental. Consultas comunitárias e envolvimento dos cidadãos garantem que os planos reflictam as reais necessidades e aspirações da população.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">3. Ferramentas e Tecnologias de Planeamento</h2>
+
+						<h3 class="text-2xl font-semibold text-white mt-8 mb-4">3.1. Sistemas de Informação Geográfica (SIG)</h3>
+						
+						<p>
+							O uso de Sistemas de Informação Geográfica (SIG) revolucionou o planeamento territorial. Estas ferramentas permitem a análise complexa de dados espaciais, modelação de cenários e visualização de informações.
+						</p>
+
+						<p>
+							Na BMC Pro Services, utilizamos SIG para mapear uso do solo, infraestruturas, riscos ambientais e densidade populacional. Isto permite tomar decisões baseadas em dados precisos e actualizados.
+						</p>
+
+						<h3 class="text-2xl font-semibold text-white mt-8 mb-4">3.2. Drones e Sensoriamento Remoto</h3>
+						
+						<p>
+							A utilização de drones para levantamento aerofotogramétrico permite obter imagens de alta resolução e modelos digitais de terreno com rapidez e precisão. Esta tecnologia é particularmente útil para monitorizar expansão urbana informal e planear infraestruturas em áreas de difícil acesso.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">4. Desafios do Planeamento em Moçambique</h2>
+						
+						<p>
+							O planeamento territorial em Moçambique enfrenta diversos desafios:
+						</p>
+
+						<ul class="list-disc list-inside space-y-2 ml-4">
+							<li><strong>Expansão urbana informal:</strong> Crescimento rápido sem infraestruturas adequadas</li>
+							<li><strong>Vulnerabilidade climática:</strong> Necessidade de planear para resiliência a eventos extremos</li>
+							<li><strong>Recursos limitados:</strong> Capacidade técnica e financeira dos municípios</li>
+							<li><strong>Gestão de terras:</strong> Complexidade na administração e regularização fundiária</li>
+						</ul>
+
+						<p>
+							Superar estes desafios requer uma abordagem integrada, que combine fortalecimento institucional, uso de tecnologia e envolvimento comunitário.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">5. O Papel da BMC Pro Services</h2>
+						
+						<p>
+							A BMC Pro Services tem desempenhado um papel activo no apoio a municípios e distritos na elaboração de instrumentos de ordenamento territorial. A nossa abordagem multidisciplinar combina conhecimentos de planeamento, engenharia, sociologia e tecnologia para criar planos viáveis e sustentáveis.
+						</p>
+
+						<p>
+							Acreditamos que o planeamento territorial não é apenas sobre desenhar mapas, mas sobre criar condições para que as comunidades prosperem em harmonia com o meio ambiente.
+						</p>
+
+						<h2 class="text-3xl font-bold text-gold-500 mt-12 mb-6">Conclusão</h2>
+						
+						<p>
+							O planeamento territorial e o desenvolvimento sustentável são indissociáveis. Para Moçambique alcançar os seus objectivos de desenvolvimento, é imperativo investir no ordenamento do território como ferramenta estratégica.
+						</p>
+
+						<p>
+							Ao integrar princípios de sustentabilidade, tecnologia avançada e participação comunitária, podemos construir cidades e vilas mais resilientes, inclusivas e prósperas para todos.
+						</p>
+
+						<div class="mt-12 pt-8 border-t border-gold-500/20">
+							<h3 class="text-2xl font-bold text-gold-500 mb-6">Referências Bibliográficas</h3>
+							<ul class="space-y-4 text-sm text-gray-400">
+								<li class="pl-8 -indent-8">
+									Assembleia da República de Moçambique. (2007). <em>Lei n.º 19/2007 de 18 de Julho: Lei de Ordenamento do Território</em>. Boletim da República.
+								</li>
+								<li class="pl-8 -indent-8">
+									Brundtland, G. H. (1987). <em>Our Common Future: Report of the World Commission on Environment and Development</em>. Oxford University Press.
+								</li>
+								<li class="pl-8 -indent-8">
+									Jacobs, J. (1961). <em>The Death and Life of Great American Cities</em>. Random House.
+								</li>
+								<li class="pl-8 -indent-8">
+									McHarg, I. L. (1969). <em>Design with Nature</em>. Natural History Press.
+								</li>
+								<li class="pl-8 -indent-8">
+									United Nations. (2018). <em>World Urbanization Prospects: The 2018 Revision</em>. United Nations Department of Economic and Social Affairs.
+								</li>
+							</ul>
+						</div>
+
+						<div class="mt-12 p-6 rounded-xl bg-gold-500/10 border border-gold-500/20">
+							<p class="text-gold-500 font-semibold mb-2">Sobre o Autor</p>
+							<p class="text-gray-300 text-sm">
+								<strong>Alberto Dimande</strong> é licenciado em Planeamento e Ordenamento Territorial, Gestor de Capital Humano e Web Developer. Apaixonado por cidades sustentáveis e uso de tecnologia para resolver desafios urbanos.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</main>
+	<Footer />
+	<BackToTop />
+	<CookieConsent />
+</Layout>

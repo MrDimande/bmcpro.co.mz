@@ -1,0 +1,40 @@
+/* empty css                                 */
+import { c as createComponent, r as renderComponent, b as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_DgRm4dWW.mjs';
+import 'kleur/colors';
+import { a as $$Layout, b as $$Header, c as $$Footer, d as $$CookieConsent } from '../chunks/CookieConsent_D7ipi_f1.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$PoliticaPrivacidade = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Pol\xEDtica de Privacidade - BMC Pro Services", "description": "Pol\xEDtica de Privacidade da BMC Pro Services, explicando como tratamos e protegemos os dados pessoais recolhidos atrav\xE9s do website." }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "Header", $$Header, {})} ${maybeRenderHead()}<main> <section class="py-20 relative overflow-hidden pt-32"> <div class="absolute inset-0 gradient-diagonal"></div> <div class="container mx-auto px-6 relative z-10 max-w-4xl"> <h1 class="text-3xl md:text-5xl font-bold text-white mb-6">
+Política de Privacidade
+</h1> <p class="text-gray-400 mb-8">
+Esta Política de Privacidade descreve como a <span class="text-gold-500 font-semibold">BMC Pro Services</span> recolhe, utiliza e protege os dados pessoais fornecidos através deste website.
+</p> <div class="space-y-8 text-sm md:text-base text-gray-300 leading-relaxed"> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">1. Dados recolhidos</h2> <p>Podemos recolher os seguintes tipos de dados quando utiliza o nosso website:</p> <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"> <li><span class="text-gold-500 font-medium">Dados de contacto:</span> nome, email, telefone e organização, quando preenche o formulário de contacto.</li> <li><span class="text-gold-500 font-medium">Dados técnicos:</span> endereço IP, tipo de navegador, páginas visitadas e data/hora de acesso, para fins de estatística e segurança.</li> </ul> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">2. Finalidades do tratamento</h2> <p>Os dados recolhidos são utilizados, nomeadamente, para:</p> <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"> <li>Responder a pedidos de contacto e pedidos de proposta;</li> <li>Preparar e apresentar serviços e soluções adequadas ao seu contexto;</li> <li>Melhorar a experiência de utilização do website e os nossos serviços;</li> <li>Cumprir obrigações legais e de segurança.</li> </ul> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">3. Partilha de dados</h2> <p>
+A BMC Pro Services não vende nem cede dados pessoais a terceiros para fins comerciais. Os dados podem ser partilhados apenas com:
+</p> <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"> <li>Prestadores de serviços estritamente necessários ao funcionamento do website (por exemplo, alojamento e email);</li> <li>Autoridades competentes, quando tal for exigido por lei.</li> </ul> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">4. Conservação dos dados</h2> <p>
+Os dados pessoais são conservados apenas pelo período necessário para cumprir as finalidades para que foram recolhidos ou para cumprimento de obrigações legais aplicáveis.
+</p> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">5. Direitos dos titulares</h2> <p>Nos termos da legislação aplicável em matéria de protecção de dados, pode exercer, entre outros, os seguintes direitos:</p> <ul class="list-disc list-inside mt-2 space-y-1 text-gray-300"> <li>Direito de acesso, rectificação ou eliminação dos seus dados;</li> <li>Direito à limitação ou oposição ao tratamento;</li> <li>Direito à portabilidade dos dados, quando aplicável.</li> </ul> <p class="mt-2">
+Para exercer estes direitos, contacte-nos através do email
+<a href="mailto:geral@bmcpro.co.mz" class="text-gold-500 hover:text-gold-400 underline">geral@bmcpro.co.mz</a>.
+</p> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">6. Segurança</h2> <p>
+Adoptamos medidas técnicas e organizativas adequadas para proteger os dados pessoais contra perda, uso indevido, acesso não autorizado, divulgação, alteração ou destruição.
+</p> </section> <section> <h2 class="text-xl font-semibold text-gold-500 mb-3">7. Actualizações a esta Política</h2> <p>
+Esta Política de Privacidade pode ser actualizada periodicamente. A versão em vigor será sempre publicada neste website com a indicação da data de última actualização.
+</p> </section> </div> <p class="text-gray-500 text-xs mt-10">
+Última actualização: Dezembro 2025
+</p> </div> </section> </main> ${renderComponent($$result2, "Footer", $$Footer, {})} ${renderComponent($$result2, "CookieConsent", $$CookieConsent, {})} ` })}`;
+}, "C:/project-x/bmcpro.co.mz/src/pages/politica-privacidade.astro", void 0);
+
+const $$file = "C:/project-x/bmcpro.co.mz/src/pages/politica-privacidade.astro";
+const $$url = "/politica-privacidade";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+	__proto__: null,
+	default: $$PoliticaPrivacidade,
+	file: $$file,
+	url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };

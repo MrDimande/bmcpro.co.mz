@@ -1,0 +1,152 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CookieConsent from '../../components/CookieConsent.astro';
+import BackToTop from '../../components/BackToTop.astro';
+import { Calendar, ArrowRight, TrendingUp, Lightbulb, Target, Users, Clock } from 'lucide-astro';
+import '../../styles/global.css';
+
+const articles = [
+	{
+		slug: 'estrategias-crescimento-empresarial-2024',
+		icon: TrendingUp,
+		title: 'Estratégias de Crescimento Empresarial em 2024',
+		excerpt: 'Descubra as principais tendências e estratégias que estão impulsionando o crescimento das empresas em Moçambique e além.',
+		category: 'Consultoria Estratégica',
+		date: '15 Jan 2024',
+		readTime: '5 min'
+	},
+	{
+		slug: 'inovacao-digital-transformando-processos',
+		icon: Lightbulb,
+		title: 'Inovação Digital: Transformando Processos Empresariais',
+		excerpt: 'Como a digitalização de processos pode aumentar a eficiência operacional e reduzir custos nas organizações.',
+		category: 'Inovação Digital',
+		date: '10 Jan 2024',
+		readTime: '7 min'
+	},
+	{
+		slug: 'planeamento-territorial-desenvolvimento-sustentavel',
+		icon: Target,
+		title: 'Planeamento Territorial e Desenvolvimento Sustentável',
+		excerpt: 'A importância do ordenamento territorial para o desenvolvimento urbano sustentável e melhoria da qualidade de vida.',
+		category: 'Planeamento Territorial',
+		date: '5 Jan 2024',
+		readTime: '6 min'
+	},
+	{
+		slug: 'gestao-equipas-multidisciplinares',
+		icon: Users,
+		title: 'Gestão de Equipas Multidisciplinares: Desafios e Oportunidades',
+		excerpt: 'Estratégias eficazes para liderar e coordenar equipas diversas em projetos complexos de consultoria.',
+		category: 'Gestão',
+		date: '28 Dez 2023',
+		readTime: '8 min'
+	}
+];
+---
+
+<Layout title="Blog & Notícias - BMC Pro Services">
+	<Header />
+	<main>
+		<section class="py-20 relative overflow-hidden pt-32">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center mb-16">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">
+						<span class="text-white">Blog &</span>
+						<span class="text-gold-500"> Notícias</span>
+					</h1>
+					<p class="text-lg text-gray-400 max-w-2xl mx-auto">
+						Artigos, insights e tendências sobre gestão, consultoria e inovação empresarial.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+					{articles.map((article, index) => {
+						const IconComponent = article.icon;
+						return (
+							<article class="glass-dark rounded-3xl overflow-hidden hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 flex flex-col animate-on-scroll group" style={`animation-delay: ${index * 0.1}s;`}>
+								<div class="p-6 pb-4">
+									<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center mb-4 glow-gold">
+										<IconComponent class="w-6 h-6 text-gold-500" stroke-width="1.5" />
+									</div>
+									<span class="text-xs text-gold-500 font-medium uppercase tracking-wider">{article.category}</span>
+								</div>
+								
+								<div class="px-6 pb-6 flex-grow flex flex-col">
+									<h3 class="text-xl font-bold text-white mb-3 group-hover:text-gold-500 transition-colors">
+										{article.title}
+									</h3>
+									<p class="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+										{article.excerpt}
+									</p>
+									
+									<div class="flex items-center justify-between text-xs text-gray-500 mb-4">
+										<div class="flex items-center gap-1">
+											<Calendar class="w-3 h-3" />
+											{article.date}
+										</div>
+										<div class="flex items-center gap-1">
+											<Clock class="w-3 h-3" />
+											{article.readTime}
+										</div>
+									</div>
+									
+									<a href={`/blog/${article.slug}`} class="flex items-center gap-2 text-gold-500 hover:text-gold-400 font-medium text-sm transition-colors group/link">
+										Ler artigo completo
+										<ArrowRight class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+									</a>
+								</div>
+							</article>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+	<BackToTop />
+	<CookieConsent />
+</Layout>
+
+<script>
+	if (typeof window !== 'undefined') {
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const delay = entry.target.style.getPropertyValue('--animation-delay') || '0s';
+					entry.target.style.animationDelay = delay;
+					entry.target.classList.add('animate-on-scroll-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		setTimeout(() => {
+			document.querySelectorAll('.animate-on-scroll').forEach(el => {
+				observer.observe(el);
+			});
+		}, 100);
+	}
+</script>
+
+<style is:global>
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+	
+	.animate-on-scroll-visible {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+</style>
+

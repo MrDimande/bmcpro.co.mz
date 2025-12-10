@@ -1,0 +1,1 @@
+import"./hoisted.DigBNQeo.js";document.addEventListener("DOMContentLoaded",()=>{document.getElementById("manage-cookies-btn")?.addEventListener("click",()=>{const e=document.getElementById("cookie-modal");e&&(e.classList.remove("hidden"),document.body.style.overflow="hidden")})});

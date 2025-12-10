@@ -1,0 +1,266 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { Users, Sparkles, Cpu, Shield, TrendingUp, MapPin, Headphones, Award, Handshake, CheckCircle, Star, Quote } from 'lucide-astro';
+import '../styles/global.css';
+
+const differentiators = [
+	{
+		icon: Users,
+		title: 'Equipa Multidisciplinar',
+		description: 'Profissionais especializados em diversas áreas, trabalhando em conjunto para oferecer soluções integradas e abrangentes.',
+		details: 'A nossa equipa combina expertise em planeamento territorial, gestão de recursos humanos, desenvolvimento web, comunicação e engenharia, permitindo abordagens holísticas aos desafios dos nossos clientes.'
+	},
+	{
+		icon: Sparkles,
+		title: 'Soluções Personalizadas',
+		description: 'Cada projeto é único. Desenvolvemos estratégias personalizadas que se adaptam às necessidades específicas do seu negócio.',
+		details: 'Não acreditamos em soluções "tamanho único". Cada cliente recebe uma análise detalhada e uma proposta customizada que reflecte a sua realidade e objectivos específicos.'
+	},
+	{
+		icon: Cpu,
+		title: 'Tecnologia de Ponta',
+		description: 'Utilizamos as mais recentes ferramentas tecnológicas e práticas inovadoras para maximizar eficiência e resultados.',
+		details: 'Ferramentas como Better Rides, KoboCollect, sistemas SIG e plataformas de gestão integrada permitem-nos oferecer soluções modernas e eficientes.'
+	},
+	{
+		icon: Shield,
+		title: 'Ética e Compromisso',
+		description: 'Mantemos os mais altos padrões de ética profissional e compromisso com a transparência em todos os nossos projetos.',
+		details: 'A transparência, integridade e responsabilidade são valores fundamentais que guiam todas as nossas interacções e entregas.'
+	},
+	{
+		icon: TrendingUp,
+		title: 'Resultados Comprovados',
+		description: 'Temos um histórico sólido de projetos bem-sucedidos que geram valor real e impacto positivo para os nossos clientes.',
+		details: 'Desde a nossa fundação, temos um histórico sólido de projetos bem-sucedidos que geram valor real e impacto positivo, com 95% de taxa de satisfação dos nossos clientes.'
+	},
+	{
+		icon: MapPin,
+		title: 'Experiência Local',
+		description: 'Conhecimento profundo do contexto moçambicano, legislação local e dinâmicas de mercado específicas do país.',
+		details: 'Fundada em 2023, a BMC Pro Services desenvolveu rapidamente um conhecimento profundo do contexto moçambicano, legislação local e dinâmicas de mercado, facilitando a implementação de soluções adaptadas e eficazes.'
+	},
+	{
+		icon: Headphones,
+		title: 'Suporte Contínuo',
+		description: 'Acompanhamento pós-projeto para garantir que as soluções implementadas continuem a gerar valor a longo prazo.',
+		details: 'O nosso compromisso não termina com a entrega. Oferecemos suporte contínuo, monitorização e ajustes para garantir resultados sustentáveis.'
+	}
+];
+
+const stats = [
+	{ value: '2023', label: 'Ano de Fundação', description: 'Empresa moçambicana' },
+	{ value: '50+', label: 'Projetos Concluídos', description: 'Com sucesso comprovado' },
+	{ value: '95%', label: 'Taxa de Satisfação', description: 'Clientes satisfeitos' },
+	{ value: '100+', label: 'Clientes Atendidos', description: 'Empresas e instituições' }
+];
+
+const testimonials = [
+	{
+		name: 'Maria Santos',
+		company: 'Conselho Municipal de Marracuene',
+		role: 'Directora de Planeamento',
+		text: 'A BMC Pro Services transformou completamente a nossa abordagem ao planeamento territorial. O conhecimento técnico e a atenção aos detalhes foram excepcionais.',
+		rating: 5
+	},
+	{
+		name: 'João Mário',
+		company: 'GreenBuild Lda',
+		role: 'CEO',
+		text: 'O suporte contínuo e as soluções personalizadas da BMC Pro foram fundamentais para o crescimento da nossa empresa. Recomendo sem hesitação.',
+		rating: 5
+	},
+	{
+		name: 'Ana Paula',
+		company: 'TecnoAgro',
+		role: 'Directora de Operações',
+		text: 'A implementação das soluções digitais melhorou significativamente a nossa eficiência operacional. Profissionais competentes e dedicados.',
+		rating: 5
+	}
+];
+---
+
+<Layout title="Porquê Escolher-nos - BMC Pro Services">
+	<Header />
+	<main>
+		<!-- Hero Section -->
+		<section class="py-20 relative overflow-hidden pt-32">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute inset-0 gradient-gold opacity-20"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-4xl mx-auto text-center">
+					<h1 class="text-4xl md:text-6xl font-bold mb-6">
+						<span class="text-white">Porquê Escolher</span>
+						<span class="text-gold-500"> a BMC Pro Services?</span>
+					</h1>
+					<p class="text-xl text-gray-300 leading-relaxed mb-8">
+						A BMC Pro Services distingue-se pela combinação única de expertise multidisciplinar, conhecimento local profundo e compromisso inabalável com a excelência. Somos mais do que consultores – somos parceiros estratégicos dedicados ao seu sucesso.
+					</p>
+					<p class="text-lg text-gray-400 leading-relaxed">
+						Fundada em 2023, a BMC Pro Services desenvolveu rapidamente uma compreensão profunda do mercado moçambicano, legislação local e dinâmicas empresariais. Esta experiência, combinada com metodologias comprovadas internacionalmente e tecnologias de ponta, permite-nos oferecer soluções que não apenas funcionam, mas que transformam organizações.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Stats Section -->
+		<section class="py-12 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+					{stats.map((stat, index) => (
+						<div class="text-center animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
+							<div class="text-4xl md:text-5xl font-bold text-gold-500 mb-2">{stat.value}</div>
+							<div class="text-white font-semibold mb-1">{stat.label}</div>
+							<div class="text-gray-400 text-sm">{stat.description}</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Differentiators Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute top-0 right-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+					<span class="text-white">Os Nossos</span>
+					<span class="text-gold-500"> Diferenciais</span>
+				</h2>
+				<p class="text-lg text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+					O que nos torna únicos e por que somos a escolha certa para o seu projeto
+				</p>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+					{differentiators.map((item, index) => {
+						const IconComponent = item.icon;
+						return (
+							<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
+								<div class="w-20 h-20 rounded-full bg-gradient-to-br from-gold-600/20 to-gold-500/10 flex items-center justify-center mb-6 mx-auto glow-gold">
+									<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+								</div>
+								<h3 class="text-2xl font-bold text-gold-500 mb-4 text-center">{item.title}</h3>
+								<p class="text-gray-300 leading-relaxed text-center mb-4">{item.description}</p>
+								<p class="text-gray-400 text-sm leading-relaxed text-center">{item.details}</p>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+
+		<!-- Testimonials Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<h2 class="text-4xl md:text-5xl font-bold text-center mb-4">
+					<span class="text-white">O Que Dizem</span>
+					<span class="text-gold-500"> Os Nossos Clientes</span>
+				</h2>
+				<p class="text-lg text-gray-400 text-center mb-16 max-w-2xl mx-auto">
+					Depoimentos reais de clientes que confiaram na BMC Pro Services
+				</p>
+
+				<div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+					{testimonials.map((testimonial, index) => (
+						<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 animate-on-scroll flex flex-col" style={`animation-delay: ${index * 0.15}s;`}>
+							<div class="mb-6">
+								<Quote class="w-12 h-12 text-gold-500/30 mb-4" />
+								<p class="text-gray-300 leading-relaxed italic mb-4 flex-grow">
+									"{testimonial.text}"
+								</p>
+								<div class="flex gap-1 mb-4">
+									{Array.from({ length: testimonial.rating }).map(() => (
+										<Star class="w-4 h-4 text-gold-500 fill-gold-500" />
+									))}
+								</div>
+							</div>
+							<div class="pt-6 border-t border-gold-500/20">
+								<p class="text-white font-semibold">{testimonial.name}</p>
+								<p class="text-gold-500 text-sm font-medium">{testimonial.role}</p>
+								<p class="text-gray-400 text-sm">{testimonial.company}</p>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 relative overflow-hidden">
+			<div class="absolute inset-0 gradient-diagonal"></div>
+			<div class="absolute inset-0 gradient-gold opacity-20"></div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="max-w-3xl mx-auto text-center">
+					<h2 class="text-4xl md:text-5xl font-bold mb-6">
+						<span class="text-white">Pronto para</span>
+						<span class="text-gold-500"> Trabalhar Connosco?</span>
+					</h2>
+					<p class="text-lg text-gray-300 mb-8 leading-relaxed">
+						Descubra como a BMC Pro Services pode ajudar a transformar a sua organização e impulsionar o seu crescimento.
+					</p>
+					<div class="flex flex-col sm:flex-row gap-4 justify-center">
+						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105">
+							Contactar-nos
+						</a>
+						<a href="/services" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold hover:bg-gold-500/10 hover:border-gold-500 transition-all transform hover:scale-105">
+							Ver Serviços
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<Footer />
+	<BackToTop />
+	<CookieConsent />
+</Layout>
+
+<script>
+	if (typeof window !== 'undefined') {
+		const observerOptions = {
+			threshold: 0.1,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					const delay = entry.target.style.getPropertyValue('--animation-delay') || '0s';
+					entry.target.style.animationDelay = delay;
+					entry.target.classList.add('animate-on-scroll-visible');
+					observer.unobserve(entry.target);
+				}
+			});
+		}, observerOptions);
+
+		setTimeout(() => {
+			document.querySelectorAll('.animate-on-scroll').forEach(el => {
+				observer.observe(el);
+			});
+		}, 100);
+	}
+</script>
+
+<style is:global>
+	.animate-on-scroll {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+	
+	.animate-on-scroll-visible {
+		opacity: 1 !important;
+		transform: translateY(0) !important;
+	}
+</style>
+
