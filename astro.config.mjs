@@ -1,6 +1,6 @@
+import node from '@astrojs/node';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
 import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
 
@@ -8,10 +8,12 @@ const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://api.bmcpro.co.mz',
+  site: 'https://bmcpro.co.mz',
   integrations: [tailwind(), react()],
-  output: 'server',
-  adapter: vercel(),
+  output: 'server', // Full SSR para Hostinger
+  adapter: node({
+    mode: 'standalone'
+  }),
   server: {
     port: parseInt(process.env.PORT || '4321'),
     host: '0.0.0.0' // Necessário para Hostinger
