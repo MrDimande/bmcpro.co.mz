@@ -1,4 +1,3 @@
-import node from '@astrojs/node';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import { defineConfig } from 'astro/config';
@@ -6,17 +5,29 @@ import { loadEnv } from 'vite';
 
 const env = loadEnv(process.env.NODE_ENV || 'development', process.cwd(), '');
 
+// Detectar ambiente - Vercel define VERCEL=1
+const isVercel = process.env.VERCEL === '1';
+
+// Importar adapter dinamicamente
+const getAdapter = async () => {
+  if (isVercel) {
+    const vercel = (await import('@astrojs/vercel/serverless')).default;
+    return vercel();
+  } else {
+    const node = (await import('@astrojs/node')).default;
+    return node({ mode: 'standalone' });
+  }
+};
+
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://bmcpro.co.mz',
+  site: isVercel ? 'https://api.bmcpro.co.mz' : 'https://bmcpro.co.mz',
   integrations: [tailwind(), react()],
-  output: 'server', // Full SSR para Hostinger
-  adapter: node({
-    mode: 'standalone'
-  }),
+  output: 'server',
+  adapter: await getAdapter(),
   server: {
     port: parseInt(process.env.PORT || '4321'),
-    host: '0.0.0.0' // Necessário para Hostinger
+    host: '0.0.0.0'
   },
   vite: {
     define: {
