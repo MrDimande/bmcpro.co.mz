@@ -6,7 +6,6 @@
     "dev": "astro dev",
     "start": "node ./dist/server/entry.mjs",
     "build": "astro build",
-    "build:vercel": "astro build --config astro.config.vercel.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -14,7 +13,6 @@
     "@astrojs/node": "^8.3.4",
     "@astrojs/react": "^3.0.0",
     "@astrojs/tailwind": "^5.1.0",
-    "@astrojs/vercel": "^7.8.2",
     "@react-three/drei": "^9.88.0",
     "@react-three/fiber": "^8.15.0",
     "@supabase/supabase-js": "^2.45.0",
