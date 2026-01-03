@@ -32,7 +32,7 @@ npm run build
 
 ## 📁 Estrutura do Projeto
 
-```
+```text
 src/
 ├── components/     # Componentes reutilizáveis
 ├── layouts/        # Layouts de página
@@ -45,9 +45,11 @@ src/
 ## 🔌 API Endpoints
 
 ### POST `/api/contact`
+
 Envia mensagem de contacto.
 
 **Body:**
+
 ```json
 {
   "name": "Nome Completo",
@@ -58,6 +60,7 @@ Envia mensagem de contacto.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -66,6 +69,7 @@ Envia mensagem de contacto.
 ```
 
 ### GET `/api/health`
+
 Verifica o status da API.
 
 ## ⚙️ Operação
@@ -138,19 +142,21 @@ Este projeto está preparado para deploy na Hostinger usando Supabase como base 
    ```
 
 6. **Configurar HTTPS**
-   - Activar SSL/HTTPS via painel Hostinger ou Let's Encrypt 
+   - Activar SSL/HTTPS via painel Hostinger ou Let's Encrypt
 
 ## 🔧 Requisitos para Deploy
 
 ### Hostinger VPS/Cloud
+
 - **Node.js 18+** instalado
 - **PM2** para gestão de processos
 - **Nginx** como reverse proxy (recomendado)
 - **SSL/HTTPS** via Let's Encrypt
 
 ### Variáveis de Ambiente Obrigatórias
+
 | Variável | Descrição | Obrigatório |
-|----------|-----------|-------------|
+| -------- | --------- | ----------- |
 | `SUPABASE_URL` | URL do projecto Supabase | ✅ Sim |
 | `SUPABASE_ANON_KEY` | Chave pública Supabase | ✅ Sim |
 | `JWT_SECRET` | Chave secreta para tokens | ✅ Sim |

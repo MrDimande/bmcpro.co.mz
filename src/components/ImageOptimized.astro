@@ -1,0 +1,51 @@
+---
+/**
+ * ImageOptimized Component
+ * Wrapper para garantir lazy loading e optimização de imagens consistente
+ */
+import { Image } from 'astro:assets';
+
+interface Props {
+	src: ImageMetadata | string;
+	alt: string;
+	width: number;
+	height: number;
+	class?: string;
+	priority?: boolean;
+	quality?: number;
+}
+
+const { 
+	src, 
+	alt, 
+	width, 
+	height, 
+	class: className = '', 
+	priority = false,
+	quality = 80
+} = Astro.props;
+---
+
+{typeof src === 'string' ? (
+	<img 
+		src={src}
+		alt={alt}
+		width={width}
+		height={height}
+		class={className}
+		loading={priority ? "eager" : "lazy"}
+		decoding="async"
+	/>
+) : (
+	<Image 
+		src={src}
+		alt={alt}
+		width={width}
+		height={height}
+		class={className}
+		loading={priority ? "eager" : "lazy"}
+		decoding="async"
+		format="webp"
+		quality={quality}
+	/>
+)}

@@ -10,6 +10,7 @@
     "start": "node ./dist/server/entry.mjs",
     "build": "astro build",
     "build:vercel": "astro build --config astro.config.vercel.mjs",
+    "build:hostinger": "node scripts/prepare-static-build.mjs --move && astro build --config astro.config.hostinger.mjs & node scripts/prepare-static-build.mjs --restore",
     "preview": "astro preview",
     "astro": "astro"
   },

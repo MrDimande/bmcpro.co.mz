@@ -10,13 +10,19 @@ import {
 	GraduationCap, 
 	Briefcase,
 	Check,
-	ArrowRight
+	ArrowRight,
+	Sparkles,
+	ChevronDown
 } from 'lucide-astro';
 
+// Dados dos serviços com categorias para cores únicas
 const services = [
 	{
 		icon: Target,
 		title: 'Consultoria Estratégica',
+		slug: 'consultoria-estrategica',
+		category: 'strategic',
+		badge: 'Mais Procurado',
 		description: 'Apoiamos organizações na definição de metas, estratégias e planos de ação alinhados à realidade do mercado e ao futuro desejado pela instituição.',
 		subServices: [
 			'Diagnóstico organizacional',
@@ -29,6 +35,8 @@ const services = [
 	{
 		icon: Map,
 		title: 'Planeamento Territorial',
+		slug: 'planeamento-territorial',
+		category: 'territorial',
 		description: 'Desenvolvemos soluções técnicas para gestão e ordenamento do território, com foco na sustentabilidade, urbanização e melhoria da qualidade de vida.',
 		subServices: [
 			'Planos de estrutura urbana',
@@ -41,6 +49,8 @@ const services = [
 	{
 		icon: Megaphone,
 		title: 'Comunicação & Branding',
+		slug: 'comunicacao-branding',
+		category: 'communication',
 		description: 'Criamos identidade visual, campanhas e materiais que reforçam a presença das marcas e facilitam a comunicação com o público-alvo.',
 		subServices: [
 			'Identidade visual e branding',
@@ -53,6 +63,9 @@ const services = [
 	{
 		icon: Cpu,
 		title: 'Inovação Digital & Smart Solutions',
+		slug: 'inovacao-digital',
+		category: 'digital',
+		badge: 'Novo',
 		description: 'Integramos ferramentas tecnológicas que aceleram processos, melhoram decisões e trazem eficiência às operações.',
 		subServices: [
 			'Digitalização de processos',
@@ -65,6 +78,8 @@ const services = [
 	{
 		icon: ShoppingBag,
 		title: 'Procurement e Gestão de Aquisições',
+		slug: 'procurement',
+		category: 'procurement',
 		description: 'Ajudamos empresas a estruturar processos éticos, transparentes e eficientes de aquisição de bens e serviços.',
 		subServices: [
 			'Gestão do ciclo de procurement',
@@ -77,6 +92,8 @@ const services = [
 	{
 		icon: Leaf,
 		title: 'Consultoria Ambiental',
+		slug: 'consultoria-ambiental',
+		category: 'environmental',
 		description: 'Prestamos suporte técnico especializado em análises ambientais, mitigação de impactos e sustentabilidade.',
 		subServices: [
 			'Estudos de impacto ambiental (EIA/RIMA)',
@@ -89,6 +106,8 @@ const services = [
 	{
 		icon: FileSearch,
 		title: 'Pesquisa & Estudos Técnicos',
+		slug: 'pesquisa-estudos',
+		category: 'research',
 		description: 'Realizamos surveys, recolha de dados e análises técnicas para tomada de decisões baseadas em evidências.',
 		subServices: [
 			'Levantamentos de campo',
@@ -101,6 +120,8 @@ const services = [
 	{
 		icon: GraduationCap,
 		title: 'Formação e Desenvolvimento Profissional',
+		slug: 'formacao-desenvolvimento',
+		category: 'training',
 		description: 'Capacitamos equipas em diversas áreas de gestão, tecnologia e liderança, promovendo ambientes de trabalho mais produtivos e eficazes.',
 		subServices: [
 			'Treinamentos corporativos',
@@ -113,6 +134,8 @@ const services = [
 	{
 		icon: Briefcase,
 		title: 'Gestão Administrativa & Apoio Operacional',
+		slug: 'gestao-administrativa',
+		category: 'administrative',
 		description: 'Oferecemos suporte administrativo profissional para garantir o funcionamento eficiente e organizado das operações internas.',
 		subServices: [
 			'Gestão documental',
@@ -123,44 +146,205 @@ const services = [
 		]
 	}
 ];
+
+// Categorias com cores para gradientes únicos
+const categoryColors: Record<string, { from: string; to: string; glow: string }> = {
+	strategic: { from: 'from-amber-500/30', to: 'to-amber-600/10', glow: 'rgba(245, 158, 11, 0.4)' },
+	territorial: { from: 'from-emerald-500/30', to: 'to-emerald-600/10', glow: 'rgba(16, 185, 129, 0.4)' },
+	communication: { from: 'from-purple-500/30', to: 'to-purple-600/10', glow: 'rgba(168, 85, 247, 0.4)' },
+	digital: { from: 'from-blue-500/30', to: 'to-blue-600/10', glow: 'rgba(59, 130, 246, 0.4)' },
+	procurement: { from: 'from-orange-500/30', to: 'to-orange-600/10', glow: 'rgba(249, 115, 22, 0.4)' },
+	environmental: { from: 'from-teal-500/30', to: 'to-teal-600/10', glow: 'rgba(20, 184, 166, 0.4)' },
+	research: { from: 'from-pink-500/30', to: 'to-pink-600/10', glow: 'rgba(236, 72, 153, 0.4)' },
+	training: { from: 'from-violet-500/30', to: 'to-violet-600/10', glow: 'rgba(139, 92, 246, 0.4)' },
+	administrative: { from: 'from-slate-400/30', to: 'to-slate-500/10', glow: 'rgba(148, 163, 184, 0.4)' },
+};
 ---
 
-<section class="py-20 relative overflow-hidden">
-	<!-- Background -->
+<section id="services-list" class="py-24 relative overflow-hidden">
+	<!-- Background Premium -->
 	<div class="absolute inset-0 gradient-diagonal"></div>
 	<div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl"></div>
+	<div class="absolute top-1/4 right-0 w-80 h-80 bg-gold-500/3 rounded-full blur-3xl"></div>
 	
 	<div class="container mx-auto px-6 relative z-10">
-		<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+		<!-- Header da Secção Premium -->
+		<header class="text-center mb-16 animate-on-scroll">
+			<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full badge-premium mb-6">
+				<Sparkles class="w-4 h-4 text-gold-500" stroke-width="2" />
+				<span class="text-sm font-semibold text-gold-400">Soluções Personalizadas</span>
+			</div>
+			
+			<h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+				<span class="text-white">Os Nossos </span>
+				<span class="gradient-text-animated">Serviços</span>
+			</h2>
+			
+			<p class="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+				Oferecemos um portfólio completo de serviços especializados para impulsionar 
+				o crescimento e a transformação da sua organização.
+			</p>
+		</header>
+		
+		<!-- Bento Grid de Serviços -->
+		<div class="services-bento-grid">
 			{services.map((service, index) => {
 				const IconComponent = service.icon;
+				const colors = categoryColors[service.category];
+				const isFeatured = index === 0;
+				
 				return (
-					<div class="glass-dark rounded-3xl p-8 hover:glow-gold transition-all transform hover:scale-105 border border-gold-500/20 flex flex-col animate-on-scroll" style={`animation-delay: ${index * 0.1}s;`}>
-						<div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-gold-600/30 to-gold-500/10 flex items-center justify-center mb-6 glow-gold">
-							<IconComponent class="w-10 h-10 text-gold-500" stroke-width="1.5" />
+					<article 
+						class={`
+							card-metallic card-glow-border shimmer-border rounded-3xl p-8 
+							group relative flex flex-col
+							animate-on-scroll stagger-${index + 1}
+							${isFeatured ? 'featured-card' : ''}
+						`}
+						aria-labelledby={`service-title-${service.slug}`}
+					>
+						<!-- Badge se existir -->
+						{service.badge && (
+							<div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-gold-500/20 border border-gold-500/40">
+								<span class="text-xs font-bold text-gold-400 uppercase tracking-wide">
+									{service.badge}
+								</span>
+							</div>
+						)}
+						
+						<!-- Ícone com gradiente único -->
+						<div class={`w-20 h-20 rounded-2xl bg-gradient-to-br ${colors.from} ${colors.to} flex items-center justify-center mb-6 transition-all duration-300`}
+							style={`box-shadow: 0 0 20px ${colors.glow};`}>
+							<IconComponent class="w-10 h-10 text-gold-500 icon-pulse" stroke-width="1.5" />
 						</div>
 						
-						<h3 class="text-2xl font-bold text-gold-500 mb-4">{service.title}</h3>
-						<p class="text-gray-300 leading-relaxed mb-6 flex-grow text-sm">{service.description}</p>
+						<!-- Título -->
+						<h3 
+							id={`service-title-${service.slug}`}
+							class="text-2xl font-bold text-gold-500 mb-4 group-hover:text-gold-400 transition-colors"
+						>
+							{service.title}
+						</h3>
 						
-						<ul class="space-y-3 mb-6">
-							{service.subServices.map((subService) => (
-								<li class="text-gray-400 text-sm flex items-start gap-2">
-									<Check class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" stroke-width="2.5" />
-									<span>{subService}</span>
-								</li>
-							))}
-						</ul>
+						<!-- Descrição -->
+						<p class="text-gray-200 leading-relaxed mb-6 text-sm flex-grow">
+							{service.description}
+						</p>
 						
-						<button class="w-full px-6 py-3 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center justify-center gap-2">
-							Saiba mais
-							<ArrowRight class="w-4 h-4" stroke-width="2.5" />
-						</button>
-					</div>
+						<!-- Sub-serviços com expand/collapse -->
+						<div class="mb-6">
+							<ul 
+								role="list" 
+								class="space-y-3 sub-services-list"
+								data-expanded="false"
+								aria-label={`Sub-serviços de ${service.title}`}
+							>
+								{service.subServices.map((subService, subIndex) => (
+									<li 
+										class={`text-gray-200 text-sm flex items-start gap-2 ${subIndex >= 3 ? 'hidden-sub' : ''}`}
+									>
+										<Check class="w-4 h-4 text-gold-500 mt-0.5 flex-shrink-0" stroke-width="2.5" />
+										<span>{subService}</span>
+									</li>
+								))}
+							</ul>
+							
+							{service.subServices.length > 3 && (
+								<button 
+									type="button"
+									class="mt-3 text-gold-500 text-sm flex items-center gap-1 hover:text-gold-400 transition-colors expand-btn"
+									aria-expanded="false"
+									aria-controls={`sub-list-${service.slug}`}
+								>
+									<span class="expand-text">Ver todos ({service.subServices.length})</span>
+									<ChevronDown class="w-4 h-4 expand-icon transition-transform duration-300" />
+								</button>
+							)}
+						</div>
+						
+						<!-- CTA Premium -->
+						<a 
+							href={`/servicos/${service.slug}`} 
+							class="mt-auto w-full px-6 py-3.5 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all duration-300 transform hover:scale-[1.02] flex items-center justify-center gap-2 group/btn"
+							aria-label={`Saiba mais sobre ${service.title}`}
+						>
+							<span>Saiba mais</span>
+							<ArrowRight class="w-4 h-4 transition-transform group-hover/btn:translate-x-1" stroke-width="2.5" />
+						</a>
+					</article>
 				);
 			})}
 		</div>
 	</div>
 </section>
 
+<script>
+	// Expand/Collapse sub-services functionality
+	document.querySelectorAll('.expand-btn').forEach(btn => {
+		btn.addEventListener('click', () => {
+			const list = btn.parentElement?.querySelector('.sub-services-list');
+			const text = btn.querySelector('.expand-text');
+			const icon = btn.querySelector('.expand-icon');
+			const hiddenItems = list?.querySelectorAll('.hidden-sub');
+			
+			if (!list || !text || !hiddenItems) return;
+			
+			const isExpanded = list.getAttribute('data-expanded') === 'true';
+			
+			if (isExpanded) {
+				// Collapse
+				hiddenItems.forEach(item => {
+					(item as HTMLElement).style.display = 'none';
+				});
+				list.setAttribute('data-expanded', 'false');
+				list.classList.remove('expanded');
+				btn.setAttribute('aria-expanded', 'false');
+				text.textContent = `Ver todos (${hiddenItems.length + 3})`;
+				icon?.classList.remove('rotate-180');
+			} else {
+				// Expand
+				hiddenItems.forEach(item => {
+					(item as HTMLElement).style.display = 'flex';
+				});
+				list.setAttribute('data-expanded', 'true');
+				list.classList.add('expanded');
+				btn.setAttribute('aria-expanded', 'true');
+				text.textContent = 'Ver menos';
+				icon?.classList.add('rotate-180');
+			}
+		});
+	});
+	
+	// Initial hide of extra items
+	document.querySelectorAll('.hidden-sub').forEach(item => {
+		(item as HTMLElement).style.display = 'none';
+	});
+</script>
 
+<style>
+	/* Local styles for this component */
+	.expand-icon.rotate-180 {
+		transform: rotate(180deg);
+	}
+	
+	/* Featured card extra styling */
+	.featured-card {
+		background: 
+			radial-gradient(circle at 0% 0%, rgba(255, 184, 0, 0.12), transparent 50%),
+			radial-gradient(circle at 100% 100%, rgba(255, 184, 0, 0.06), transparent 50%),
+			linear-gradient(145deg, #040507 0%, #0c0f14 45%, #040507 100%);
+	}
+	
+	@media (min-width: 1024px) {
+		.featured-card {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+		
+		.featured-card p {
+			font-size: 1rem;
+			line-height: 1.75;
+		}
+	}
+</style>

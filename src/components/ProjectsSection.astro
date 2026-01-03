@@ -67,8 +67,11 @@ const projects = [
 							<img 
 								src={project.image} 
 								alt={project.name}
+								width={400}
+								height={192}
 								class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
 								loading="lazy"
+								decoding="async"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 							<div class="absolute inset-0 bg-gold-500/0 group-hover:bg-gold-500/10 transition-colors duration-500"></div>
