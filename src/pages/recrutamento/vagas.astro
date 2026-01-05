@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { JOBS } from '../../lib/jobs';
+
+const uniqueLocations = [...new Set(JOBS.map(job => job.location))];
+const uniqueTypes = [...new Set(JOBS.map(job => job.type))];
+---
+
+<Layout title="Vagas Disponíveis | BMC Pro Services">
+  <main class="min-h-screen bg-gray-50 py-12 px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-8">
+           <a href="/recrutamento" class="text-sm font-semibold leading-6 text-gold-600 hover:text-gold-500 mb-4 inline-block">
+            ← Voltar ao início
+          </a>
+          <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Oportunidades Disponíveis</h1>
+          <p class="mt-4 text-lg text-gray-600">Explore as nossas vagas abertas e encontre o seu próximo desafio.</p>
+      </div>
+
+      <!-- Filters -->
+      <div class="mb-8 p-4 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col sm:flex-row gap-4">
+        <div class="flex-1">
+            <label for="location-filter" class="block text-sm font-medium text-gray-700 mb-1">Localização</label>
+            <select id="location-filter" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-gold-500 focus:outline-none focus:ring-gold-500 sm:text-sm">
+                <option value="">Todas as localizações</option>
+                {uniqueLocations.map(loc => (
+                    <option value={loc}>{loc}</option>
+                ))}
+            </select>
+        </div>
+        <div class="flex-1">
+            <label for="type-filter" class="block text-sm font-medium text-gray-700 mb-1">Tipo de Contrato</label>
+            <select id="type-filter" class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-gold-500 focus:outline-none focus:ring-gold-500 sm:text-sm">
+                <option value="">Todos os tipos</option>
+                 {uniqueTypes.map(type => (
+                    <option value={type}>{type}</option>
+                ))}
+            </select>
+        </div>
+      </div>
+
+      <div id="jobs-container" class="space-y-6">
+        {JOBS.map((job) => (
+          <div 
+            class="job-card bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 hover:shadow-md transition-shadow"
+            data-location={job.location}
+            data-type={job.type}
+          >
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        <a href={`/recrutamento/${job.slug}`} class="hover:text-gold-600 transition-colors">
+                            {job.title}
+                        </a>
+                    </h3>
+                    <div class="mt-2 flex flex-wrap gap-2 text-sm text-gray-500">
+                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 font-medium text-gray-800">
+                            {job.location}
+                        </span>
+                        <span class="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 font-medium text-gray-800">
+                            {job.type}
+                        </span>
+                        <span>Publicado em {job.postedAt}</span>
+                    </div>
+                </div>
+                <a href={`/recrutamento/${job.slug}`} class="shrink-0 rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gold-600 shadow-sm ring-1 ring-inset ring-gold-200 hover:bg-gold-50 transition-colors">
+                    Ver Detalhes
+                </a>
+            </div>
+            <p class="mt-4 text-gray-600 line-clamp-2">{job.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div id="no-results" class="hidden text-center py-12">
+        <p class="text-gray-500 text-lg">Nenhuma vaga encontrada com estes filtros.</p>
+        <button id="clear-filters" class="mt-4 text-gold-600 hover:text-gold-500 text-sm font-medium">Limpar filtros</button>
+      </div>
+
+       {JOBS.length === 0 && (
+            <div class="text-center py-12">
+                <p class="text-gray-500">Não há vagas disponíveis no momento. Volte em breve!</p>
+            </div>
+        )}
+    </div>
+  </main>
+
+  <script>
+    const locationFilter = document.getElementById('location-filter') as HTMLSelectElement;
+    const typeFilter = document.getElementById('type-filter') as HTMLSelectElement;
+    const jobsContainer = document.getElementById('jobs-container');
+    const jobCards = document.querySelectorAll('.job-card');
+    const noResults = document.getElementById('no-results');
+    const clearFiltersBtn = document.getElementById('clear-filters');
+
+    function filterJobs() {
+        const selectedLocation = locationFilter.value;
+        const selectedType = typeFilter.value;
+        let visibleCount = 0;
+
+        jobCards.forEach(card => {
+             const cardLocation = (card as HTMLElement).dataset.location || '';
+             const cardType = (card as HTMLElement).dataset.type || '';
+
+             const matchLocation = selectedLocation === '' || cardLocation === selectedLocation;
+             const matchType = selectedType === '' || cardType === selectedType;
+
+             if (matchLocation && matchType) {
+                 (card as HTMLElement).style.display = 'block';
+                 visibleCount++;
+             } else {
+                 (card as HTMLElement).style.display = 'none';
+             }
+        });
+
+        if (visibleCount === 0 && jobCards.length > 0) {
+            noResults?.classList.remove('hidden');
+        } else {
+            noResults?.classList.add('hidden');
+        }
+    }
+
+    locationFilter?.addEventListener('change', filterJobs);
+    typeFilter?.addEventListener('change', filterJobs);
+
+    clearFiltersBtn?.addEventListener('click', () => {
+        locationFilter.value = '';
+        typeFilter.value = '';
+        filterJobs();
+    });
+  </script>
+</Layout>

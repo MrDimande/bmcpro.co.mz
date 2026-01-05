@@ -3,33 +3,65 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CookieConsent from '../../components/CookieConsent.astro';
-import { Megaphone, Check, ArrowRight, Phone, Mail, ChevronLeft } from 'lucide-astro';
+import { Megaphone, Target, Briefcase, PenTool, Lightbulb, ArrowRight, Phone, Mail, ChevronLeft, CheckCircle2, TrendingUp, Palette, Image as ImageIcon } from 'lucide-astro';
+import InteractiveQuiz from '../../components/services/InteractiveQuiz';
+import ServiceProsCons from '../../components/services/ServiceProsCons.astro';
+import MethodologyTimeline from '../../components/services/MethodologyTimeline.astro';
 import '../../styles/global.css';
 
 const service = {
-	icon: Megaphone,
 	title: 'Comunicação & Branding',
-	description: 'Criamos identidade visual, campanhas e materiais que reforçam a presença das marcas e facilitam a comunicação com o público-alvo.',
-	longDescription: 'Uma marca forte é o activo mais valioso de qualquer organização. Desenvolvemos estratégias de comunicação integrada e identidades visuais memoráveis que conectam a sua empresa ao seu público, criando relações duradouras e diferenciação competitiva no mercado.',
-	subServices: [
-		{ name: 'Identidade visual e branding', description: 'Criação de logotipos, paleta de cores, tipografia e manual de marca.' },
-		{ name: 'Criação de conteúdo corporativo', description: 'Textos institucionais, relatórios, apresentações e materiais de comunicação.' },
-		{ name: 'Gestão de redes sociais', description: 'Estratégia, criação de conteúdo e gestão de plataformas digitais.' },
-		{ name: 'Desenvolvimento de materiais gráficos', description: 'Flyers, brochuras, banners, sinalética e merchandising.' },
-		{ name: 'Estratégias de comunicação institucional', description: 'Planos de comunicação interna e externa, relações públicas.' }
+	ref: 'Branding',
+	problem: 'No mercado saturado actual, marcas que não comunicam com clareza são ignoradas. Muitas empresas sofrem com identidades fragmentadas e mensagens inconsistentes que confundem o cliente e diluem a percepção de valor, resultando em perda de oportunidades comerciais.',
+	approach: 'Não desenhamos apenas logótipos; construímos ecossistemas narrativos. A nossa abordagem alinha a identidade visual profundamente com a estratégia corporativa, garantindo que cada ponto de contacto—do cartão de visita ao post no LinkedIn—conte a mesma história poderosa, utilizando psicologia das cores e semiótica para influenciar a percepção.',
+	outputs: [
+		{ title: 'BrandGuard™ Manual', desc: 'Livro de normas completo com directrizes visuais e tom de voz.' },
+		{ title: 'Identity Pack', desc: 'Logótipo, tipografia, paleta e aplicações estacionárias.' },
+		{ title: 'Strategic Messaging Framework', desc: 'Slogans, manifesto e pilares de comunicação.' },
+		{ title: 'Corporate Assets Kit', desc: 'Templates de apresentações, relatórios e assinaturas de e-mail.' }
 	],
-	benefits: [
-		'Designers e criativos com experiência internacional',
-		'Abordagem estratégica focada em resultados',
-		'Conhecimento profundo do mercado moçambicano',
-		'Entrega rápida sem comprometer a qualidade'
-	]
+	tools: [
+		'Adobe Creative Cloud (Illustrator, Photoshop, InDesign)',
+		'Figma para colaboração de design',
+		'Miro para workshops de estratégia',
+		'Semrush para análise de tendências'
+	],
+	caseStudy: {
+		title: 'De "Loja Local" a Parceiro Multinacional',
+		scenario: 'A "TechMoz Solutions" (nome fictício) tinha um produto de software de classe mundial, mas uma imagem desactualizada. Após o nosso rebranding completo e realinhamento de tom de voz, a percepção de maturidade da marca aumentou drasticamente.',
+		result: 'Em 6 meses, fecharam contratos com duas multinacionais do sector de Oil & Gas, que citaram a "profissionalismo e solidez da marca" como factor de confiança decisivo.'
+	}
 };
+
+const quizQuestions = [
+    { id: 1, text: "O seu logótipo funciona tão bem num outdoor como no ícone de uma app?", options: [{ text: "Sim, é versátil", points: 2 }, { text: "Perde detalhe quando é pequeno", points: 1 }, { text: "Não", points: 0 }] },
+    { id: 2, text: "Usa as mesmas cores e fontes em TODOS os documentos da empresa?", options: [{ text: "Rigorosamente", points: 2 }, { text: "Na maioria das vezes", points: 1 }, { text: "Cada pessoa faz do seu jeito", points: 0 }] },
+    { id: 3, text: "Se tapasse o logo no seu site, o cliente saberia que é a sua empresa?", options: [{ text: "Sim, a linguagem e estilo são únicos", points: 2 }, { text: "Talvez", points: 1 }, { text: "Não, parece genérico", points: 0 }] },
+    { id: 4, text: "A sua equipa sabe explicar a essência da marca em uma frase?", options: [{ text: "Sim, todos alinhados", points: 2 }, { text: "Mais ou menos", points: 1 }, { text: "Cada um diz uma coisa", points: 0 }] }
+];
+
+const quizResults = [
+    { minScore: 0, maxScore: 3, title: "Crise de Identidade", description: "A sua marca está invisível ou confusa. Precisa urgente de um 'banho de loja' estratégico para transmitir confiança.", color: "bg-red-500" },
+    { minScore: 4, maxScore: 6, title: "Em Construção", description: "Tem boas bases, mas falta consistência. Com pequenos ajustes de profissionalização, o seu valor percebido vai duplicar.", color: "bg-yellow-500" },
+    { minScore: 7, maxScore: 8, title: "Marca Forte", description: "Excelente. Tem uma identidade sólida. O próximo passo é amplificação e campanhas de impacto.", color: "bg-green-500" }
+];
+
+const pros = ["Empresas que querem cobrar mais caro pelo seu serviço", "Startups a lançar produtos inovadores", "Marcas antigas a precisar de modernização"];
+const cons = ["Quem só quer 'um desenho rápido'", "Empresas que não valorizam a percepção do cliente"];
+
+const methodologySteps = [
+    { title: "Descoberta", description: "Workshops para extrair o DNA da marca." },
+    { title: "Estratégia", description: "Definição de posicionamento e arquétipo." },
+    { title: "Identidade Visual", description: "Design do sistema (Logo, Cores, Tipografia)." },
+    { title: "Pontos de Contacto", description: "Aplicação em stationary, digital e frota." },
+    { title: "BrandGuard", description: "Entrega do manual para garantir consistência futura." }
+];
+
 ---
 
 <Layout 
 	title={`${service.title} - Serviços BMC Pro`}
-	description={service.description}
+	description="Branding estratégico e comunicação corporativa para empresas que querem liderar."
 >
 	<Header />
 	<main class="min-h-screen bg-gradient-to-b from-dark-200 via-dark-100 to-dark-200">
@@ -55,83 +87,159 @@ const service = {
 							& Branding
 						</span>
 					</h1>
-					
-					<p class="text-xl text-gray-300 leading-relaxed mb-8 max-w-3xl">
-						{service.longDescription}
-					</p>
-					
-					<div class="flex flex-wrap gap-4">
-						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
-							Solicitar Proposta
-							<ArrowRight class="w-5 h-5" />
-						</a>
-						<a href="tel:+258820883478" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold hover:bg-gold-500/10 transition-all flex items-center gap-2">
-							<Phone class="w-5 h-5" />
-							+258 82 088 3478
-						</a>
-					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Sub-services Section -->
-		<section class="py-20 relative">
+		<!-- 1. O Problema Real -->
+		<section class="py-16 relative border-t border-white/5">
 			<div class="container mx-auto px-6">
-				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-center">O Que Oferecemos</h2>
-				<p class="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-					Serviços completos de comunicação e branding para fortalecer a sua presença no mercado.
-				</p>
+				<div class="max-w-3xl">
+					<h2 class="text-xl text-gold-500 font-semibold mb-4 flex items-center gap-2">
+						<Target class="w-5 h-5" />
+						O Desafio
+					</h2>
+					<p class="text-2xl md:text-3xl text-white font-medium leading-relaxed">
+						{service.problem}
+					</p>
+				</div>
+			</div>
+		</section>
+
+        <!-- Brand Score Quiz -->
+        <section class="py-16 bg-dark-300/20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-white mb-2">Qual é o seu 'Brand Score'?</h2>
+                    <p class="text-gray-400">Avalie rapidamente a força da sua marca no mercado.</p>
+                </div>
+                <InteractiveQuiz 
+                    client:visible
+                    title="Auditoria de Marca Expresso"
+                    description="Descubra se a sua marca está a trabalhar a seu favor ou contra si."
+                    questions={quizQuestions}
+                    results={quizResults}
+                />
+            </div>
+        </section>
+
+        <!-- Process / Backstage Section (Visual Authenticity) -->
+        <section class="py-20 relative border-t border-white/5 bg-dark-200">
+             <div class="container mx-auto px-6">
+                 <div class="grid md:grid-cols-2 gap-12 items-center">
+                     <div>
+                         <span class="text-gold-500 font-bold text-sm tracking-widest uppercase mb-4 block">Processo Criativo</span>
+                         <h2 class="text-3xl font-bold text-white mb-6">A Ciência da Arte</h2>
+                         <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                             Não acreditamos em inspiração divina. O nosso design nasce de pesquisa, testes e iteração. Mostramos-lhe os rascunhos, os conceitos descartados e o racional por trás de cada curva.
+                         </p>
+                         <ul class="space-y-4">
+                             <li class="flex items-center gap-3 text-gray-300">
+                                 <Palette class="w-5 h-5 text-gold-500" />
+                                 <span>Exploração Cromática Psicológica</span>
+                             </li>
+                             <li class="flex items-center gap-3 text-gray-300">
+                                 <PenTool class="w-5 h-5 text-gold-500" />
+                                 <span>Tipografia Customizada ou Curada</span>
+                             </li>
+                             <li class="flex items-center gap-3 text-gray-300">
+                                 <ImageIcon class="w-5 h-5 text-gold-500" />
+                                 <span>Direcção de Arte Fotográfica</span>
+                             </li>
+                         </ul>
+                     </div>
+                     <div class="grid grid-cols-2 gap-4 opacity-80 hover:opacity-100 transition-opacity">
+                         <div class="h-48 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-white/5 flex items-center justify-center">
+                             <span class="text-gray-600 font-mono text-sm">Sketch.jpg</span>
+                         </div>
+                         <div class="h-48 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-white/5 flex items-center justify-center mt-8">
+                             <span class="text-gray-600 font-mono text-sm">Grid.svg</span>
+                         </div>
+                         <div class="h-48 rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-white/5 flex items-center justify-center -mt-8">
+                             <span class="text-gray-600 font-mono text-sm">Moodboard.png</span>
+                         </div>
+                         <div class="h-48 rounded-2xl bg-gradient-to-br from-gold-500/20 to-gold-900/20 border border-gold-500/30 flex items-center justify-center">
+                             <span class="text-gold-500 font-mono text-sm">Final.ai</span>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+        </section>
+
+		<MethodologyTimeline 
+            steps={methodologySteps}
+            title="Como Criamos Marcas Únicas"
+            subtitle="Do conceito à realidade."
+        />
+
+		<!-- 3. O Que Entregamos (Outputs) -->
+		<section class="py-20 relative bg-dark-100/30">
+			<div class="container mx-auto px-6">
+				<h2 class="text-xl text-gold-500 font-semibold mb-8 flex items-center gap-2">
+					<Briefcase class="w-5 h-5" />
+					Entregáveis Concretos
+				</h2>
 				
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{service.subServices.map((sub, index) => (
-						<div class="glass-dark rounded-2xl p-6 border border-gold-500/20 hover:border-gold-500/40 transition-all group">
-							<div class="flex items-start gap-4">
-								<div class="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-gold-500/30 transition-colors">
-									<Check class="w-5 h-5 text-gold-500" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-white mb-2">{sub.name}</h3>
-									<p class="text-gray-300 text-sm leading-relaxed">{sub.description}</p>
-								</div>
-							</div>
+				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+					{service.outputs.map((output) => (
+						<div class="glass-dark p-6 rounded-xl border border-gold-500/10 hover:border-gold-500/30 transition-all group hover:-translate-y-1">
+							<CheckCircle2 class="w-8 h-8 text-gold-500 mb-4 group-hover:scale-110 transition-transform" />
+							<h3 class="text-lg font-bold text-white mb-2">{output.title}</h3>
+							<p class="text-sm text-gray-400">{output.desc}</p>
 						</div>
 					))}
 				</div>
 			</div>
 		</section>
 
-		<!-- Benefits Section -->
-		<section class="py-20 relative bg-dark-100/50">
+        <!-- Pros/Cons -->
+        <ServiceProsCons idealFor={pros} notIdealFor={cons} />
+
+		<!-- 5. Mini-caso (Cenário Real) -->
+		<section class="py-20 relative overflow-hidden">
 			<div class="container mx-auto px-6">
-				<div class="max-w-4xl mx-auto">
-					<h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Porquê Escolher-nos</h2>
+				<div class="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-dark-300 to-dark-100 border border-gold-500/20 p-8 md:p-12 relative">
+					<div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
 					
-					<div class="grid md:grid-cols-2 gap-6">
-						{service.benefits.map((benefit) => (
-							<div class="flex items-start gap-4 p-6 rounded-xl bg-gradient-to-r from-gold-500/5 to-transparent border-l-2 border-gold-500">
-								<Check class="w-6 h-6 text-gold-500 flex-shrink-0 mt-0.5" />
-								<p class="text-gray-200 leading-relaxed">{benefit}</p>
+					<div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
+						<div class="md:w-1/3">
+							<div class="bg-gold-500/10 rounded-2xl p-6 text-center border border-gold-500/20">
+								<TrendingUp class="w-12 h-12 text-gold-500 mx-auto mb-4" />
+								<p class="text-gold-400 font-bold text-lg">Caso de Sucesso</p>
+								<p class="text-white/60 text-sm mt-2">{service.caseStudy.title}</p>
 							</div>
-						))}
+						</div>
+						<div class="md:w-2/3">
+							<h3 class="text-2xl font-bold text-white mb-4">Cenário</h3>
+							<p class="text-gray-300 leading-relaxed mb-6">"{service.caseStudy.scenario}"</p>
+							
+							<div class="pl-4 border-l-2 border-gold-500">
+								<h4 class="text-lg font-bold text-white mb-2">Resultado</h4>
+								<p class="text-gray-300">{service.caseStudy.result}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- CTA Section -->
-		<section class="py-20 relative">
-			<div class="container mx-auto px-6 text-center">
-				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-					Pronto para Elevar a Sua Marca?
-				</h2>
-				<p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-					Entre em contacto para uma consulta sobre identidade visual e estratégia de comunicação.
-				</p>
-				<div class="flex flex-wrap gap-4 justify-center">
-					<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
-						<Mail class="w-5 h-5" />
-						Contactar Agora
-					</a>
+		<!-- 6. CTA Inteligente -->
+		<section class="py-20 relative text-center">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto">
+					<h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+						A sua marca reflecte a excelência do seu produto?
+					</h2>
+					<p class="text-xl text-gray-300 mb-10">
+						Não deixe que uma imagem fraca comprometa bons negócios. Vamos auditar a sua presença visual.
+					</p>
+					
+					<div class="flex flex-wrap gap-4 justify-center">
+						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-bold text-lg hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
+							Agendar Auditoria de Marca
+							<ArrowRight class="w-5 h-5" />
+						</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -144,5 +252,9 @@ const service = {
 	.glass-dark {
 		background: rgba(0, 0, 0, 0.4);
 		backdrop-filter: blur(10px);
+	}
+	
+	.hover\:glow-gold-lg:hover {
+		box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
 	}
 </style>

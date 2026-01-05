@@ -22,9 +22,32 @@ const corsHeaders = {
 };
 
 export const onRequest = defineMiddleware(async ({ request }, next) => {
+  const url = new URL(request.url);
   const origin = request.headers.get('origin') || '';
   const isAllowedOrigin = ALLOWED_ORIGINS.includes(origin) || origin === '';
   
+  // Basic Auth para Área de Seleção
+  if (url.pathname.startsWith('/seleccao')) {
+    const authHeader = request.headers.get('authorization');
+    
+    if (!authHeader) {
+      return new Response('Unauthorized', { 
+        status: 401,
+        headers: {
+          'WWW-Authenticate': 'Basic realm="Área de Seleção"'
+        }
+      });
+    }
+
+    const auth = Buffer.from(authHeader.split(' ')[1], 'base64').toString().split(':');
+    const user = auth[0];
+    const pass = auth[1];
+
+    if (user !== 'admin' || pass !== 'admin') {
+      return new Response('Forbidden', { status: 403 });
+    }
+  }
+
   // Preflight OPTIONS request
   if (request.method === 'OPTIONS') {
     return new Response(null, {

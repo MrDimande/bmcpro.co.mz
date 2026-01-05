@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { JOBS, getJobBySlug } from '../../lib/jobs';
+import { Upload, AlertCircle, CheckCircle } from 'lucide-astro';
+
+const jobSlug = Astro.url.searchParams.get('job');
+const selectedJob = jobSlug ? getJobBySlug(jobSlug) : null;
+---
+
+<Layout title="Candidatura | BMC Pro Services">
+  <main class="min-h-screen bg-gray-50 py-12 px-6 lg:px-8">
+    <div class="mx-auto max-w-2xl">
+         <a href={selectedJob ? `/recrutamento/${selectedJob.slug}` : "/recrutamento/vagas"} class="text-sm font-semibold leading-6 text-gold-600 hover:text-gold-500 mb-8 inline-block">
+            ← Voltar
+          </a>
+
+          <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 sm:p-10">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">Envie a sua Candidatura</h1>
+                {selectedJob && (
+                    <p class="mt-2 text-lg text-gray-600">
+                        Você está se candidatando para a vaga de <span class="font-semibold text-gold-600">{selectedJob.title}</span>.
+                    </p>
+                )}
+                {!selectedJob && (
+                    <p class="mt-2 text-gray-600">Preencha o formulário abaixo para se candidatar às nossas oportunidades.</p>
+                )}
+            </div>
+
+            <!-- Error Summary Box (Hidden by default) -->
+            <div id="error-summary" class="hidden rounded-md bg-red-50 p-4 mb-6">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <AlertCircle class="h-5 w-5 text-red-400" aria-hidden="true" />
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-red-800">Existem erros no formulário</h3>
+                        <div class="mt-2 text-sm text-red-700">
+                            <ul role="list" class="list-disc pl-5 space-y-1" id="error-list"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="application-form" action="/api/candidatura" method="POST" enctype="multipart/form-data" class="space-y-6" novalidate>
+                <input type="hidden" name="jobSlug" value={jobSlug || 'candidatura-espontanea'} />
+                
+                <div>
+                    <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Nome Completo <span class="text-red-500">*</span></label>
+                    <div class="mt-2 relative">
+                        <input type="text" name="name" id="name" required minlength="3" class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gold-500 sm:text-sm sm:leading-6" />
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 hidden error-icon">
+                            <AlertCircle class="h-5 w-5 text-red-500" aria-hidden="true" />
+                        </div>
+                    </div>
+                    <p class="mt-2 text-sm text-red-600 hidden error-message" id="name-error">O nome é obrigatório e deve ter pelo menos 3 caracteres.</p>
+                </div>
+
+                <div class="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+                    <div>
+                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email <span class="text-red-500">*</span></label>
+                        <div class="mt-2 relative">
+                            <input type="email" name="email" id="email" required class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gold-500 sm:text-sm sm:leading-6" />
+                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 hidden error-icon">
+                                <AlertCircle class="h-5 w-5 text-red-500" aria-hidden="true" />
+                            </div>
+                        </div>
+                        <p class="mt-2 text-sm text-red-600 hidden error-message" id="email-error">Insira um email válido.</p>
+                    </div>
+                     <div>
+                        <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Telefone <span class="text-red-500">*</span></label>
+                        <div class="mt-2 relative">
+                            <input type="tel" name="phone" id="phone" required pattern="[0-9\+\-\s]{8,}" class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gold-500 sm:text-sm sm:leading-6" />
+                             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 hidden error-icon">
+                                <AlertCircle class="h-5 w-5 text-red-500" aria-hidden="true" />
+                            </div>
+                        </div>
+                        <p class="mt-2 text-sm text-red-600 hidden error-message" id="phone-error">Insira um número de telefone válido.</p>
+                    </div>
+                </div>
+
+                {!selectedJob && (
+                    <div>
+                        <label for="area" class="block text-sm font-medium leading-6 text-gray-900">Área de Interesse</label>
+                        <div class="mt-2">
+                            <select id="area" name="jobSlugSelector" class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-gold-500 sm:text-sm sm:leading-6">
+                                <option value="candidatura-espontanea">Candidatura Espontânea</option>
+                                {JOBS.map(job => (
+                                    <option value={job.slug}>{job.title}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+                )}
+
+                <div>
+                    <label for="message" class="block text-sm font-medium leading-6 text-gray-900">Mensagem / Carta de Apresentação</label>
+                     <div class="mt-2">
+                        <textarea id="message" name="message" rows="4" class="block w-full rounded-md border-0 py-2.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gold-500 sm:text-sm sm:leading-6"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="cv" class="block text-sm font-medium leading-6 text-gray-900">Currículo (PDF) <span class="text-red-500">*</span></label>
+                    <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10 drag-area bg-gray-50/50 hover:bg-gray-50 transition-colors relative" id="drop-zone">
+                        <div class="text-center">
+                            <Upload class="mx-auto h-12 w-12 text-gray-300" />
+                            <div class="mt-4 flex text-sm leading-6 text-gray-600 justify-center">
+                                <label for="cv" class="relative cursor-pointer rounded-md bg-white font-semibold text-gold-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-gold-600 focus-within:ring-offset-2 hover:text-gold-500">
+                                    <span>Upload de ficheiro</span>
+                                    <input id="cv" name="cv" type="file" accept=".pdf" required class="sr-only" />
+                                </label>
+                                <p class="pl-1">ou arraste e solte</p>
+                            </div>
+                            <p class="text-xs leading-5 text-gray-600">PDF até 5MB</p>
+                            <p id="file-name" class="mt-2 text-sm text-gold-600 font-semibold hidden flex items-center justify-center gap-1">
+                                <CheckCircle class="w-4 h-4" />
+                                <span class="text-content"></span>
+                            </p>
+                             <p id="file-error" class="mt-2 text-sm text-red-600 font-medium hidden"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="submit-btn" class="flex w-full justify-center rounded-md bg-gold-500 px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gold-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span class="btn-text">Enviar Candidatura</span>
+                        <span class="loading-spinner hidden ml-2">...</span>
+                    </button>
+                    <p class="mt-4 text-center text-xs text-gray-500">
+                        Ao enviar, você concorda com o processamento dos seus dados pessoais para fins de recrutamento.
+                    </p>
+                </div>
+            </form>
+          </div>
+    </div>
+  </main>
+  
+  <script>
+    const form = document.getElementById('application-form') as HTMLFormElement;
+    const fileInput = document.getElementById('cv') as HTMLInputElement;
+    const fileNameDisplay = document.getElementById('file-name');
+    const fileErrorDisplay = document.getElementById('file-error');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const errorSummary = document.getElementById('error-summary');
+    const errorList = document.getElementById('error-list');
+
+    // Helper to show/hide errors
+    function toggleError(input: HTMLInputElement, show: boolean) {
+        const container = input.parentElement;
+        const icon = container?.querySelector('.error-icon');
+        const msg = container?.parentElement?.querySelector('.error-message');
+
+        if (show) {
+            input.classList.add('ring-red-500', 'text-red-900');
+            icon?.classList.remove('hidden');
+            msg?.classList.remove('hidden');
+            input.setAttribute('aria-invalid', 'true');
+        } else {
+            input.classList.remove('ring-red-500', 'text-red-900');
+            icon?.classList.add('hidden');
+            msg?.classList.add('hidden');
+            input.setAttribute('aria-invalid', 'false');
+        }
+    }
+
+    // Validate single field
+    function validateField(input: HTMLInputElement): boolean {
+        let valid = true;
+        
+        if (input.required && !input.value.trim()) {
+            valid = false;
+        } else if (input.type === 'email' && input.value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            valid = emailRegex.test(input.value);
+        } else if (input.type === 'tel' && input.value) {
+             const phoneRegex = /[0-9\+\-\s]{8,}/;
+             valid = phoneRegex.test(input.value);
+        }
+
+        toggleError(input, !valid);
+        return valid;
+    }
+
+    // Attach listeners
+    ['name', 'email', 'phone'].forEach(id => {
+        const input = document.getElementById(id) as HTMLInputElement;
+        if(input) {
+            input.addEventListener('blur', () => validateField(input));
+            input.addEventListener('input', () => {
+                 if (input.classList.contains('ring-red-500')) {
+                     validateField(input);
+                 }
+            });
+        }
+    });
+
+    // File handling
+    if(fileInput) {
+        fileInput.addEventListener('change', (e) => {
+            const file = fileInput.files?.[0];
+            
+            if(file) {
+                // Check size (5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    fileErrorDisplay!.textContent = "O ficheiro deve ser menor que 5MB.";
+                    fileErrorDisplay!.classList.remove('hidden');
+                    fileNameDisplay!.classList.add('hidden');
+                    fileInput.value = ''; // Clear
+                } else if (file.type !== 'application/pdf') {
+                    fileErrorDisplay!.textContent = "Apenas ficheiros PDF são permitidos.";
+                    fileErrorDisplay!.classList.remove('hidden');
+                    fileNameDisplay!.classList.add('hidden');
+                    fileInput.value = '';
+                } else {
+                    const nameSpan = fileNameDisplay!.querySelector('.text-content');
+                    if (nameSpan) nameSpan.textContent = file.name;
+                    fileNameDisplay!.classList.remove('hidden');
+                    fileErrorDisplay!.classList.add('hidden');
+                }
+            } else {
+                 fileNameDisplay!.classList.add('hidden');
+                 fileErrorDisplay!.classList.add('hidden');
+            }
+        });
+    }
+
+    // Form Submit
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+            const errors: string[] = [];
+
+            // Validate all text fields
+            ['name', 'email', 'phone'].forEach(id => {
+                const input = document.getElementById(id) as HTMLInputElement;
+                if (!validateField(input)) {
+                    isValid = false;
+                    errors.push(`Verifique o campo ${input.previousElementSibling?.textContent?.replace('*', '').trim()}`);
+                }
+            });
+
+            // Validate file
+            if (!fileInput.files || fileInput.files.length === 0) {
+                isValid = false;
+                fileErrorDisplay!.textContent = "Por favor, carregue o seu currículo.";
+                fileErrorDisplay!.classList.remove('hidden');
+                errors.push("O currículo é obrigatório.");
+            }
+
+            if (!isValid) {
+                e.preventDefault();
+                if(errorSummary && errorList) {
+                    errorList.innerHTML = errors.map(err => `<li>${err}</li>`).join('');
+                    errorSummary.classList.remove('hidden');
+                     window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else {
+                // Show loading
+                submitBtn.disabled = true;
+                const spinner = submitBtn.querySelector('.loading-spinner');
+                const text = submitBtn.querySelector('.btn-text');
+                if(spinner) spinner.classList.remove('hidden');
+                if(text) text.textContent = "A enviar...";
+            }
+        });
+    }
+  </script>
+</Layout>

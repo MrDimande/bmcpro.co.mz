@@ -3,36 +3,55 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import CookieConsent from '../../components/CookieConsent.astro';
-import { FileSearch, Check, ArrowRight, Phone, Mail, ChevronLeft } from 'lucide-astro';
+import { FileSearch, Microscope, ClipboardCheck, BarChart2, PieChart, ArrowRight, Phone, Mail, ChevronLeft, MapPin, Database, BookOpen, Search } from 'lucide-astro';
+import ServiceProsCons from '../../components/services/ServiceProsCons.astro';
+import MethodologyTimeline from '../../components/services/MethodologyTimeline.astro';
 import '../../styles/global.css';
 
 const service = {
-	icon: FileSearch,
 	title: 'Pesquisa & Estudos Técnicos',
-	description: 'Realizamos surveys, recolha de dados e análises técnicas para tomada de decisões baseadas em evidências.',
-	longDescription: 'Decisões informadas requerem dados de qualidade. A nossa equipa especializada conduz pesquisas rigorosas, levantamentos de campo e análises técnicas que fornecem as evidências necessárias para fundamentar estratégias e projectos.',
-	subServices: [
-		{ name: 'Levantamentos de campo', description: 'Recolha de dados primários através de metodologias robustas.' },
-		{ name: 'Estudos socioeconómicos', description: 'Análise de impactos sociais e económicos de projectos e políticas.' },
-		{ name: 'Pesquisas de mercado', description: 'Investigação de tendências, concorrência e oportunidades de negócio.' },
-		{ name: 'Recolha e tratamento de dados', description: 'Colecta, limpeza e análise estatística de informação.' },
-		{ name: 'Estudos sectoriais', description: 'Análises aprofundadas para sectores públicos e privados específicos.' }
+	ref: 'Pesquisa',
+	problem: 'Decisões baseadas em "achismos" ou dados desactualizados são a receita para o fracasso. Sem entender profundamente o terreno, o consumidor ou a comunidade beneficiária, projectos falham e investimentos evaporam.',
+	approach: 'Combinamos rigor científico com velocidade comercial. Não entregamos apenas tabelas e gráficos. Transformamos dados brutos em inteligência accionável e insights narrativos que explicam o "porquê" por trás dos números, usando metodologias mistas adaptadas à realidade de Moçambique.',
+	outputs: [
+		{ title: 'Estudos de Viabilidade', desc: 'EVTEs completos para fundamentar investimentos.' },
+		{ title: 'Monitoria e Avaliação', desc: 'Sistemas M&A para medir impacto de projectos.' },
+		{ title: 'Estudos de Mercado', desc: 'Análise profunda de concorrência e comportamento do consumidor.' },
+		{ title: 'Censos e Surveys', desc: 'Levantamentos demográficos e socioeconómicos em larga escala.' }
 	],
-	benefits: [
-		'Metodologias de pesquisa internacionalmente reconhecidas',
-		'Equipas de campo experientes e treinadas',
-		'Uso de ferramentas digitais de recolha de dados',
-		'Relatórios claros e accionáveis'
-	]
+	tools: [
+		'SPSS / R (Análise Estatística Avançada)',
+		'NVivo (Análise de Dados Qualitativos)',
+		'KoboCollect (Recolha de Dados Digital Offline)',
+		'Tableau / PowerBI (Visualização de Dados)'
+	],
+	caseStudy: {
+		title: 'Mapeamento de Consumo Periurbano',
+		scenario: 'Uma grande marca de FMCG queria lançar um novo produto nas zonas periurbanas de Maputo, mas desconhecia os hábitos de compra nas pequenas "lojas de bairro".',
+		result: 'Realizámos um censo digital em 500 pontos de venda. Identificámos que 80% das compras eram de formatos fraccionados. A marca ajustou a embalagem antes do lançamento e superou as metas de vendas em 200%.'
+	}
 };
+
+const pros = ["Donos de empresas que querem entrar em novos mercados", "ONGs que precisam reportar impacto a doadores", "Investidores a avaliar viabilidade de projectos"];
+const cons = ["Quem precisa de sondagens políticas (não é o nosso foco)", "Quem quer dados secundários sem ir ao terreno"];
+
+const methodologySteps = [
+    { title: "Definição da Amostra", description: "Cálculo estatístico para garantir representatividade." },
+    { title: "Desenho dos Instrumentos", description: "Criação de inquéritos digitais e guiões de entrevista." },
+    { title: "Trabalho de Campo", description: "Recolha de dados com equipas treinadas e supervisão QC." },
+    { title: "Limpeza e Análise", description: "Tratamento de dados e cruzamento de variáveis." },
+    { title: "Relatório de Insights", description: "Apresentação visual com recomendações estratégicas." }
+];
+
 ---
 
 <Layout 
 	title={`${service.title} - Serviços BMC Pro`}
-	description={service.description}
+	description="Estudos de mercado, pesquisas socioeconómicas e análise de dados em Moçambique."
 >
 	<Header />
 	<main class="min-h-screen bg-gradient-to-b from-dark-200 via-dark-100 to-dark-200">
+		<!-- Hero Section -->
 		<section class="pt-32 pb-20 relative overflow-hidden">
 			<div class="absolute inset-0 bg-gradient-to-r from-gold-500/5 to-transparent"></div>
 			<div class="absolute top-20 right-0 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
@@ -54,76 +73,187 @@ const service = {
 							& Estudos Técnicos
 						</span>
 					</h1>
-					
-					<p class="text-xl text-gray-300 leading-relaxed mb-8 max-w-3xl">
-						{service.longDescription}
-					</p>
-					
-					<div class="flex flex-wrap gap-4">
-						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
-							Solicitar Proposta
-							<ArrowRight class="w-5 h-5" />
-						</a>
-						<a href="tel:+258820883478" class="px-8 py-4 rounded-xl border-2 border-gold-500/50 text-gold-500 font-semibold hover:bg-gold-500/10 transition-all flex items-center gap-2">
-							<Phone class="w-5 h-5" />
-							+258 82 088 3478
-						</a>
-					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="py-20 relative">
+		<!-- Open Methodology Visualization -->
+		<section class="py-16 bg-dark-300/30 border-y border-white/5">
+             <div class="container mx-auto px-6">
+                 <div class="text-center mb-10">
+                     <span class="text-gold-500 font-bold text-sm tracking-widest uppercase mb-2 block">Transparência Total</span>
+                     <h2 class="text-3xl font-bold text-white mb-2">A Nossa "Cozinha" de Dados</h2>
+                     <p class="text-gray-400">Como garantimos que os dados não mentem.</p>
+                 </div>
+                 
+                 <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-6">
+                     <!-- Card 1 -->
+                     <div class="bg-dark-200 p-6 rounded-2xl border border-white/5 text-center group hover:border-gold-500/50 transition-colors">
+                         <div class="w-16 h-16 mx-auto mb-4 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                             <Database class="w-8 h-8" />
+                         </div>
+                         <h3 class="text-white font-bold mb-2">Fontes Primárias</h3>
+                         <p class="text-gray-400 text-sm">Não usamos apenas Google. Vamos ao terreno, falamos com pessoas reais e captamos coordenadas GPS.</p>
+                     </div>
+                     
+                     <!-- Card 2 -->
+                     <div class="bg-dark-200 p-6 rounded-2xl border border-white/5 text-center group hover:border-gold-500/50 transition-colors">
+                         <div class="w-16 h-16 mx-auto mb-4 bg-gold-500/10 rounded-full flex items-center justify-center text-gold-500 group-hover:scale-110 transition-transform">
+                             <img src="/icons/validade.svg" onerror="this.src=''" class="hidden" /> <!-- Fallback if no icon -->
+                             <Search class="w-8 h-8" />
+                         </div>
+                         <h3 class="text-white font-bold mb-2">Tripla Validação</h3>
+                         <p class="text-gray-400 text-sm">Validamos dados por: 1. Supervisão Humana, 2. Logic Checks Automáticos, 3. Re-entrevistas aleatórias.</p>
+                     </div>
+
+                     <!-- Card 3 -->
+                     <div class="bg-dark-200 p-6 rounded-2xl border border-white/5 text-center group hover:border-gold-500/50 transition-colors">
+                         <div class="w-16 h-16 mx-auto mb-4 bg-purple-500/10 rounded-full flex items-center justify-center text-purple-500 group-hover:scale-110 transition-transform">
+                             <BookOpen class="w-8 h-8" />
+                         </div>
+                         <h3 class="text-white font-bold mb-2">Honestidade Intelectual</h3>
+                         <p class="text-gray-400 text-sm">Todos os estudos têm limitações. Nós declaramos as nossas. Não "masajamos" dados para agradar.</p>
+                     </div>
+                 </div>
+
+                 <!-- Sample Chart Visualization -->
+                 <div class="mt-12 p-8 bg-dark-200 rounded-3xl border border-white/5">
+                     <div class="flex flex-col md:flex-row gap-8 items-center">
+                         <div class="md:w-1/3 text-center md:text-left">
+                             <h4 class="text-xl font-bold text-white mb-2">Visualização Clara</h4>
+                             <p class="text-gray-400 text-sm">Transformamos Excels complexos em histórias visuais fáceis de digerir.</p>
+                         </div>
+                         <div class="md:w-2/3 w-full h-64 bg-dark-100 rounded-xl p-4 relative flex items-end justify-around gap-2 border border-white/5">
+                             <!-- Dummy Chart Bars -->
+                             <div class="w-full flex items-end justify-between h-full px-4 gap-4">
+                                 <div class="w-12 bg-gray-700/50 rounded-t h-[30%] relative group">
+                                     <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-gray-500">2021</div>
+                                 </div>
+                                 <div class="w-12 bg-gray-700/50 rounded-t h-[45%] relative group">
+                                     <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-gray-500">2022</div>
+                                 </div>
+                                 <div class="w-12 bg-gray-700/50 rounded-t h-[60%] relative group">
+                                     <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs text-gray-500">2023</div>
+                                 </div>
+                                 <div class="w-12 bg-gold-500 rounded-t h-[85%] relative group shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+                                     <div class="absolute -top-8 left-1/2 -translate-x-1/2 font-bold text-gold-500">2024</div>
+                                     <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity rounded-t"></div>
+                                 </div>
+                             </div>
+                             <div class="absolute bottom-4 left-4 text-xs font-mono text-gray-500 bg-dark-300 px-2 py-1 rounded">Crescimento Projectado</div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+		</section>
+
+		<!-- 1. O Problema Real -->
+		<section class="py-16 relative">
 			<div class="container mx-auto px-6">
-				<h2 class="text-3xl md:text-4xl font-bold text-white mb-4 text-center">O Que Oferecemos</h2>
-				<p class="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-					Serviços de pesquisa e estudos técnicos para fundamentar as suas decisões.
-				</p>
+				<div class="max-w-3xl">
+					<h2 class="text-xl text-gold-500 font-semibold mb-4 flex items-center gap-2">
+						<Microscope class="w-5 h-5" />
+						O Perigo do Desconhecido
+					</h2>
+					<p class="text-2xl md:text-3xl text-white font-medium leading-relaxed">
+						{service.problem}
+					</p>
+				</div>
+			</div>
+		</section>
+
+        <MethodologyTimeline 
+            steps={methodologySteps} 
+            title="Ciência, Não Adivinhação"
+            subtitle="Processo rigoroso de recolha e análise."
+        />
+
+		<!-- 3. O Que Entregamos (Outputs) -->
+		<section class="py-20 relative bg-dark-100/30">
+			<div class="container mx-auto px-6">
+				<h2 class="text-xl text-gold-500 font-semibold mb-8 flex items-center gap-2">
+					<ClipboardCheck class="w-5 h-5" />
+					Entregáveis de Inteligência
+				</h2>
 				
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{service.subServices.map((sub) => (
-						<div class="glass-dark rounded-2xl p-6 border border-gold-500/20 hover:border-gold-500/40 transition-all group">
-							<div class="flex items-start gap-4">
-								<div class="w-10 h-10 rounded-xl bg-gold-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-gold-500/30 transition-colors">
-									<Check class="w-5 h-5 text-gold-500" />
-								</div>
-								<div>
-									<h3 class="text-lg font-semibold text-white mb-2">{sub.name}</h3>
-									<p class="text-gray-300 text-sm leading-relaxed">{sub.description}</p>
-								</div>
-							</div>
+				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+					{service.outputs.map((output) => (
+						<div class="glass-dark p-6 rounded-xl border border-gold-500/10 hover:border-gold-500/30 transition-all group hover:-translate-y-1">
+							<Database class="w-8 h-8 text-gold-500 mb-4 group-hover:scale-110 transition-transform" />
+							<h3 class="text-lg font-bold text-white mb-2">{output.title}</h3>
+							<p class="text-sm text-gray-400">{output.desc}</p>
 						</div>
 					))}
 				</div>
 			</div>
 		</section>
 
-		<section class="py-20 relative bg-dark-100/50">
+		<!-- 4. Ferramentas & Métodos -->
+		<section class="py-16 border-y border-white/5 bg-dark-300/30">
+			<div class="container mx-auto px-6 text-center">
+				<h2 class="text-xl text-gold-500 font-semibold mb-8 flex items-center justify-center gap-2">
+					<BarChart2 class="w-5 h-5" />
+					Ferramentas Científicas
+				</h2>
+				<div class="flex flex-wrap justify-center gap-4 md:gap-8">
+					{service.tools.map((tool) => (
+						<span class="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm md:text-base hover:bg-white/10 transition-colors">
+							{tool}
+						</span>
+					))}
+				</div>
+			</div>
+		</section>
+
+        <!-- Pros/Cons -->
+        <ServiceProsCons idealFor={pros} notIdealFor={cons} />
+
+		<!-- 5. Mini-caso (Cenário Real) -->
+		<section class="py-20 relative overflow-hidden">
 			<div class="container mx-auto px-6">
-				<div class="max-w-4xl mx-auto">
-					<h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Porquê Escolher-nos</h2>
-					<div class="grid md:grid-cols-2 gap-6">
-						{service.benefits.map((benefit) => (
-							<div class="flex items-start gap-4 p-6 rounded-xl bg-gradient-to-r from-gold-500/5 to-transparent border-l-2 border-gold-500">
-								<Check class="w-6 h-6 text-gold-500 flex-shrink-0 mt-0.5" />
-								<p class="text-gray-200 leading-relaxed">{benefit}</p>
+				<div class="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-dark-300 to-dark-100 border border-gold-500/20 p-8 md:p-12 relative">
+					<div class="absolute top-0 right-0 w-64 h-64 bg-gold-500/5 rounded-full blur-3xl -mr-16 -mt-16"></div>
+					
+					<div class="flex flex-col md:flex-row gap-8 items-start relative z-10">
+						<div class="md:w-1/3">
+							<div class="bg-gold-500/10 rounded-2xl p-6 text-center border border-gold-500/20">
+								<MapPin class="w-12 h-12 text-gold-500 mx-auto mb-4" />
+								<p class="text-gold-400 font-bold text-lg">Insight no Terreno</p>
+								<p class="text-white/60 text-sm mt-2">{service.caseStudy.title}</p>
 							</div>
-						))}
+						</div>
+						<div class="md:w-2/3">
+							<h3 class="text-2xl font-bold text-white mb-4">Cenário</h3>
+							<p class="text-gray-300 leading-relaxed mb-6">"{service.caseStudy.scenario}"</p>
+							
+							<div class="pl-4 border-l-2 border-gold-500">
+								<h4 class="text-lg font-bold text-white mb-2">Resultado</h4>
+								<p class="text-gray-300">{service.caseStudy.result}</p>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="py-20 relative">
-			<div class="container mx-auto px-6 text-center">
-				<h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Precisa de Dados para Decidir?</h2>
-				<p class="text-gray-300 mb-8 max-w-2xl mx-auto">
-					Contacte-nos para discutir o seu projecto de pesquisa.
-				</p>
-				<a href="/contact" class="inline-flex px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-semibold hover:glow-gold-lg transition-all transform hover:scale-105 items-center gap-2">
-					<Mail class="w-5 h-5" />
-					Contactar Agora
-				</a>
+		<!-- 6. CTA Inteligente -->
+		<section class="py-20 relative text-center">
+			<div class="container mx-auto px-6">
+				<div class="max-w-3xl mx-auto">
+					<h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
+						Quer eliminar os "achismos" do seu negócio?
+					</h2>
+					<p class="text-xl text-gray-300 mb-10">
+						Vamos desenhar a pesquisa certa para responder às suas perguntas mais críticas.
+					</p>
+					
+					<div class="flex flex-wrap gap-4 justify-center">
+						<a href="/contact" class="px-8 py-4 rounded-xl bg-gradient-to-r from-gold-600 to-gold-500 text-dark-200 font-bold text-lg hover:glow-gold-lg transition-all transform hover:scale-105 flex items-center gap-2">
+							Solicitar Estudo
+							<ArrowRight class="w-5 h-5" />
+						</a>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>
@@ -135,5 +265,9 @@ const service = {
 	.glass-dark {
 		background: rgba(0, 0, 0, 0.4);
 		backdrop-filter: blur(10px);
+	}
+	
+	.hover\:glow-gold-lg:hover {
+		box-shadow: 0 0 30px rgba(234, 179, 8, 0.3);
 	}
 </style>

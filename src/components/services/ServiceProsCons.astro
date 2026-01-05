@@ -1,0 +1,64 @@
+---
+import { CheckCircle2, XCircle } from 'lucide-astro';
+
+interface Props {
+  idealFor: string[];
+  notIdealFor: string[];
+}
+
+const { idealFor, notIdealFor } = Astro.props;
+---
+
+<section class="py-20 bg-dark-200">
+  <div class="container mx-auto px-6">
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      
+      <!-- Ideal For -->
+      <div class="p-8 rounded-3xl bg-gradient-to-br from-green-900/10 to-transparent border border-green-500/20 relative overflow-hidden group hover:border-green-500/30 transition-colors">
+        <div class="absolute top-0 right-0 p-4 opacity-10">
+          <CheckCircle2 class="w-32 h-32 text-green-500" />
+        </div>
+        
+        <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-green-500/20">
+            <CheckCircle2 class="w-6 h-6 text-green-500" />
+          </div>
+          Este serviço é ideal para si, se...
+        </h3>
+        
+        <ul class="space-y-4 relative z-10">
+          {idealFor.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500 flex-shrink-0"></span>
+              <span class="text-gray-300 leading-relaxed">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Not Ideal For -->
+      <div class="p-8 rounded-3xl bg-gradient-to-br from-red-900/10 to-transparent border border-red-500/20 relative overflow-hidden group hover:border-red-500/30 transition-colors">
+        <div class="absolute top-0 right-0 p-4 opacity-10">
+          <XCircle class="w-32 h-32 text-red-500" />
+        </div>
+        
+        <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+          <div class="p-2 rounded-lg bg-red-500/20">
+            <XCircle class="w-6 h-6 text-red-500" />
+          </div>
+          Não é ideal para si, se...
+        </h3>
+        
+        <ul class="space-y-4 relative z-10">
+          {notIdealFor.map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0"></span>
+              <span class="text-gray-300 leading-relaxed">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

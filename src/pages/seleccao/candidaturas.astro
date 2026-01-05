@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllApplications } from '../../lib/applications';
+import { getJobBySlug } from '../../lib/jobs';
+
+const applications = await getAllApplications();
+---
+
+<Layout title="Gestão de Candidaturas | BMC Admin">
+  <main class="min-h-screen bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="sm:flex sm:items-center">
+      <div class="sm:flex-auto">
+        <h1 class="text-2xl font-semibold leading-6 text-gray-900">Candidaturas</h1>
+        <p class="mt-2 text-sm text-gray-700">Lista de todas as candidaturas recebidas para vagas na BMC Pro Services.</p>
+      </div>
+      <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
+        
+      </div>
+    </div>
+    
+    <div class="mt-8 flow-root">
+      <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+            <table class="min-w-full divide-y divide-gray-300 bg-white">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Candidato</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Vaga/Área</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Contactos</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Data</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Mensagem</th>
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+                    <span class="sr-only">Ações</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 bg-white">
+                {applications.map((app) => {
+                  const job = getJobBySlug(app.jobSlug);
+                  const jobTitle = job ? job.title : (app.jobSlug === 'candidatura-espontanea' ? 'Candidatura Espontânea' : app.jobSlug);
+                  
+                  return (
+                    <tr>
+                      <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                        {app.name}
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {jobTitle}
+                      </td>
+                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        <div class="flex flex-col">
+                            <span>{app.email}</span>
+                            <span>{app.phone}</span>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                        {new Date(app.submittedAt).toLocaleDateString('pt-PT')}
+                      </td>
+                      <td class="px-3 py-4 text-sm text-gray-500 max-w-xs truncate" title={app.message}>
+                        {app.message}
+                      </td>
+                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        <a href={app.cvPath} target="_blank" class="text-gold-600 hover:text-gold-900">
+                          Download CV<span class="sr-only">, {app.name}</span>
+                        </a>
+                      </td>
+                    </tr>
+                  )
+                })}
+
+                {applications.length === 0 && (
+                     <tr>
+                      <td colspan="6" class="text-center py-10 text-gray-500">
+                        Nenhuma candidatura encontrada.
+                      </td>
+                    </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
