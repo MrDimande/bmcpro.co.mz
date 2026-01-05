@@ -1,18 +1,9 @@
 import type { APIRoute } from 'astro';
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { supabase } from '../../../lib/supabase';
 
-// Este endpoint serve o arquivo de CV de forma segura
-// Ele verifica (via middleware) se o usuário está autenticado
-// Os headers de autorização são validados no middleware global para rotas /api/ que precisam de proteção?
-// Na verdade, o middleware.ts atual protege /seleccao, mas vamos adicionar verificação aqui ou estender o middleware.
-
+// Este endpoint serve o arquivo de CV de forma segura via redirecionamento para URL assinada
 export const GET: APIRoute = async ({ params, request }) => {
     // Verificação de segurança (Autenticação Básica)
-    // O ideal é que o middleware já tenha tratado isso para rotas /seleccao,
-    // mas como este é um endpoint de API, vamos verificar o header manualmente ou confiar no middleware se estiver configurado.
-    // Vamos adicionar verificação básica aqui para garantir.
-    
     const authHeader = request.headers.get('authorization');
     if (!authHeader) {
         return new Response('Unauthorized', { 
@@ -36,28 +27,22 @@ export const GET: APIRoute = async ({ params, request }) => {
         return new Response('ID não fornecido', { status: 400 });
     }
 
-    const storageDir = 'storage/cvs';
-    // Precisamos encontrar o arquivo com a extensão correta, mas salvamos como .pdf por padrão no upload ou pegamos a extensão original.
-    // Na API de upload salvamos como `${id}${fileExt}`.
-    // Vamos tentar achar o arquivo. Assumindo .pdf por enquanto pois o input tem accept=".pdf"
-    
-    const filePath = path.join(storageDir, `${id}.pdf`);
+    // O "id" aqui na verdade é o caminho do arquivo no bucket (ex: "12345.pdf")
+    // Gerar URL assinada válida por 60 segundos
+    const { data, error } = await supabase
+        .storage
+        .from('cvs')
+        .createSignedUrl(id, 60);
 
-    try {
-        const fileHandle = await fs.open(filePath, 'r');
-        const stat = await fileHandle.stat();
-        const fileContent = await fileHandle.readFile();
-        await fileHandle.close();
-
-        return new Response(fileContent, {
-            headers: {
-                'Content-Type': 'application/pdf',
-                'Content-Length': stat.size.toString(),
-                'Content-Disposition': `inline; filename="cv-${id}.pdf"`
-            }
-        });
-
-    } catch (error) {
+    if (error || !data) {
+        console.error('Erro ao gerar URL assinada:', error);
         return new Response('Arquivo não encontrado', { status: 404 });
     }
+
+    return new Response(null, {
+        status: 302,
+        headers: {
+            'Location': data.signedUrl
+        }
+    });
 };
